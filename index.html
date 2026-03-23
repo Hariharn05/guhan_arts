@@ -1,0 +1,3174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guhan Arts — Sacred Tanjore Paintings</title>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9942A;
+    --gold-light: #E8B84B;
+    --gold-bright: #FFD700;
+    --gold-pale: #F5E6B8;
+    --crimson: #8B1A1A;
+    --crimson-deep: #5C0A0A;
+    --ivory: #FAF3E0;
+    --ivory-dark: #EFE4C4;
+    --obsidian: #0D0907;
+    --brown-deep: #1A0F05;
+    --brown-mid: #3D1F0A;
+    --text-main: #2A1505;
+    --text-light: #6B4423;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--obsidian);
+    color: var(--ivory);
+    font-family: 'EB Garamond', Georgia, serif;
+    overflow-x: hidden;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='4' fill='%23C9942A' opacity='0.8'/%3E%3Ccircle cx='10' cy='10' r='8' fill='none' stroke='%23C9942A' stroke-width='1' opacity='0.4'/%3E%3C/svg%3E") 10 10, auto;
+  }
+
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 9999;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    opacity: 0.6;
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--brown-deep); }
+  ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+  /* ── ORNAMENTAL DIVIDER ── */
+  .ornament {
+    text-align: center;
+    color: var(--gold);
+    font-size: 1.4rem;
+    letter-spacing: 0.4em;
+    opacity: 0.7;
+    margin: 0.5rem 0;
+  }
+  .ornament-line {
+    display: flex; align-items: center; gap: 1.2rem;
+    margin: 1.5rem 0;
+  }
+  .ornament-line::before, .ornament-line::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+  }
+  .ornament-line span { color: var(--gold); font-size: 1.2rem; white-space: nowrap; }
+
+  /* ══════════════════════════════
+     NAVIGATION
+  ══════════════════════════════ */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    padding: 1rem 3rem;
+    display: flex; align-items: center; justify-content: space-between;
+    background: linear-gradient(to bottom, rgba(13,9,7,0.97), transparent);
+    border-bottom: 1px solid rgba(201,148,42,0.15);
+    backdrop-filter: blur(4px);
+    transition: all 0.4s ease;
+  }
+  nav.scrolled {
+    background: rgba(13,9,7,0.97);
+    border-bottom-color: rgba(201,148,42,0.35);
+    padding: 0.7rem 3rem;
+  }
+  .nav-logo {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.25rem;
+    color: var(--gold-light);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    text-shadow: 0 0 30px rgba(201,148,42,0.4);
+  }
+  .nav-logo span { color: var(--crimson); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    color: var(--ivory-dark);
+    text-decoration: none;
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute; bottom: -4px; left: 0; right: 0;
+    height: 1px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transition: transform 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold-light); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+  .nav-cta {
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold) !important;
+    padding: 0.5rem 1.4rem;
+    border-radius: 1px;
+    transition: all 0.3s !important;
+  }
+  .nav-cta:hover { background: var(--gold) !important; color: var(--obsidian) !important; }
+  .nav-cta::after { display: none !important; }
+
+  /* ══════════════════════════════
+     HERO
+  ══════════════════════════════ */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(ellipse at 50% 0%, rgba(139,26,26,0.25) 0%, transparent 60%),
+                radial-gradient(ellipse at 20% 100%, rgba(201,148,42,0.12) 0%, transparent 50%),
+                linear-gradient(180deg, #0D0907 0%, #1A0F05 50%, #0D0907 100%);
+  }
+
+  /* Mandala background */
+  .hero-mandala {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px; height: 800px;
+    opacity: 0.06;
+    animation: rotateMandala 80s linear infinite;
+  }
+  @keyframes rotateMandala { to { transform: translate(-50%, -50%) rotate(360deg); } }
+
+  /* Corner ornaments */
+  .corner { position: absolute; width: 180px; height: 180px; }
+  .corner svg { width: 100%; height: 100%; }
+  .corner-tl { top: 70px; left: 20px; }
+  .corner-tr { top: 70px; right: 20px; transform: scaleX(-1); }
+  .corner-bl { bottom: 20px; left: 20px; transform: scaleY(-1); }
+  .corner-br { bottom: 20px; right: 20px; transform: scale(-1); }
+
+  .hero-content {
+    text-align: center;
+    max-width: 900px;
+    padding: 2rem;
+    z-index: 1;
+    animation: fadeUp 1.2s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-badge {
+    display: inline-block;
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid rgba(201,148,42,0.4);
+    padding: 0.45rem 1.6rem;
+    margin-bottom: 2rem;
+    animation: fadeUp 1.2s 0.2s ease both;
+  }
+
+  .hero-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(2.8rem, 7vw, 6rem);
+    font-weight: 900;
+    line-height: 1.05;
+    color: var(--gold-light);
+    text-shadow: 0 0 60px rgba(201,148,42,0.35), 0 0 120px rgba(201,148,42,0.15);
+    margin-bottom: 0.3rem;
+    animation: fadeUp 1.2s 0.35s ease both;
+  }
+  .hero-title span { color: var(--crimson); text-shadow: 0 0 40px rgba(139,26,26,0.6); }
+
+  .hero-sub {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(0.8rem, 1.5vw, 1rem);
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--gold-pale);
+    opacity: 0.65;
+    margin-bottom: 2rem;
+    animation: fadeUp 1.2s 0.45s ease both;
+  }
+
+  .hero-desc {
+    font-size: clamp(1rem, 1.8vw, 1.25rem);
+    line-height: 1.9;
+    color: var(--ivory-dark);
+    opacity: 0.85;
+    max-width: 620px;
+    margin: 0 auto 3rem;
+    font-style: italic;
+    animation: fadeUp 1.2s 0.55s ease both;
+  }
+
+  .hero-actions {
+    display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;
+    animation: fadeUp 1.2s 0.7s ease both;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
+    color: var(--obsidian);
+    border: none;
+    padding: 1rem 3rem;
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s;
+    box-shadow: 0 0 30px rgba(201,148,42,0.3);
+  }
+  .btn-primary::before {
+    content: '';
+    position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.5s;
+  }
+  .btn-primary:hover::before { left: 100%; }
+  .btn-primary:hover { box-shadow: 0 0 60px rgba(201,148,42,0.6); transform: translateY(-2px); }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--gold-light);
+    border: 1px solid rgba(201,148,42,0.5);
+    padding: 1rem 3rem;
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.4s;
+  }
+  .btn-secondary:hover {
+    border-color: var(--gold);
+    background: rgba(201,148,42,0.08);
+    box-shadow: 0 0 30px rgba(201,148,42,0.15);
+  }
+
+  .hero-scroll {
+    position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    animation: fadeUp 1.2s 1s ease both;
+  }
+  .hero-scroll span {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    opacity: 0.6;
+    text-transform: uppercase;
+  }
+  .scroll-line {
+    width: 1px; height: 50px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.2); }
+  }
+
+  /* ══════════════════════════════
+     SECTION BASE
+  ══════════════════════════════ */
+  section { padding: 6rem 2rem; }
+  .container { max-width: 1200px; margin: 0 auto; }
+
+  .section-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.8;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    color: var(--gold-light);
+    text-align: center;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 40px rgba(201,148,42,0.2);
+  }
+  .section-desc {
+    text-align: center;
+    color: var(--ivory-dark);
+    font-size: 1.1rem;
+    line-height: 1.9;
+    max-width: 600px;
+    margin: 1rem auto 3rem;
+    font-style: italic;
+    opacity: 0.8;
+  }
+
+  /* ══════════════════════════════
+     ABOUT / HERITAGE
+  ══════════════════════════════ */
+  #heritage {
+    background: linear-gradient(180deg, #0D0907 0%, #110B04 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  #heritage::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9942A' fill-opacity='0.03'%3E%3Cpath d='M30 0 L60 30 L30 60 L0 30 Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .heritage-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+  @media (max-width: 768px) { .heritage-grid { grid-template-columns: 1fr; gap: 3rem; } }
+
+  .heritage-visual {
+    position: relative;
+  }
+  .painting-frame {
+    position: relative;
+    border: 3px solid var(--gold);
+    box-shadow: 0 0 0 8px rgba(201,148,42,0.08),
+                0 0 0 9px var(--gold),
+                0 0 0 18px rgba(201,148,42,0.06),
+                0 0 60px rgba(201,148,42,0.2);
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    background: linear-gradient(135deg, #2A1505 0%, #1A0F05 50%, #3D1F0A 100%);
+  }
+  .painting-inner {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 1rem;
+  }
+  .painting-inner svg { width: 70%; height: 70%; opacity: 0.85; }
+  .painting-caption {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 1rem;
+    background: linear-gradient(to top, rgba(13,9,7,0.9), transparent);
+    text-align: center;
+  }
+  .painting-caption p {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  .frame-corner-deco {
+    position: absolute; width: 30px; height: 30px;
+  }
+  .frame-corner-deco.tl { top: -1px; left: -1px; }
+  .frame-corner-deco.tr { top: -1px; right: -1px; transform: scaleX(-1); }
+  .frame-corner-deco.bl { bottom: -1px; left: -1px; transform: scaleY(-1); }
+  .frame-corner-deco.br { bottom: -1px; right: -1px; transform: scale(-1); }
+
+  .heritage-text h3 {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.8rem;
+    color: var(--gold-light);
+    margin-bottom: 1.5rem;
+    line-height: 1.3;
+  }
+  .heritage-text p {
+    color: var(--ivory-dark);
+    line-height: 2;
+    margin-bottom: 1.2rem;
+    font-size: 1.05rem;
+    opacity: 0.85;
+  }
+  .heritage-stats {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem; margin-top: 2.5rem;
+  }
+  .stat {
+    text-align: center;
+    padding: 1.2rem;
+    border: 1px solid rgba(201,148,42,0.2);
+    background: rgba(201,148,42,0.03);
+    transition: all 0.3s;
+  }
+  .stat:hover { border-color: rgba(201,148,42,0.5); background: rgba(201,148,42,0.07); }
+  .stat-num {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.8rem;
+    color: var(--gold);
+    display: block;
+  }
+  .stat-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    color: var(--ivory-dark);
+    opacity: 0.65;
+    text-transform: uppercase;
+  }
+
+  /* ══════════════════════════════
+     GALLERY
+  ══════════════════════════════ */
+  #gallery {
+    background: #0D0907;
+    position: relative;
+  }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  @media (max-width: 900px) { .gallery-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 550px) { .gallery-grid { grid-template-columns: 1fr; } }
+
+  .gallery-item {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    touch-action: manipulation;
+    border: 1px solid rgba(201,148,42,0.15);
+    transition: all 0.5s ease;
+    aspect-ratio: 3/4;
+    background: var(--brown-deep);
+  }
+  .gallery-item:first-child { grid-row: span 2; aspect-ratio: unset; }
+  .gallery-item:hover {
+    border-color: rgba(201,148,42,0.6);
+    box-shadow: 0 0 40px rgba(201,148,42,0.2);
+    transform: translateY(-4px);
+  }
+  .gallery-item-inner {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, var(--brown-deep), var(--brown-mid));
+    min-height: 250px;
+  }
+  .gallery-item-inner svg { width: 60%; height: 60%; }
+  .gallery-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(13,9,7,0.95) 0%, rgba(13,9,7,0.3) 50%, transparent 100%);
+    display: flex; flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.5rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s;
+  }
+  .gallery-item:hover .gallery-overlay {
+    pointer-events: auto;
+  }
+  .gallery-item:hover .gallery-overlay { opacity: 1; }
+  .gallery-overlay h4 {
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    color: var(--gold-light);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.25rem;
+  }
+  .gallery-overlay p { font-size: 0.8rem; color: var(--ivory-dark); opacity: 0.7; }
+
+  /* ══════════════════════════════
+     PROCESS
+  ══════════════════════════════ */
+  #process {
+    background: linear-gradient(180deg, #0D0907 0%, #110B04 50%, #0D0907 100%);
+    position: relative;
+  }
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    margin-top: 4rem;
+    position: relative;
+  }
+  @media (max-width: 900px) { .process-steps { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 550px) { .process-steps { grid-template-columns: 1fr; } }
+
+  .process-steps::before {
+    content: '';
+    position: absolute;
+    top: 2.5rem; left: 12.5%; right: 12.5%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), var(--gold), transparent);
+    opacity: 0.3;
+  }
+  @media (max-width: 900px) { .process-steps::before { display: none; } }
+
+  .process-step {
+    text-align: center;
+    padding: 2rem 1.5rem;
+    position: relative;
+    transition: all 0.4s;
+  }
+  .process-step:hover { transform: translateY(-8px); }
+  .step-icon {
+    width: 5rem; height: 5rem;
+    border: 1px solid rgba(201,148,42,0.4);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1.5rem;
+    background: rgba(201,148,42,0.05);
+    position: relative;
+    transition: all 0.4s;
+  }
+  .process-step:hover .step-icon {
+    border-color: var(--gold);
+    background: rgba(201,148,42,0.12);
+    box-shadow: 0 0 30px rgba(201,148,42,0.2);
+  }
+  .step-icon svg { width: 2rem; height: 2rem; }
+  .step-num {
+    position: absolute; top: -0.6rem; right: -0.6rem;
+    width: 1.4rem; height: 1.4rem;
+    background: var(--gold);
+    color: var(--obsidian);
+    border-radius: 50%;
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+  }
+  .step-title {
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    color: var(--gold-light);
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+  }
+  .step-desc { font-size: 0.9rem; color: var(--ivory-dark); opacity: 0.7; line-height: 1.7; }
+
+  /* ══════════════════════════════
+     COMMISSION FORM
+  ══════════════════════════════ */
+  #commission {
+    background: linear-gradient(180deg, #0D0907 0%, #0A0804 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  #commission::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -20%;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(139,26,26,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  #commission::after {
+    content: '';
+    position: absolute;
+    bottom: -30%; right: -10%;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,148,42,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .form-wrapper {
+    max-width: 820px;
+    margin: 0 auto;
+    border: 1px solid rgba(201,148,42,0.2);
+    background: linear-gradient(135deg, rgba(26,15,5,0.8), rgba(10,8,4,0.9));
+    backdrop-filter: blur(10px);
+    padding: 3.5rem;
+    position: relative;
+    z-index: 1;
+  }
+  .form-wrapper::before, .form-wrapper::after {
+    content: '';
+    position: absolute;
+    width: 80px; height: 80px;
+    border-color: rgba(201,148,42,0.4);
+    border-style: solid;
+  }
+  .form-wrapper::before {
+    top: -1px; left: -1px;
+    border-width: 2px 0 0 2px;
+  }
+  .form-wrapper::after {
+    bottom: -1px; right: -1px;
+    border-width: 0 2px 2px 0;
+  }
+
+  .form-header {
+    text-align: center; margin-bottom: 3rem;
+  }
+  .form-header h2 {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.8rem;
+    color: var(--gold-light);
+    margin-bottom: 0.75rem;
+  }
+  .form-header p { color: var(--ivory-dark); opacity: 0.7; font-style: italic; font-size: 1rem; }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  @media (max-width: 650px) { .form-grid { grid-template-columns: 1fr; } }
+
+  .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+  .form-group.full { grid-column: 1 / -1; }
+
+  .form-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    display: flex; align-items: center; gap: 0.4rem;
+  }
+  .form-label .optional {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 0.75rem;
+    letter-spacing: 0;
+    color: var(--ivory-dark);
+    opacity: 0.5;
+    text-transform: none;
+  }
+
+  .form-control {
+    background: rgba(201,148,42,0.04);
+    border: 1px solid rgba(201,148,42,0.2);
+    color: var(--ivory);
+    padding: 0.85rem 1.1rem;
+    font-family: 'EB Garamond', serif;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s;
+    width: 100%;
+  }
+  .form-control::placeholder { color: rgba(250,243,224,0.3); font-style: italic; }
+  .form-control:focus {
+    border-color: var(--gold);
+    background: rgba(201,148,42,0.08);
+    box-shadow: 0 0 20px rgba(201,148,42,0.1);
+  }
+  select.form-control option { background: var(--brown-deep); }
+  textarea.form-control { resize: vertical; min-height: 120px; }
+
+  /* Upload zone */
+  .upload-zone {
+    border: 2px dashed rgba(201,148,42,0.25);
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.4s;
+    position: relative;
+    background: rgba(201,148,42,0.02);
+  }
+  .upload-zone:hover, .upload-zone.drag-over {
+    border-color: var(--gold);
+    background: rgba(201,148,42,0.06);
+    box-shadow: 0 0 30px rgba(201,148,42,0.1);
+  }
+  .upload-zone input[type="file"] {
+    position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
+  }
+  .upload-icon { color: var(--gold); opacity: 0.6; margin-bottom: 0.8rem; }
+  .upload-zone p {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: var(--gold-light);
+    margin-bottom: 0.3rem;
+  }
+  .upload-zone span { font-size: 0.8rem; color: var(--ivory-dark); opacity: 0.5; font-style: italic; }
+  .upload-preview {
+    margin-top: 1rem;
+    display: none;
+    position: relative;
+  }
+  .upload-preview img {
+    max-height: 150px;
+    border: 1px solid rgba(201,148,42,0.3);
+    display: block; margin: 0 auto;
+  }
+  .upload-preview.active { display: block; }
+
+  /* Frame selector */
+  .frame-options {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+  }
+  @media (max-width: 500px) { .frame-options { grid-template-columns: 1fr 1fr; } }
+
+  .frame-option { position: relative; }
+  .frame-option input[type="radio"] { position: absolute; opacity: 0; }
+  .frame-card {
+    border: 1px solid rgba(201,148,42,0.2);
+    padding: 1rem 0.75rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    background: rgba(201,148,42,0.02);
+  }
+  .frame-option input:checked + .frame-card {
+    border-color: var(--gold);
+    background: rgba(201,148,42,0.1);
+    box-shadow: 0 0 20px rgba(201,148,42,0.15);
+  }
+  .frame-card:hover { border-color: rgba(201,148,42,0.5); }
+  .frame-icon {
+    width: 50px; height: 50px;
+    margin: 0 auto 0.6rem;
+  }
+  .frame-card span {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    color: var(--ivory-dark);
+    text-transform: uppercase;
+    display: block;
+  }
+
+  /* Size slider */
+  .size-display {
+    display: flex; align-items: center;
+    gap: 1rem; margin-bottom: 0.75rem;
+  }
+  .size-display .size-val {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.4rem;
+    color: var(--gold);
+    min-width: 90px;
+  }
+  .size-display .size-unit {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    color: var(--ivory-dark);
+    opacity: 0.6;
+    letter-spacing: 0.1em;
+  }
+  input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, var(--gold) 0%, var(--gold) var(--progress, 30%), rgba(201,148,42,0.2) var(--progress, 30%));
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px; height: 18px;
+    background: var(--gold);
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(201,148,42,0.5);
+  }
+  .size-presets {
+    display: flex; gap: 0.5rem; margin-top: 0.75rem; flex-wrap: wrap;
+  }
+  .size-preset {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    padding: 0.3rem 0.75rem;
+    border: 1px solid rgba(201,148,42,0.25);
+    color: var(--ivory-dark);
+    cursor: pointer;
+    transition: all 0.3s;
+    background: transparent;
+    text-transform: uppercase;
+  }
+  .size-preset:hover, .size-preset.active {
+    border-color: var(--gold);
+    color: var(--gold);
+    background: rgba(201,148,42,0.06);
+  }
+
+  /* Submit */
+  .form-submit {
+    margin-top: 2.5rem; text-align: center;
+  }
+  .btn-submit {
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
+    background-size: 200%;
+    color: var(--obsidian);
+    border: none;
+    padding: 1.2rem 4rem;
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s;
+    box-shadow: 0 0 40px rgba(201,148,42,0.25);
+    width: 100%;
+    max-width: 380px;
+  }
+  .btn-submit:hover {
+    background-position: right;
+    box-shadow: 0 0 70px rgba(201,148,42,0.5);
+    transform: translateY(-3px);
+  }
+  .btn-submit:active { transform: translateY(-1px); }
+  .form-note {
+    margin-top: 1.2rem;
+    font-size: 0.85rem;
+    color: var(--ivory-dark);
+    opacity: 0.5;
+    font-style: italic;
+  }
+
+  /* Success message */
+  .success-message {
+    display: none;
+    text-align: center;
+    padding: 3rem 2rem;
+  }
+  .success-message.active { display: block; }
+  .success-icon { color: var(--gold); font-size: 3rem; margin-bottom: 1.5rem; }
+  .success-message h3 {
+    font-family: 'Cinzel Decorative', serif;
+    color: var(--gold-light);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .success-message p { color: var(--ivory-dark); opacity: 0.8; font-size: 1.05rem; line-height: 1.8; }
+
+  /* ══════════════════════════════
+     TESTIMONIALS
+  ══════════════════════════════ */
+  #testimonials {
+    background: linear-gradient(180deg, #0A0804 0%, #0D0907 100%);
+    position: relative;
+  }
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+  @media (max-width: 900px) { .testimonials-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .testimonials-grid { grid-template-columns: 1fr; } }
+
+  .testimonial {
+    border: 1px solid rgba(201,148,42,0.15);
+    padding: 2rem;
+    background: rgba(201,148,42,0.02);
+    position: relative;
+    transition: all 0.4s;
+  }
+  .testimonial::before {
+    content: '\201C';
+    position: absolute;
+    top: 1rem; left: 1.5rem;
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 4rem;
+    color: var(--gold);
+    opacity: 0.15;
+    line-height: 1;
+  }
+  .testimonial:hover {
+    border-color: rgba(201,148,42,0.4);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+  }
+  .testimonial-text {
+    font-style: italic;
+    color: var(--ivory-dark);
+    line-height: 1.9;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+    opacity: 0.85;
+  }
+  .testimonial-author {
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .author-avatar {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,148,42,0.4);
+    background: var(--brown-mid);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.85rem;
+    color: var(--gold);
+  }
+  .author-name {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    color: var(--gold-light);
+    letter-spacing: 0.08em;
+  }
+  .author-place { font-size: 0.8rem; color: var(--ivory-dark); opacity: 0.5; margin-top: 0.15rem; }
+  .stars { color: var(--gold); font-size: 0.7rem; margin-top: 0.2rem; }
+
+  /* ══════════════════════════════
+     FOOTER
+  ══════════════════════════════ */
+  footer {
+    background: #070503;
+    border-top: 1px solid rgba(201,148,42,0.15);
+    padding: 4rem 2rem 2rem;
+  }
+  .footer-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(201,148,42,0.1);
+    margin-bottom: 2rem;
+  }
+  @media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; } }
+  @media (max-width: 550px) { .footer-grid { grid-template-columns: 1fr; } }
+
+  .footer-brand .nav-logo { font-size: 1.1rem; display: block; margin-bottom: 1rem; }
+  .footer-brand p { font-size: 0.9rem; color: var(--ivory-dark); opacity: 0.6; line-height: 1.8; }
+
+  .footer-col h4 {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 0.6rem; }
+  .footer-col ul a {
+    color: var(--ivory-dark);
+    text-decoration: none;
+    font-size: 0.9rem;
+    opacity: 0.6;
+    transition: opacity 0.3s, color 0.3s;
+  }
+  .footer-col ul a:hover { opacity: 1; color: var(--gold-light); }
+
+  .footer-contact p {
+    font-size: 0.85rem;
+    color: var(--ivory-dark);
+    opacity: 0.6;
+    margin-bottom: 0.5rem;
+    line-height: 1.7;
+  }
+  .footer-contact a { color: var(--gold-light); text-decoration: none; }
+
+  .footer-bottom {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-bottom p { font-size: 0.8rem; color: var(--ivory-dark); opacity: 0.4; }
+  .footer-bottom p span { color: var(--crimson); }
+
+  /* ══════════════════════════════
+     ANIMATIONS (Scroll Reveal)
+  ══════════════════════════════ */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* Floating particles */
+  .particles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+  .particle {
+    position: absolute;
+    width: 2px; height: 2px;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: floatParticle linear infinite;
+    opacity: 0;
+  }
+  @keyframes floatParticle {
+    0% { transform: translateY(100%) translateX(0); opacity: 0; }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.3; }
+    100% { transform: translateY(-100px) translateX(30px); opacity: 0; }
+  }
+
+  /* Toast Notification */
+  .toast {
+    position: fixed;
+    bottom: 2rem; right: 2rem;
+    background: var(--brown-mid);
+    border: 1px solid var(--gold);
+    color: var(--ivory);
+    padding: 1rem 1.5rem;
+    max-width: 320px;
+    transform: translateX(120%);
+    transition: transform 0.5s cubic-bezier(0.34,1.56,0.64,1);
+    z-index: 9998;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  }
+  .toast.show { transform: translateX(0); }
+  .toast-title {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.3rem;
+  }
+  .toast p { font-size: 0.85rem; color: var(--ivory-dark); opacity: 0.8; line-height: 1.5; }
+
+  /* ══════════════════════════════
+     GALLERY POPUP MODAL
+  ══════════════════════════════ */
+  .modal-backdrop {
+    position: fixed; inset: 0; z-index: 5000;
+    background: rgba(7,5,3,0.93);
+    backdrop-filter: blur(8px);
+    display: flex; align-items: center; justify-content: center;
+    padding: 1.5rem;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+  .modal-backdrop.open { opacity: 1; pointer-events: all; }
+  .modal {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-width: 980px; width: 100%;
+    max-height: 92vh;
+    background: linear-gradient(135deg, #140C04, #0D0907);
+    border: 1px solid rgba(201,148,42,0.3);
+    box-shadow: 0 0 80px rgba(0,0,0,0.85), 0 0 40px rgba(201,148,42,0.07);
+    position: relative;
+    z-index: 5001;
+    transform: scale(0.93) translateY(20px);
+    transition: transform 0.4s cubic-bezier(0.34,1.3,0.64,1);
+    overflow: visible;
+  }
+  .modal-backdrop.open .modal { transform: scale(1) translateY(0); }
+  .modal::before, .modal::after {
+    content: ''; position: absolute;
+    width: 55px; height: 55px;
+    border-color: rgba(201,148,42,0.5); border-style: solid; z-index: 2; pointer-events: none;
+  }
+  .modal::before { top:0; left:0; border-width:2px 0 0 2px; }
+  .modal::after  { bottom:0; right:0; border-width:0 2px 2px 0; }
+  .modal-close {
+    position: absolute; top:1rem; right:1rem;
+    width:2.2rem; height:2.2rem;
+    border:1px solid rgba(201,148,42,0.4); background:rgba(13,9,7,0.85);
+    color:var(--gold); font-size:1.1rem; cursor:pointer;
+    display:flex; align-items:center; justify-content:center; z-index:10;
+    transition:all 0.3s; line-height:1;
+  }
+  .modal-close:hover { background:var(--gold); color:var(--obsidian); }
+  .modal-image-panel {
+    position:relative; background:#0A0704;
+    display:flex; align-items:center; justify-content:center;
+    padding:3rem 2rem;
+    border-right:1px solid rgba(201,148,42,0.15);
+    overflow:hidden; min-height:500px; border-radius:0;
+  }
+  .modal-image-panel::before {
+    content:''; position:absolute; inset:0;
+    background:radial-gradient(ellipse at center, rgba(201,148,42,0.06) 0%, transparent 70%);
+  }
+  .modal-painting-frame {
+    position:relative;
+    border:3px solid var(--gold);
+    box-shadow: 0 0 0 6px rgba(201,148,42,0.07), 0 0 0 7px var(--gold),
+                0 0 0 14px rgba(201,148,42,0.05), 0 0 50px rgba(201,148,42,0.25);
+    width:100%; max-width:280px; aspect-ratio:3/4;
+    display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(135deg,#2A1505,#1A0F05,#3D1F0A); overflow:hidden;
+  }
+  .modal-painting-frame svg { width:85%; height:85%; }
+  .jewel {
+    position:absolute; width:10px; height:10px;
+    background:var(--gold); border-radius:50%;
+    box-shadow:0 0 8px rgba(201,148,42,0.7);
+  }
+  .jewel.tl{top:-5px;left:-5px} .jewel.tr{top:-5px;right:-5px}
+  .jewel.bl{bottom:-5px;left:-5px} .jewel.br{bottom:-5px;right:-5px}
+  .modal-badge {
+    position:absolute; bottom:1.2rem; left:50%; transform:translateX(-50%);
+    font-family:'Cinzel',serif; font-size:0.5rem; letter-spacing:0.2em;
+    color:var(--gold); background:rgba(13,9,7,0.85);
+    border:1px solid rgba(201,148,42,0.3); padding:0.3rem 1rem;
+    white-space:nowrap; text-transform:uppercase;
+  }
+  .modal-details-panel {
+    padding:2.2rem 1.8rem; display:flex; flex-direction:column;
+    overflow-y:auto; gap:0;
+  }
+  .modal-details-panel::-webkit-scrollbar{width:3px}
+  .modal-details-panel::-webkit-scrollbar-thumb{background:rgba(201,148,42,0.3)}
+  .modal-deity-label {
+    font-family:'Cinzel',serif; font-size:0.58rem; letter-spacing:0.3em;
+    color:var(--gold); opacity:0.75; text-transform:uppercase; margin-bottom:0.35rem;
+  }
+  .modal-title {
+    font-family:'Cinzel Decorative',serif; font-size:1.35rem;
+    color:var(--gold-light); line-height:1.25; margin-bottom:0.15rem;
+    text-shadow:0 0 20px rgba(201,148,42,0.2);
+  }
+  .modal-subtitle {
+    font-family:'Cinzel',serif; font-size:0.62rem; letter-spacing:0.15em;
+    color:var(--ivory-dark); opacity:0.5; margin-bottom:1rem; text-transform:uppercase;
+  }
+  .modal-divider { height:1px; background:linear-gradient(to right,var(--gold),transparent); margin:0.8rem 0; opacity:0.25; }
+  .modal-story { font-size:0.93rem; line-height:1.85; color:var(--ivory-dark); opacity:0.82; margin-bottom:1rem; font-style:italic; }
+  .modal-specs { display:grid; grid-template-columns:1fr 1fr; gap:0.5rem; margin-bottom:1rem; }
+  .modal-spec { padding:0.55rem 0.75rem; border:1px solid rgba(201,148,42,0.15); background:rgba(201,148,42,0.03); }
+  .modal-spec-label {
+    font-family:'Cinzel',serif; font-size:0.52rem; letter-spacing:0.15em;
+    color:var(--gold); opacity:0.7; text-transform:uppercase; display:block; margin-bottom:0.15rem;
+  }
+  .modal-spec-val { font-size:0.85rem; color:var(--ivory); }
+  .modal-price-block {
+    display:flex; align-items:baseline; gap:0.7rem; margin-bottom:1rem;
+    padding:0.9rem 1rem; background:rgba(201,148,42,0.05);
+    border:1px solid rgba(201,148,42,0.2); position:relative; flex-wrap:wrap;
+  }
+  .modal-price-block::before {
+    content:'24K Gold · Handcrafted · Certified';
+    position:absolute; top:-0.52rem; left:0.8rem;
+    font-family:'Cinzel',serif; font-size:0.47rem; letter-spacing:0.15em;
+    color:var(--gold); background:#140C04; padding:0 0.4rem; text-transform:uppercase; opacity:0.8;
+  }
+  .modal-price { font-family:'Cinzel Decorative',serif; font-size:1.85rem; color:var(--gold); text-shadow:0 0 20px rgba(201,148,42,0.3); }
+  .modal-price-orig { font-size:0.95rem; color:var(--ivory-dark); opacity:0.4; text-decoration:line-through; }
+  .modal-price-save {
+    font-family:'Cinzel',serif; font-size:0.58rem; letter-spacing:0.1em;
+    color:#5BA85A; background:rgba(91,168,90,0.12);
+    border:1px solid rgba(91,168,90,0.25); padding:0.2rem 0.5rem; text-transform:uppercase;
+  }
+  .modal-size-row { display:flex; gap:0.45rem; flex-wrap:wrap; margin-bottom:1rem; }
+  .modal-size-label {
+    font-family:'Cinzel',serif; font-size:0.58rem; letter-spacing:0.15em;
+    color:var(--gold); text-transform:uppercase; opacity:0.75; width:100%; margin-bottom:0.2rem;
+  }
+  .modal-size-btn {
+    font-family:'Cinzel',serif; font-size:0.58rem; letter-spacing:0.08em;
+    padding:0.3rem 0.65rem; border:1px solid rgba(201,148,42,0.25);
+    color:var(--ivory-dark); cursor:pointer; transition:all 0.25s; background:transparent; text-transform:uppercase;
+  }
+  .modal-size-btn:hover,.modal-size-btn.active { border-color:var(--gold); color:var(--gold); background:rgba(201,148,42,0.08); }
+  .modal-actions { display:flex; flex-direction:column; gap:0.7rem; margin-top:auto; padding-top:0.6rem; }
+  .btn-add-cart {
+    background:linear-gradient(135deg,var(--gold),var(--gold-light),var(--gold)); background-size:200%;
+    color:var(--obsidian); border:none; padding:0.9rem 1.5rem;
+    font-family:'Cinzel',serif; font-size:0.72rem; letter-spacing:0.2em; text-transform:uppercase;
+    cursor:pointer; transition:all 0.4s;
+    display:flex; align-items:center; justify-content:center; gap:0.5rem;
+    box-shadow:0 0 25px rgba(201,148,42,0.2);
+  }
+  .btn-add-cart:hover { background-position:right; box-shadow:0 0 50px rgba(201,148,42,0.45); transform:translateY(-2px); }
+  .btn-add-cart.added { background:linear-gradient(135deg,#3A6B39,#5BA85A); box-shadow:0 0 30px rgba(91,168,90,0.3); }
+  .btn-order-now {
+    background:transparent; color:var(--gold-light);
+    border:1px solid rgba(201,148,42,0.4); padding:0.85rem 1.5rem;
+    font-family:'Cinzel',serif; font-size:0.7rem; letter-spacing:0.18em; text-transform:uppercase;
+    cursor:pointer; transition:all 0.3s;
+    display:flex; align-items:center; justify-content:center; gap:0.5rem; text-decoration:none;
+  }
+  .btn-order-now:hover { border-color:var(--gold); background:rgba(201,148,42,0.07); }
+
+  /* ══════════════════════════════
+     CART SIDEBAR
+  ══════════════════════════════ */
+  .cart-sidebar {
+    position:fixed; top:0; right:-420px; bottom:0; width:400px;
+    background:linear-gradient(180deg,#110D07,#0A0804);
+    border-left:1px solid rgba(201,148,42,0.25);
+    z-index:6000; display:flex; flex-direction:column;
+    box-shadow:-20px 0 60px rgba(0,0,0,0.6);
+    transition:right 0.45s cubic-bezier(0.34,1.1,0.64,1);
+  }
+  .cart-sidebar.open { right:0; }
+  .cart-overlay {
+    position:fixed; inset:0; background:rgba(7,5,3,0.65);
+    z-index:5999; opacity:0; pointer-events:none; transition:opacity 0.4s;
+  }
+  .cart-overlay.open { opacity:1; pointer-events:all; }
+  .cart-header {
+    display:flex; align-items:center; justify-content:space-between;
+    padding:1.4rem 1.5rem 1.1rem;
+    border-bottom:1px solid rgba(201,148,42,0.15);
+  }
+  .cart-header h3 { font-family:'Cinzel Decorative',serif; font-size:0.95rem; color:var(--gold-light); }
+  .cart-close {
+    width:2rem; height:2rem; border:1px solid rgba(201,148,42,0.35);
+    background:transparent; color:var(--gold); cursor:pointer; font-size:1rem;
+    display:flex; align-items:center; justify-content:center; transition:all 0.3s;
+  }
+  .cart-close:hover { background:var(--gold); color:var(--obsidian); }
+  .cart-items { flex:1; overflow-y:auto; padding:0.8rem 1.5rem; }
+  .cart-items::-webkit-scrollbar{width:3px}
+  .cart-items::-webkit-scrollbar-thumb{background:rgba(201,148,42,0.3)}
+  .cart-empty { text-align:center; padding:3rem 1rem; }
+  .cart-empty p { font-family:'Cinzel',serif; font-size:0.72rem; letter-spacing:0.15em; color:var(--ivory-dark); opacity:0.35; text-transform:uppercase; margin-top:1rem; }
+  .cart-item {
+    display:flex; gap:0.9rem; padding:1rem 0;
+    border-bottom:1px solid rgba(201,148,42,0.1); position:relative;
+    animation:slideInCart 0.4s cubic-bezier(0.34,1.2,0.64,1) both;
+  }
+  @keyframes slideInCart { from{opacity:0;transform:translateX(30px)} to{opacity:1;transform:translateX(0)} }
+  .cart-item-thumb {
+    width:60px; height:76px; border:1px solid rgba(201,148,42,0.3);
+    background:var(--brown-deep); display:flex; align-items:center; justify-content:center; flex-shrink:0; overflow:hidden;
+  }
+  .cart-item-thumb svg { width:90%; height:90%; }
+  .cart-item-info { flex:1; }
+  .cart-item-name { font-family:'Cinzel',serif; font-size:0.7rem; color:var(--gold-light); letter-spacing:0.05em; margin-bottom:0.15rem; }
+  .cart-item-sub { font-size:0.76rem; color:var(--ivory-dark); opacity:0.5; margin-bottom:0.35rem; }
+  .cart-item-price { font-family:'Cinzel Decorative',serif; font-size:0.9rem; color:var(--gold); }
+  .cart-item-remove { position:absolute; top:1rem; right:0; background:transparent; border:none; color:var(--crimson); cursor:pointer; font-size:0.85rem; opacity:0.55; transition:opacity 0.2s; }
+  .cart-item-remove:hover { opacity:1; }
+  .cart-footer { padding:1.1rem 1.5rem; border-top:1px solid rgba(201,148,42,0.15); }
+  .cart-total-row { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:1rem; }
+  .cart-total-label { font-family:'Cinzel',serif; font-size:0.62rem; letter-spacing:0.2em; color:var(--ivory-dark); opacity:0.6; text-transform:uppercase; }
+  .cart-total-amount { font-family:'Cinzel Decorative',serif; font-size:1.4rem; color:var(--gold); }
+  .btn-checkout {
+    width:100%; background:linear-gradient(135deg,var(--gold),var(--gold-light),var(--gold)); background-size:200%;
+    color:var(--obsidian); border:none; padding:0.95rem;
+    font-family:'Cinzel',serif; font-size:0.75rem; letter-spacing:0.2em; text-transform:uppercase;
+    cursor:pointer; transition:all 0.4s; box-shadow:0 0 30px rgba(201,148,42,0.2); margin-bottom:0.6rem;
+  }
+  .btn-checkout:hover { background-position:right; box-shadow:0 0 50px rgba(201,148,42,0.4); }
+  .cart-note { font-size:0.75rem; color:var(--ivory-dark); opacity:0.38; text-align:center; font-style:italic; }
+  .cart-trigger {
+    position:relative; background:transparent; border:1px solid rgba(201,148,42,0.4);
+    color:var(--gold); padding:0.42rem 0.85rem;
+    font-family:'Cinzel',serif; font-size:0.68rem; letter-spacing:0.1em;
+    cursor:pointer; transition:all 0.3s;
+    display:flex; align-items:center; gap:0.4rem; white-space:nowrap;
+  }
+  .cart-trigger:hover { background:rgba(201,148,42,0.08); border-color:var(--gold); }
+  .cart-count {
+    background:var(--crimson); color:var(--ivory); border-radius:50%;
+    width:1.1rem; height:1.1rem; font-size:0.52rem;
+    display:none; align-items:center; justify-content:center;
+    animation:popIn 0.4s cubic-bezier(0.34,1.5,0.64,1) both;
+  }
+  .cart-count.visible { display:flex; }
+  @keyframes popIn { from{transform:scale(0)} to{transform:scale(1)} }
+
+  @media (max-width:750px) {
+    .modal { grid-template-columns:1fr; max-height:95vh; }
+    .modal-image-panel { min-height:260px; padding:1.5rem; border-right:none; border-bottom:1px solid rgba(201,148,42,0.15); }
+    .modal-painting-frame { max-width:160px; }
+    .modal-details-panel { padding:1.4rem; }
+    .modal-title { font-size:1.05rem; }
+    .cart-sidebar { width:100%; right:-100%; }
+  }
+
+  /* Mobile Nav */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+  .hamburger span {
+    display: block;
+    width: 24px; height: 1px;
+    background: var(--gold);
+    transition: all 0.3s;
+  }
+  @media (max-width: 768px) {
+    .hamburger { display: flex; }
+    .nav-links {
+      position: fixed;
+      top: 0; right: -100%; bottom: 0;
+      width: 280px;
+      background: rgba(13,9,7,0.98);
+      border-left: 1px solid rgba(201,148,42,0.2);
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: right 0.4s ease;
+      z-index: 999;
+    }
+    .nav-links.open { right: 0; }
+    .nav-links a { font-size: 0.85rem; }
+  }
+
+  /* ══════════════════════════════
+     PAINTING KITS SECTION
+  ══════════════════════════════ */
+  #kits {
+    background: linear-gradient(180deg, #0D0907 0%, #110B04 50%, #0D0907 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  #kits::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cpath d='M40 0 L80 40 L40 80 L0 40 Z' stroke='%23C9942A' stroke-width='0.3' opacity='0.04'/%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+
+  .kits-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    margin-top: 3.5rem;
+  }
+  @media (max-width: 800px) { .kits-grid { grid-template-columns: 1fr; } }
+
+  .kit-card {
+    position: relative;
+    border: 1px solid rgba(201,148,42,0.2);
+    background: linear-gradient(145deg, rgba(26,15,5,0.9), rgba(10,8,4,0.95));
+    overflow: hidden;
+    transition: all 0.5s ease;
+    cursor: default;
+  }
+  .kit-card:hover {
+    border-color: rgba(201,148,42,0.5);
+    box-shadow: 0 0 60px rgba(201,148,42,0.12), 0 20px 40px rgba(0,0,0,0.4);
+    transform: translateY(-6px);
+  }
+  .kit-card::before, .kit-card::after {
+    content: '';
+    position: absolute;
+    width: 50px; height: 50px;
+    border-color: rgba(201,148,42,0.35);
+    border-style: solid;
+    pointer-events: none;
+    transition: all 0.4s;
+  }
+  .kit-card::before { top: 0; left: 0; border-width: 2px 0 0 2px; }
+  .kit-card::after  { bottom: 0; right: 0; border-width: 0 2px 2px 0; }
+  .kit-card:hover::before, .kit-card:hover::after { width: 70px; height: 70px; border-color: rgba(201,148,42,0.7); }
+
+  .kit-badge {
+    position: absolute;
+    top: 1.5rem; right: 1.5rem;
+    font-family: 'Cinzel', serif;
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.9rem;
+    border: 1px solid;
+  }
+  .kit-badge.beginner { color: #5BA85A; border-color: rgba(91,168,90,0.4); background: rgba(91,168,90,0.08); }
+  .kit-badge.advanced { color: var(--gold); border-color: rgba(201,148,42,0.4); background: rgba(201,148,42,0.06); }
+
+  .kit-illustration {
+    width: 100%;
+    padding: 3rem 2.5rem 2rem;
+    display: flex;
+    justify-content: center;
+    position: relative;
+  }
+  .kit-illustration::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 60%; height: 1px;
+    background: linear-gradient(to right, transparent, rgba(201,148,42,0.3), transparent);
+  }
+
+  .kit-body { padding: 2rem 2.5rem 2.5rem; }
+
+  .kit-tag {
+    font-family: 'Cinzel', serif;
+    font-size: 0.58rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    opacity: 0.7;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .kit-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.6rem;
+    color: var(--gold-light);
+    line-height: 1.2;
+    margin-bottom: 0.4rem;
+    text-shadow: 0 0 30px rgba(201,148,42,0.2);
+  }
+  .kit-subtitle {
+    font-family: 'Cinzel', serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    color: var(--ivory-dark);
+    opacity: 0.5;
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+  }
+  .kit-desc {
+    font-size: 0.95rem;
+    line-height: 1.85;
+    color: var(--ivory-dark);
+    opacity: 0.8;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+  }
+
+  .kit-contents {
+    margin-bottom: 1.8rem;
+  }
+  .kit-contents-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    opacity: 0.75;
+    margin-bottom: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .kit-contents-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, rgba(201,148,42,0.3), transparent);
+  }
+
+  .kit-items-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+  .kit-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    padding: 0.5rem 0;
+  }
+  .kit-item-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    opacity: 0.6;
+    margin-top: 0.35rem;
+    flex-shrink: 0;
+  }
+  .kit-item-text {
+    font-size: 0.85rem;
+    color: var(--ivory-dark);
+    opacity: 0.75;
+    line-height: 1.4;
+  }
+
+  .kit-pricing {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding: 1rem 1.2rem;
+    border: 1px solid rgba(201,148,42,0.15);
+    background: rgba(201,148,42,0.03);
+    position: relative;
+  }
+  .kit-pricing::before {
+    content: 'Kit Price';
+    position: absolute;
+    top: -0.52rem; left: 0.8rem;
+    font-family: 'Cinzel', serif;
+    font-size: 0.48rem;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    background: #110B04;
+    padding: 0 0.4rem;
+    text-transform: uppercase;
+    opacity: 0.8;
+  }
+  .kit-price {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.8rem;
+    color: var(--gold);
+    text-shadow: 0 0 20px rgba(201,148,42,0.3);
+  }
+  .kit-price-orig {
+    font-size: 0.95rem;
+    color: var(--ivory-dark);
+    opacity: 0.38;
+    text-decoration: line-through;
+  }
+  .kit-price-save {
+    font-family: 'Cinzel', serif;
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+    color: #5BA85A;
+    background: rgba(91,168,90,0.1);
+    border: 1px solid rgba(91,168,90,0.25);
+    padding: 0.2rem 0.5rem;
+    text-transform: uppercase;
+  }
+
+  .kit-actions { display: flex; gap: 0.8rem; }
+  .btn-kit-cart {
+    flex: 1;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light), var(--gold));
+    background-size: 200%;
+    color: var(--obsidian);
+    border: none;
+    padding: 0.85rem 1rem;
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.4s;
+    display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+    box-shadow: 0 0 20px rgba(201,148,42,0.15);
+  }
+  .btn-kit-cart:hover { background-position: right; box-shadow: 0 0 40px rgba(201,148,42,0.4); transform: translateY(-2px); }
+  .btn-kit-cart.added { background: linear-gradient(135deg,#3A6B39,#5BA85A); box-shadow: 0 0 25px rgba(91,168,90,0.3); }
+
+  .btn-kit-enquire {
+    background: transparent;
+    color: var(--gold-light);
+    border: 1px solid rgba(201,148,42,0.35);
+    padding: 0.85rem 1.2rem;
+    font-family: 'Cinzel', serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .btn-kit-enquire:hover { border-color: var(--gold); background: rgba(201,148,42,0.07); }
+
+  /* Compare table */
+  .kit-compare {
+    margin-top: 4rem;
+    border: 1px solid rgba(201,148,42,0.15);
+    overflow: hidden;
+  }
+  .kit-compare-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    background: rgba(201,148,42,0.06);
+    border-bottom: 1px solid rgba(201,148,42,0.2);
+  }
+  .kit-compare-header div {
+    padding: 1rem 1.2rem;
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .kit-compare-header div:not(:last-child) { border-right: 1px solid rgba(201,148,42,0.1); }
+  .kit-compare-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    border-bottom: 1px solid rgba(201,148,42,0.07);
+    transition: background 0.2s;
+  }
+  .kit-compare-row:last-child { border-bottom: none; }
+  .kit-compare-row:hover { background: rgba(201,148,42,0.03); }
+  .kit-compare-row div {
+    padding: 0.75rem 1.2rem;
+    font-size: 0.88rem;
+    color: var(--ivory-dark);
+    opacity: 0.8;
+  }
+  .kit-compare-row div:not(:last-child) { border-right: 1px solid rgba(201,148,42,0.07); }
+  .kit-compare-row div:first-child { opacity: 0.65; font-style: italic; }
+  .kit-check { color: #5BA85A; font-size: 1rem; opacity: 1 !important; }
+  .kit-cross { color: var(--crimson); font-size: 1rem; opacity: 1 !important; }
+  .kit-partial { color: var(--gold); font-size: 0.85rem; opacity: 1 !important; font-style: normal !important; }
+
+</style>
+</head>
+<body>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <div class="toast-title">&#10022; Message Received</div>
+  <p>Your commission request has been received. Our artisan will contact you within 24 hours.</p>
+</div>
+
+<!-- GALLERY MODAL -->
+<div class="modal-backdrop" id="modalBackdrop" onclick="handleBackdropClick(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModal()">&#10005;</button>
+    <div class="modal-image-panel">
+      <div class="modal-painting-frame" id="modalFrame">
+        <div class="jewel tl"></div><div class="jewel tr"></div>
+        <div class="jewel bl"></div><div class="jewel br"></div>
+      </div>
+      <div class="modal-badge" id="modalBadge"></div>
+    </div>
+    <div class="modal-details-panel">
+      <p class="modal-deity-label" id="modalLabel"></p>
+      <h2 class="modal-title" id="modalTitle"></h2>
+      <p class="modal-subtitle" id="modalSubtitle"></p>
+      <div class="modal-divider"></div>
+      <p class="modal-story" id="modalStory"></p>
+      <div class="modal-specs" id="modalSpecs"></div>
+      <div class="modal-divider"></div>
+      <div class="modal-size-row" id="modalSizeRow">
+        <span class="modal-size-label">Select Size</span>
+      </div>
+      <div class="modal-price-block">
+        <span class="modal-price" id="modalPrice"></span>
+        <span class="modal-price-orig" id="modalOrig"></span>
+        <span class="modal-price-save" id="modalSave"></span>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-add-cart" id="modalCartBtn" onclick="addToCart()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          Add to Cart
+        </button>
+        <a href="#commission" class="btn-order-now" onclick="closeModal()">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          Commission Custom Size
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CART SIDEBAR -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <h3>&#10022; Your Sacred Cart</h3>
+    <button class="cart-close" onclick="closeCart()">&#10005;</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty" id="cartEmpty">
+      <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#C9942A" stroke-width="0.8" style="display:block;margin:0 auto;opacity:0.25"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      <p style="margin-top:1rem">Your cart awaits a sacred creation</p>
+    </div>
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none">
+    <div class="cart-total-row">
+      <span class="cart-total-label">Total</span>
+      <span class="cart-total-amount" id="cartTotal">&#8377;0</span>
+    </div>
+    <button class="btn-checkout" onclick="checkout()">Proceed to Enquiry &#10022;</button>
+    <p class="cart-note">Our artisan will call to confirm your order details</p>
+  </div>
+</div>
+
+<!-- NAVIGATION -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">Guhan<span>Arts</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#heritage">Heritage</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#testimonials">Patrons</a></li>
+    <li><a href="#kits">Painting Kits</a></li>
+    <li><a href="#commission" class="nav-cta">Commission</a></li>
+  </ul>
+  <button class="cart-trigger" onclick="openCart()">
+    ✦ Cart
+    <span class="cart-count" id="cartCount">0</span>
+  </button>
+  <div class="hamburger" id="hamburger" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="particles" id="particles"></div>
+  <!-- Mandala -->
+  <svg class="hero-mandala" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#C9942A" stroke-width="0.5">
+    <circle cx="200" cy="200" r="180"/><circle cx="200" cy="200" r="150"/><circle cx="200" cy="200" r="120"/><circle cx="200" cy="200" r="90"/><circle cx="200" cy="200" r="60"/><circle cx="200" cy="200" r="30"/>
+    <line x1="200" y1="20" x2="200" y2="380"/><line x1="20" y1="200" x2="380" y2="200"/>
+    <line x1="73" y1="73" x2="327" y2="327"/><line x1="327" y1="73" x2="73" y2="327"/>
+    <polygon points="200,50 350,275 50,275"/><polygon points="200,350 350,125 50,125"/>
+    <polygon points="200,80 320,260 80,260"/><polygon points="200,320 320,140 80,140"/>
+    <g transform="rotate(22.5 200 200)"><line x1="200" y1="20" x2="200" y2="380"/><line x1="20" y1="200" x2="380" y2="200"/></g>
+    <circle cx="200" cy="50" r="8"/><circle cx="200" cy="350" r="8"/>
+    <circle cx="50" cy="200" r="8"/><circle cx="350" cy="200" r="8"/>
+    <circle cx="93" cy="93" r="6"/><circle cx="307" cy="93" r="6"/>
+    <circle cx="93" cy="307" r="6"/><circle cx="307" cy="307" r="6"/>
+  </svg>
+
+  <!-- Corner ornaments -->
+  <div class="corner corner-tl">
+    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10,10 L90,10 M10,10 L10,90" stroke="#C9942A" stroke-width="1.5" opacity="0.4"/>
+      <path d="M20,10 Q20,20 10,20" stroke="#C9942A" stroke-width="1" opacity="0.4"/>
+      <path d="M40,10 Q40,40 10,40" stroke="#C9942A" stroke-width="0.8" opacity="0.3"/>
+      <circle cx="10" cy="10" r="4" fill="#C9942A" opacity="0.5"/>
+      <circle cx="90" cy="10" r="2" fill="#C9942A" opacity="0.3"/>
+      <circle cx="10" cy="90" r="2" fill="#C9942A" opacity="0.3"/>
+      <path d="M55,10 L10,55" stroke="#C9942A" stroke-width="0.5" opacity="0.2"/>
+    </svg>
+  </div>
+  <div class="corner corner-tr"><svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10,10 L90,10 M10,10 L10,90" stroke="#C9942A" stroke-width="1.5" opacity="0.4"/><path d="M20,10 Q20,20 10,20" stroke="#C9942A" stroke-width="1" opacity="0.4"/><path d="M40,10 Q40,40 10,40" stroke="#C9942A" stroke-width="0.8" opacity="0.3"/><circle cx="10" cy="10" r="4" fill="#C9942A" opacity="0.5"/><circle cx="90" cy="10" r="2" fill="#C9942A" opacity="0.3"/><circle cx="10" cy="90" r="2" fill="#C9942A" opacity="0.3"/><path d="M55,10 L10,55" stroke="#C9942A" stroke-width="0.5" opacity="0.2"/></svg></div>
+  <div class="corner corner-bl"><svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10,10 L90,10 M10,10 L10,90" stroke="#C9942A" stroke-width="1.5" opacity="0.4"/><path d="M20,10 Q20,20 10,20" stroke="#C9942A" stroke-width="1" opacity="0.4"/><path d="M40,10 Q40,40 10,40" stroke="#C9942A" stroke-width="0.8" opacity="0.3"/><circle cx="10" cy="10" r="4" fill="#C9942A" opacity="0.5"/><circle cx="90" cy="10" r="2" fill="#C9942A" opacity="0.3"/><circle cx="10" cy="90" r="2" fill="#C9942A" opacity="0.3"/><path d="M55,10 L10,55" stroke="#C9942A" stroke-width="0.5" opacity="0.2"/></svg></div>
+  <div class="corner corner-br"><svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10,10 L90,10 M10,10 L10,90" stroke="#C9942A" stroke-width="1.5" opacity="0.4"/><path d="M20,10 Q20,20 10,20" stroke="#C9942A" stroke-width="1" opacity="0.4"/><path d="M40,10 Q40,40 10,40" stroke="#C9942A" stroke-width="0.8" opacity="0.3"/><circle cx="10" cy="10" r="4" fill="#C9942A" opacity="0.5"/><circle cx="90" cy="10" r="2" fill="#C9942A" opacity="0.3"/><circle cx="10" cy="90" r="2" fill="#C9942A" opacity="0.3"/><path d="M55,10 L10,55" stroke="#C9942A" stroke-width="0.5" opacity="0.2"/></svg></div>
+
+  <div class="hero-content">
+    <div class="hero-badge">✦ Established in the Sacred City of Thanjavur ✦</div>
+    <div class="ornament">— ॐ —</div>
+    <h1 class="hero-title">Guhan<span>Arts</span></h1>
+    <p class="hero-sub">The Art of Gold & Divinity</p>
+    <div class="ornament-line"><span>✦ ✦ ✦</span></div>
+    <p class="hero-desc">
+      Where ancient devotion meets masterful craftsmanship. Each Tanjore painting is a living prayer — crafted with 24-karat gold leaf, precious gemstones, and centuries-old tradition, blessed and made eternal for your home.
+    </p>
+    <div class="hero-actions">
+      <a href="#commission" class="btn-primary">Commission Your Painting</a>
+      <a href="#gallery" class="btn-secondary">View the Gallery</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <span>Discover</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- HERITAGE -->
+<section id="heritage">
+  <div class="container">
+    <div class="heritage-grid">
+      <div class="heritage-visual reveal">
+        <div class="painting-frame">
+          <!-- Decorative frame corners -->
+          <svg class="frame-corner-deco tl" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1,1 L29,1 M1,1 L1,29" stroke="#C9942A" stroke-width="2"/><circle cx="1" cy="1" r="3" fill="#C9942A"/></svg>
+          <svg class="frame-corner-deco tr" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1,1 L29,1 M1,1 L1,29" stroke="#C9942A" stroke-width="2"/><circle cx="1" cy="1" r="3" fill="#C9942A"/></svg>
+          <svg class="frame-corner-deco bl" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1,1 L29,1 M1,1 L1,29" stroke="#C9942A" stroke-width="2"/><circle cx="1" cy="1" r="3" fill="#C9942A"/></svg>
+          <svg class="frame-corner-deco br" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1,1 L29,1 M1,1 L1,29" stroke="#C9942A" stroke-width="2"/><circle cx="1" cy="1" r="3" fill="#C9942A"/></svg>
+          <div class="painting-inner">
+            <!-- Decorative Deity Silhouette -->
+            <svg viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg" fill="none">
+              <!-- Halo -->
+              <circle cx="100" cy="70" r="55" stroke="#C9942A" stroke-width="1.5" opacity="0.6"/>
+              <circle cx="100" cy="70" r="48" stroke="#C9942A" stroke-width="0.5" stroke-dasharray="3 3" opacity="0.4"/>
+              <circle cx="100" cy="70" r="42" stroke="#C9942A" stroke-width="0.8" opacity="0.3"/>
+              <!-- Crown rays -->
+              <g stroke="#C9942A" stroke-width="1" opacity="0.5">
+                <line x1="100" y1="15" x2="100" y2="5"/>
+                <line x1="75" y1="22" x2="70" y2="13"/>
+                <line x1="125" y1="22" x2="130" y2="13"/>
+                <line x1="55" y1="45" x2="48" y2="38"/>
+                <line x1="145" y1="45" x2="152" y2="38"/>
+              </g>
+              <!-- Crown -->
+              <path d="M78,28 L82,18 L86,26 L90,14 L94,24 L100,12 L106,24 L110,14 L114,26 L118,18 L122,28 Z" fill="#C9942A" opacity="0.7"/>
+              <!-- Head -->
+              <ellipse cx="100" cy="68" rx="22" ry="26" fill="#C9942A" opacity="0.25"/>
+              <ellipse cx="100" cy="68" rx="22" ry="26" stroke="#C9942A" stroke-width="1" opacity="0.6"/>
+              <!-- Face features -->
+              <ellipse cx="93" cy="65" rx="3" ry="3.5" fill="#C9942A" opacity="0.5"/>
+              <ellipse cx="107" cy="65" rx="3" ry="3.5" fill="#C9942A" opacity="0.5"/>
+              <path d="M96,74 Q100,78 104,74" stroke="#C9942A" stroke-width="1" opacity="0.5"/>
+              <!-- Body -->
+              <path d="M78,90 Q70,120 65,160 L135,160 Q130,120 122,90 Z" fill="#C9942A" opacity="0.12" stroke="#C9942A" stroke-width="0.8"/>
+              <!-- Arms -->
+              <path d="M78,105 Q55,95 45,110 Q50,125 65,120" stroke="#C9942A" stroke-width="1.5" fill="none" opacity="0.5"/>
+              <path d="M122,105 Q145,95 155,110 Q150,125 135,120" stroke="#C9942A" stroke-width="1.5" fill="none" opacity="0.5"/>
+              <!-- Lower hands items -->
+              <circle cx="42" cy="112" r="6" stroke="#C9942A" stroke-width="1" opacity="0.5"/>
+              <path d="M155,108 L162,112 L155,116 Z" fill="#C9942A" opacity="0.4"/>
+              <!-- Lotus seat -->
+              <path d="M65,165 Q100,155 135,165 Q120,200 100,200 Q80,200 65,165 Z" fill="#C9942A" opacity="0.1" stroke="#C9942A" stroke-width="1"/>
+              <path d="M70,165 Q100,158 130,165 Q115,185 100,185 Q85,185 70,165 Z" stroke="#C9942A" stroke-width="0.5" opacity="0.3" fill="none"/>
+              <!-- Petal details -->
+              <g stroke="#C9942A" stroke-width="0.5" opacity="0.3">
+                <path d="M75,170 Q80,160 85,170"/><path d="M90,167 Q95,157 100,167"/>
+                <path d="M105,167 Q110,157 115,167"/><path d="M120,170 Q125,160 130,170"/>
+              </g>
+              <!-- Jewelry dots -->
+              <circle cx="100" cy="90" r="2.5" fill="#C9942A" opacity="0.7"/>
+              <circle cx="88" cy="93" r="1.5" fill="#C9942A" opacity="0.5"/>
+              <circle cx="112" cy="93" r="1.5" fill="#C9942A" opacity="0.5"/>
+              <!-- Border decorations -->
+              <rect x="10" y="10" width="180" height="260" stroke="#C9942A" stroke-width="0.5" fill="none" opacity="0.2"/>
+              <rect x="15" y="15" width="170" height="250" stroke="#C9942A" stroke-width="0.3" fill="none" opacity="0.15" stroke-dasharray="4 4"/>
+            </svg>
+          </div>
+          <div class="painting-caption">
+            <p>Shri Lakshmi Devi · 24K Gold Leaf · Kundan Work</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="heritage-text reveal">
+        <p class="section-label" style="text-align:left">The Living Tradition</p>
+        <h3>A Sacred Art Born in the Courts of Thanjavur</h3>
+        <div class="ornament-line" style="margin:1.5rem 0"><span>✦</span></div>
+        <p>Tanjore paintings — known as <em>Palagai Padam</em> in Tamil — are among India's most revered classical art forms, born in the splendid courts of the Maratha kings of Thanjavur in the 16th century. Commissioned as objects of divine devotion, they were never merely decorative — they were sacred portals.</p>
+        <p>Each painting is a meditative act: thick gold foils pressed by hand, precious and semi-precious stones inlaid with devotion, figures rendered in rich mineral pigments on wooden boards prepared with limestone paste. No two paintings are alike. Each carries the breath of its maker.</p>
+        <p>At Guhan Arts, our master artisans have inherited this lineage across four generations. We invite you to commission a living sacred heirloom for your home.</p>
+        <div class="heritage-stats">
+          <div class="stat">
+            <span class="stat-num">400+</span>
+            <span class="stat-label">Years of Tradition</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">24K</span>
+            <span class="stat-label">Pure Gold Leaf</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">60+</span>
+            <span class="stat-label">Days Per Painting</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="container">
+    <p class="section-label reveal">Sacred Creations</p>
+    <h2 class="section-title reveal">The Gallery of Divinity</h2>
+    <div class="ornament reveal">— ✦ —</div>
+    <p class="section-desc reveal">Each piece is a universe unto itself — a devotional masterwork wrought in gold, gemstone, and prayer.</p>
+
+    <div class="gallery-grid">
+      <!-- Item 1 - Large -->
+      <div class="gallery-item reveal" onclick="openModal(0)">
+        <div class="gallery-item-inner">
+          <svg viewBox="0 0 160 220" xmlns="http://www.w3.org/2000/svg" fill="none">
+            <rect width="160" height="220" fill="#1A0F05"/>
+            <circle cx="80" cy="80" r="50" stroke="#C9942A" stroke-width="1.5" opacity="0.5"/>
+            <circle cx="80" cy="80" r="42" stroke="#C9942A" stroke-width="0.5" opacity="0.3"/>
+            <ellipse cx="80" cy="78" rx="20" ry="24" fill="#C9942A" opacity="0.2" stroke="#C9942A" stroke-width="1"/>
+            <path d="M60,100 Q50,130 48,170 L112,170 Q110,130 100,100 Z" fill="#C9942A" opacity="0.1" stroke="#C9942A" stroke-width="0.8"/>
+            <path d="M60,100 Q40,90 35,105" stroke="#C9942A" stroke-width="1.2" opacity="0.4"/>
+            <path d="M100,100 Q120,90 125,105" stroke="#C9942A" stroke-width="1.2" opacity="0.4"/>
+            <path d="M55,175 Q80,165 105,175 Q90,195 80,195 Q70,195 55,175 Z" fill="#C9942A" opacity="0.1" stroke="#C9942A" stroke-width="1"/>
+            <path d="M65,78 Q68,86 80,88 Q92,86 95,78" stroke="#C9942A" stroke-width="0.8" opacity="0.4"/>
+            <path d="M58,66 Q80,56 102,66" stroke="#C9942A" stroke-width="0.8" opacity="0.3"/>
+            <path d="M60,56 L80,48 L100,56" stroke="#C9942A" stroke-width="0.8" fill="none" opacity="0.5"/>
+            <rect x="5" y="5" width="150" height="210" stroke="#C9942A" stroke-width="0.8" fill="none" opacity="0.25"/>
+            <rect x="10" y="10" width="140" height="200" stroke="#C9942A" stroke-width="0.3" fill="none" opacity="0.15"/>
+            <g fill="#C9942A" opacity="0.6">
+              <circle cx="5" cy="5" r="3"/><circle cx="155" cy="5" r="3"/>
+              <circle cx="5" cy="215" r="3"/><circle cx="155" cy="215" r="3"/>
+            </g>
+          </svg>
+        </div>
+        <div class="gallery-overlay">
+          <h4>Shri Balaji · Tirupati</h4>
+          <p>Gold Leaf · Rubies · 24"×32"</p>
+        </div>
+      </div>
+
+      <!-- Item 2 -->
+      <div class="gallery-item reveal" onclick="openModal(1)">
+        <div class="gallery-item-inner">
+          <svg viewBox="0 0 140 180" xmlns="http://www.w3.org/2000/svg" fill="none">
+            <rect width="140" height="180" fill="#200C03"/>
+            <circle cx="70" cy="65" r="40" stroke="#E8B84B" stroke-width="1.2" opacity="0.4"/>
+            <ellipse cx="70" cy="63" rx="17" ry="20" fill="#E8B84B" opacity="0.15" stroke="#E8B84B" stroke-width="1"/>
+            <path d="M53,82 Q42,105 40,145 L100,145 Q98,105 87,82 Z" fill="#E8B84B" opacity="0.08" stroke="#E8B84B" stroke-width="0.8"/>
+            <path d="M53,82 Q35,74 30,88" stroke="#E8B84B" stroke-width="1.2" opacity="0.35"/>
+            <path d="M87,82 Q105,74 110,88" stroke="#E8B84B" stroke-width="1.2" opacity="0.35"/>
+            <path d="M45,148 Q70,140 95,148 Q82,165 70,165 Q58,165 45,148 Z" fill="#E8B84B" opacity="0.08" stroke="#E8B84B" stroke-width="0.8"/>
+            <path d="M58,58 Q65,68 70,70 Q75,68 82,58" stroke="#E8B84B" stroke-width="0.8" opacity="0.4"/>
+            <g fill="#E8B84B" opacity="0.5">
+              <circle cx="70" cy="82" r="2.5"/><circle cx="60" cy="86" r="1.5"/><circle cx="80" cy="86" r="1.5"/>
+            </g>
+            <rect x="4" y="4" width="132" height="172" stroke="#E8B84B" stroke-width="0.8" fill="none" opacity="0.2"/>
+          </svg>
+        </div>
+        <div class="gallery-overlay">
+          <h4>Goddess Saraswati</h4>
+          <p>Gold Leaf · Emeralds · 18"×24"</p>
+        </div>
+      </div>
+
+      <!-- Item 3 -->
+      <div class="gallery-item reveal" onclick="openModal(2)">
+        <div class="gallery-item-inner">
+          <svg viewBox="0 0 140 180" xmlns="http://www.w3.org/2000/svg" fill="none">
+            <rect width="140" height="180" fill="#160A02"/>
+            <circle cx="70" cy="60" r="38" stroke="#FFD700" stroke-width="1" opacity="0.4"/>
+            <circle cx="70" cy="60" r="32" stroke="#FFD700" stroke-width="0.5" stroke-dasharray="2 3" opacity="0.3"/>
+            <ellipse cx="70" cy="58" rx="16" ry="19" fill="#FFD700" opacity="0.12" stroke="#FFD700" stroke-width="1"/>
+            <!-- 4 arms deity -->
+            <path d="M54,75 Q44,65 36,72 Q38,82 50,82" stroke="#FFD700" stroke-width="1.3" opacity="0.4"/>
+            <path d="M86,75 Q96,65 104,72 Q102,82 90,82" stroke="#FFD700" stroke-width="1.3" opacity="0.4"/>
+            <path d="M54,80 Q42,92 38,100" stroke="#FFD700" stroke-width="1.2" opacity="0.35"/>
+            <path d="M86,80 Q98,92 102,100" stroke="#FFD700" stroke-width="1.2" opacity="0.35"/>
+            <path d="M54,80 Q43,110 42,148 L98,148 Q97,110 86,80 Z" fill="#FFD700" opacity="0.07" stroke="#FFD700" stroke-width="0.8"/>
+            <path d="M44,150 Q70,142 96,150 Q84,170 70,170 Q56,170 44,150 Z" fill="#FFD700" opacity="0.08" stroke="#FFD700" stroke-width="0.8"/>
+            <g fill="#FFD700" opacity="0.5">
+              <circle cx="34" cy="70" r="4"/><circle cx="106" cy="70" r="4"/><circle cx="36" cy="102" r="3"/><circle cx="104" cy="102" r="3"/>
+            </g>
+            <rect x="4" y="4" width="132" height="172" stroke="#FFD700" stroke-width="0.8" fill="none" opacity="0.2"/>
+          </svg>
+        </div>
+        <div class="gallery-overlay">
+          <h4>Lord Vishnu · Chaturbhuja</h4>
+          <p>Gold Leaf · Sapphires · 20"×28"</p>
+        </div>
+      </div>
+
+      <!-- Item 4 -->
+      <div class="gallery-item reveal" onclick="openModal(3)">
+        <div class="gallery-item-inner">
+          <svg viewBox="0 0 140 180" xmlns="http://www.w3.org/2000/svg" fill="none">
+            <rect width="140" height="180" fill="#1E0E04"/>
+            <circle cx="70" cy="62" r="38" stroke="#C9942A" stroke-width="1" opacity="0.45"/>
+            <ellipse cx="70" cy="60" rx="17" ry="21" fill="#C9942A" opacity="0.15" stroke="#C9942A" stroke-width="1"/>
+            <!-- Elephant head hints for Ganesha -->
+            <path d="M55,68 Q48,72 42,80 Q38,90 44,95" stroke="#C9942A" stroke-width="2" fill="none" opacity="0.5"/>
+            <path d="M55,68 Q62,78 58,90 Q55,95 50,92" stroke="#C9942A" stroke-width="1.5" fill="none" opacity="0.4"/>
+            <path d="M85,68 Q92,72 98,80 Q102,90 96,95" stroke="#C9942A" stroke-width="2" fill="none" opacity="0.5"/>
+            <path d="M55,78 Q70,74 85,78" stroke="#C9942A" stroke-width="1" opacity="0.4"/>
+            <ellipse cx="70" cy="100" rx="28" ry="20" fill="#C9942A" opacity="0.08" stroke="#C9942A" stroke-width="0.8"/>
+            <path d="M42,118 Q70,110 98,118 Q85,145 70,148 Q55,145 42,118 Z" fill="#C9942A" opacity="0.08" stroke="#C9942A" stroke-width="0.8"/>
+            <path d="M56,58 L70,52 L84,58" fill="#C9942A" opacity="0.4" stroke="#C9942A" stroke-width="0.8"/>
+            <g fill="#C9942A" opacity="0.5">
+              <circle cx="60" cy="55" r="2.5"/><circle cx="80" cy="55" r="2.5"/>
+            </g>
+            <rect x="4" y="4" width="132" height="172" stroke="#C9942A" stroke-width="0.8" fill="none" opacity="0.2"/>
+          </svg>
+        </div>
+        <div class="gallery-overlay">
+          <h4>Shri Ganesha · Vakratunda</h4>
+          <p>Gold Leaf · Coral · 16"×20"</p>
+        </div>
+      </div>
+
+      <!-- Item 5 -->
+      <div class="gallery-item reveal" onclick="openModal(4)">
+        <div class="gallery-item-inner">
+          <svg viewBox="0 0 140 180" xmlns="http://www.w3.org/2000/svg" fill="none">
+            <rect width="140" height="180" fill="#0F0804"/>
+            <circle cx="70" cy="60" r="42" stroke="#E8B84B" stroke-width="1" opacity="0.3"/>
+            <circle cx="70" cy="60" r="35" stroke="#E8B84B" stroke-width="0.5" opacity="0.25"/>
+            <ellipse cx="70" cy="58" rx="18" ry="22" fill="#E8B84B" opacity="0.12" stroke="#E8B84B" stroke-width="1"/>
+            <path d="M52,80 Q44,100 42,148 L98,148 Q96,100 88,80 Z" fill="#E8B84B" opacity="0.07" stroke="#E8B84B" stroke-width="0.8"/>
+            <path d="M52,80 Q34,72 28,85 Q30,100 44,100" stroke="#E8B84B" stroke-width="1.5" opacity="0.4"/>
+            <path d="M52,80 Q34,88 28,100" stroke="#E8B84B" stroke-width="1.2" opacity="0.3"/>
+            <path d="M88,80 Q106,72 112,85 Q110,100 96,100" stroke="#E8B84B" stroke-width="1.5" opacity="0.4"/>
+            <path d="M88,80 Q106,88 112,100" stroke="#E8B84B" stroke-width="1.2" opacity="0.3"/>
+            <circle cx="26" cy="87" r="5" stroke="#E8B84B" stroke-width="1" opacity="0.45"/>
+            <circle cx="114" cy="87" r="5" stroke="#E8B84B" stroke-width="1" opacity="0.45"/>
+            <path d="M44,150 Q70,142 96,150 Q84,165 70,168 Q56,165 44,150 Z" fill="#E8B84B" opacity="0.08" stroke="#E8B84B" stroke-width="0.8"/>
+            <rect x="4" y="4" width="132" height="172" stroke="#E8B84B" stroke-width="0.8" fill="none" opacity="0.2"/>
+          </svg>
+        </div>
+        <div class="gallery-overlay">
+          <h4>Goddess Durga · Ashtabhuja</h4>
+          <p>Gold Leaf · Diamonds · 24"×36"</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="container">
+    <p class="section-label reveal">The Sacred Method</p>
+    <h2 class="section-title reveal">How Your Painting Is Born</h2>
+    <div class="ornament reveal">— ✦ —</div>
+    <p class="section-desc reveal">From your vision to a consecrated heirloom — a journey of devotion, craft, and timeless beauty.</p>
+
+    <div class="process-steps">
+      <div class="process-step reveal">
+        <div class="step-icon">
+          <span class="step-num">1</span>
+          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 4 L28 10 L28 22 L16 28 L4 22 L4 10 Z" stroke="#C9942A" stroke-width="1.5" fill="none"/>
+            <path d="M16 4 L16 28 M4 10 L28 22 M28 10 L4 22" stroke="#C9942A" stroke-width="0.5" opacity="0.4"/>
+            <circle cx="16" cy="16" r="4" fill="#C9942A" opacity="0.4"/>
+          </svg>
+        </div>
+        <h3 class="step-title">Commission & Vision</h3>
+        <p class="step-desc">Share your reference, deity preference, and sacred intentions through our commission form. Our artisan calls you personally to understand every nuance.</p>
+      </div>
+
+      <div class="process-step reveal">
+        <div class="step-icon">
+          <span class="step-num">2</span>
+          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="6" y="4" width="20" height="24" rx="1" stroke="#C9942A" stroke-width="1.5"/>
+            <path d="M10 10 L22 10 M10 14 L22 14 M10 18 L18 18" stroke="#C9942A" stroke-width="1"/>
+            <path d="M6 8 L26 8" stroke="#C9942A" stroke-width="0.5"/>
+            <circle cx="22" cy="22" r="4" fill="#C9942A" opacity="0.3" stroke="#C9942A" stroke-width="1"/>
+            <path d="M20 22 L22 24 L25 20" stroke="#C9942A" stroke-width="1"/>
+          </svg>
+        </div>
+        <h3 class="step-title">Design & Approval</h3>
+        <p class="step-desc">Our master artists sketch the composition, select gemstones, and create a detailed design plan. You receive a preview for approval before work begins.</p>
+      </div>
+
+      <div class="process-step reveal">
+        <div class="step-icon">
+          <span class="step-num">3</span>
+          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 24 Q16 8 24 24" stroke="#C9942A" stroke-width="1.5" fill="none"/>
+            <path d="M12 20 Q16 12 20 20" stroke="#C9942A" stroke-width="1" opacity="0.5"/>
+            <circle cx="8" cy="24" r="2" fill="#C9942A" opacity="0.7"/>
+            <circle cx="24" cy="24" r="2" fill="#C9942A" opacity="0.7"/>
+            <line x1="16" y1="4" x2="16" y2="10" stroke="#C9942A" stroke-width="1.5"/>
+            <path d="M12 6 L16 4 L20 6" stroke="#C9942A" stroke-width="1"/>
+          </svg>
+        </div>
+        <h3 class="step-title">Sacred Craftsmanship</h3>
+        <p class="step-desc">40–90 days of meticulous creation: wood preparation, chalk paste layering, pigment painting, 24K gold foil pressing, and gemstone inlay — all by hand.</p>
+      </div>
+
+      <div class="process-step reveal">
+        <div class="step-icon">
+          <span class="step-num">4</span>
+          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" y="8" width="24" height="18" rx="1" stroke="#C9942A" stroke-width="1.5"/>
+            <rect x="8" y="4" width="16" height="4" stroke="#C9942A" stroke-width="1"/>
+            <path d="M4 12 L28 12" stroke="#C9942A" stroke-width="0.5"/>
+            <path d="M8 16 L10 18 L14 14 M16 14 L24 14 M16 19 L22 19" stroke="#C9942A" stroke-width="1"/>
+            <circle cx="26" cy="26" r="5" fill="#C9942A" opacity="0.2" stroke="#C9942A" stroke-width="1"/>
+            <path d="M24 26 L26 28 L30 23" stroke="#C9942A" stroke-width="1.2"/>
+          </svg>
+        </div>
+        <h3 class="step-title">Delivery & Blessing</h3>
+        <p class="step-desc">Each painting is ritually blessed, triple-layered in protective packaging, insured, and delivered to your door with a certificate of authenticity.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMISSION FORM -->
+<section id="commission">
+  <div class="container">
+    <p class="section-label reveal">Begin the Sacred Journey</p>
+    <h2 class="section-title reveal">Commission Your Masterpiece</h2>
+    <div class="ornament reveal">— ✦ —</div>
+    <p class="section-desc reveal">Fill the form below with your vision. Our master artisan will personally call you within 24 hours to discuss your sacred commission in detail.</p>
+
+    <div class="form-wrapper reveal" id="formWrapper">
+      <!-- FORM -->
+      <div id="formContent">
+        <div class="form-header">
+          <div class="ornament-line"><span>✦ Your Commission Details ✦</span></div>
+        </div>
+
+        <div class="form-grid" id="commissionForm">
+          <!-- Name -->
+          <div class="form-group">
+            <label class="form-label">Your Name <span style="color:var(--crimson)">*</span></label>
+            <input type="text" class="form-control" id="custName" placeholder="As it shall appear on the certificate…" required>
+          </div>
+
+          <!-- Phone -->
+          <div class="form-group">
+            <label class="form-label">Phone Number <span style="color:var(--crimson)">*</span></label>
+            <input type="tel" class="form-control" id="custPhone" placeholder="+91 _____ _____" required>
+          </div>
+
+          <!-- Email -->
+          <div class="form-group full">
+            <label class="form-label">Email Address <span class="optional">(optional)</span></label>
+            <input type="email" class="form-control" id="custEmail" placeholder="For sending design previews and updates…">
+          </div>
+
+          <!-- Reference Image Upload -->
+          <div class="form-group full">
+            <label class="form-label">Reference Image <span class="optional">(optional — helps us understand your vision)</span></label>
+            <div class="upload-zone" id="uploadZone">
+              <input type="file" id="refImage" accept="image/*" onchange="handleFileUpload(event)">
+              <div class="upload-icon">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M20 8 L20 28 M12 16 L20 8 L28 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                  <path d="M8 30 L8 34 L32 34 L32 30" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                  <rect x="2" y="2" width="36" height="36" rx="2" stroke="currentColor" stroke-width="0.8" opacity="0.3"/>
+                </svg>
+              </div>
+              <p>Drop your reference image here, or click to browse</p>
+              <span>JPG, PNG, WEBP — up to 10MB · deity image, photo, or sketch</span>
+              <div class="upload-preview" id="uploadPreview">
+                <img id="previewImg" src="" alt="Reference">
+              </div>
+            </div>
+          </div>
+
+          <!-- Painting Size -->
+          <div class="form-group full">
+            <label class="form-label">Painting Size <span style="color:var(--crimson)">*</span></label>
+            <div class="size-display">
+              <span class="size-val" id="sizeDisplay">12 × 16</span>
+              <span class="size-unit">inches</span>
+            </div>
+            <input type="range" id="sizeSlider" min="0" max="5" value="1" step="1"
+              oninput="updateSize(this.value)" style="--progress: 20%">
+            <div class="size-presets">
+              <button class="size-preset" onclick="setSize(0,'8 × 10')">8×10"</button>
+              <button class="size-preset active" onclick="setSize(1,'12 × 16')">12×16"</button>
+              <button class="size-preset" onclick="setSize(2,'18 × 24')">18×24"</button>
+              <button class="size-preset" onclick="setSize(3,'24 × 32')">24×32"</button>
+              <button class="size-preset" onclick="setSize(4,'30 × 40')">30×40"</button>
+              <button class="size-preset" onclick="setSize(5,'Custom')">Custom</button>
+            </div>
+          </div>
+
+          <!-- Frame Type -->
+          <div class="form-group full">
+            <label class="form-label">Frame Type <span style="color:var(--crimson)">*</span></label>
+            <div class="frame-options">
+              <label class="frame-option">
+                <input type="radio" name="frame" value="teak" checked>
+                <div class="frame-card">
+                  <div class="frame-icon">
+                    <svg viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect x="5" y="5" width="40" height="40" stroke="#C9942A" stroke-width="2"/>
+                      <rect x="9" y="9" width="32" height="32" stroke="#C9942A" stroke-width="1" opacity="0.4"/>
+                      <path d="M5 5 L9 9 M45 5 L41 9 M5 45 L9 41 M45 45 L41 41" stroke="#C9942A" stroke-width="1.5" opacity="0.6"/>
+                      <rect x="12" y="12" width="26" height="26" fill="#3D1F0A" opacity="0.4"/>
+                    </svg>
+                  </div>
+                  <span>Traditional Teak</span>
+                </div>
+              </label>
+              <label class="frame-option">
+                <input type="radio" name="frame" value="gold">
+                <div class="frame-card">
+                  <div class="frame-icon">
+                    <svg viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect x="4" y="4" width="42" height="42" stroke="#FFD700" stroke-width="2.5"/>
+                      <rect x="7" y="7" width="36" height="36" stroke="#FFD700" stroke-width="1" opacity="0.5"/>
+                      <rect x="10" y="10" width="30" height="30" stroke="#FFD700" stroke-width="0.5" stroke-dasharray="2 2" opacity="0.3"/>
+                      <g fill="#FFD700" opacity="0.7">
+                        <circle cx="4" cy="4" r="2.5"/><circle cx="46" cy="4" r="2.5"/>
+                        <circle cx="4" cy="46" r="2.5"/><circle cx="46" cy="46" r="2.5"/>
+                      </g>
+                      <rect x="13" y="13" width="24" height="24" fill="#1A1000" opacity="0.4"/>
+                    </svg>
+                  </div>
+                  <span>Gold Gilded</span>
+                </div>
+              </label>
+              <label class="frame-option">
+                <input type="radio" name="frame" value="ornate">
+                <div class="frame-card">
+                  <div class="frame-icon">
+                    <svg viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect x="3" y="3" width="44" height="44" stroke="#C9942A" stroke-width="3" rx="2"/>
+                      <rect x="7" y="7" width="36" height="36" stroke="#C9942A" stroke-width="1" rx="1" opacity="0.5"/>
+                      <circle cx="3" cy="3" r="3" fill="#C9942A"/><circle cx="47" cy="3" r="3" fill="#C9942A"/>
+                      <circle cx="3" cy="47" r="3" fill="#C9942A"/><circle cx="47" cy="47" r="3" fill="#C9942A"/>
+                      <circle cx="25" cy="3" r="2" fill="#C9942A" opacity="0.6"/>
+                      <circle cx="25" cy="47" r="2" fill="#C9942A" opacity="0.6"/>
+                      <circle cx="3" cy="25" r="2" fill="#C9942A" opacity="0.6"/>
+                      <circle cx="47" cy="25" r="2" fill="#C9942A" opacity="0.6"/>
+                      <rect x="11" y="11" width="28" height="28" fill="#0D0907" opacity="0.4"/>
+                    </svg>
+                  </div>
+                  <span>Ornate Carved</span>
+                </div>
+              </label>
+              <label class="frame-option">
+                <input type="radio" name="frame" value="rosewood">
+                <div class="frame-card">
+                  <div class="frame-icon">
+                    <svg viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect x="4" y="4" width="42" height="42" stroke="#8B3A3A" stroke-width="2.5"/>
+                      <path d="M4 4 L8 8 M46 4 L42 8 M4 46 L8 42 M46 46 L42 42" stroke="#8B3A3A" stroke-width="1.5" opacity="0.7"/>
+                      <rect x="8" y="8" width="34" height="34" stroke="#8B3A3A" stroke-width="0.8" opacity="0.4"/>
+                      <line x1="4" y1="25" x2="8" y2="25" stroke="#8B3A3A" stroke-width="1" opacity="0.5"/>
+                      <line x1="46" y1="25" x2="42" y2="25" stroke="#8B3A3A" stroke-width="1" opacity="0.5"/>
+                      <rect x="12" y="12" width="26" height="26" fill="#2A0808" opacity="0.4"/>
+                    </svg>
+                  </div>
+                  <span>Rosewood</span>
+                </div>
+              </label>
+              <label class="frame-option">
+                <input type="radio" name="frame" value="frameless">
+                <div class="frame-card">
+                  <div class="frame-icon">
+                    <svg viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect x="8" y="8" width="34" height="34" stroke="#C9942A" stroke-width="1" stroke-dasharray="4 3" opacity="0.6"/>
+                      <line x1="8" y1="8" x2="42" y2="42" stroke="#C9942A" stroke-width="0.5" opacity="0.2"/>
+                      <line x1="42" y1="8" x2="8" y2="42" stroke="#C9942A" stroke-width="0.5" opacity="0.2"/>
+                      <text x="25" y="28" font-size="8" fill="#C9942A" text-anchor="middle" opacity="0.6" font-family="serif">No</text>
+                      <text x="25" y="37" font-size="8" fill="#C9942A" text-anchor="middle" opacity="0.6" font-family="serif">Frame</text>
+                    </svg>
+                  </div>
+                  <span>Frameless</span>
+                </div>
+              </label>
+              <label class="frame-option">
+                <input type="radio" name="frame" value="custom">
+                <div class="frame-card">
+                  <div class="frame-icon">
+                    <svg viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M25 8 L42 15 L42 35 L25 42 L8 35 L8 15 Z" stroke="#C9942A" stroke-width="1.5" fill="none"/>
+                      <path d="M25 12 L38 18 L38 32 L25 38 L12 32 L12 18 Z" stroke="#C9942A" stroke-width="0.8" fill="none" opacity="0.4"/>
+                      <circle cx="25" cy="25" r="5" stroke="#C9942A" stroke-width="1" opacity="0.5"/>
+                      <text x="25" y="29" font-size="7" fill="#C9942A" text-anchor="middle" opacity="0.7" font-family="serif">✦</text>
+                    </svg>
+                  </div>
+                  <span>Custom</span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div class="form-group full">
+            <label class="form-label">Your Vision & Special Instructions</label>
+            <textarea class="form-control" id="custDesc" placeholder="Describe the deity, occasion, purpose, colour preferences, gemstone requests, or any sacred intention you wish the painting to embody…" rows="5"></textarea>
+          </div>
+
+          <!-- Submit -->
+          <div class="form-group full form-submit">
+            <button class="btn-submit" onclick="submitForm()">
+              ✦ &nbsp; Submit My Commission &nbsp; ✦
+            </button>
+            <p class="form-note">Our master artisan will personally call you within 24 hours to begin your sacred journey.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUCCESS -->
+      <div class="success-message" id="successMsg">
+        <div class="success-icon">✦</div>
+        <h3>Your Commission Has Been Received</h3>
+        <div class="ornament-line" style="margin:1.5rem 0"><span>✦</span></div>
+        <p>
+          <em>Om Shanti.</em> Your sacred vision has been received with devotion.<br><br>
+          Our master artisan will personally call you within <strong style="color:var(--gold)">24 hours</strong> to understand your vision, discuss the painting details, confirm materials and timeline, and begin the sacred journey of creation together.<br><br>
+          May your home be blessed with the divine presence of this eternal art.
+        </p>
+        <div style="margin-top:2rem; color:var(--gold); font-family:'Cinzel',serif; font-size:0.75rem; letter-spacing:0.2em; opacity:0.7">
+          — GUHAN ARTS · THANJAVUR —
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- PAINTING KITS -->
+<section id="kits">
+  <div class="container">
+    <p class="section-label reveal">Learn the Sacred Art</p>
+    <h2 class="section-title reveal">Painting Kits</h2>
+    <div class="ornament reveal">— ✦ —</div>
+    <p class="section-desc reveal">Bring the ancient tradition of Tanjore into your own hands. Our curated kits contain everything you need, prepared by master artisans and delivered to your door.</p>
+
+    <div class="kits-grid">
+
+      <!-- ── BEGINNER KIT ── -->
+      <div class="kit-card reveal">
+        <div class="kit-badge beginner">Beginner Friendly</div>
+
+        <div class="kit-illustration">
+          <svg viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg" fill="none" width="100%" style="max-width:280px">
+            <!-- Wooden board -->
+            <rect x="30" y="20" width="140" height="170" rx="2" fill="#3D1F0A" opacity="0.6" stroke="#C9942A" stroke-width="1.5"/>
+            <rect x="35" y="25" width="130" height="160" rx="1" fill="#2A1505" opacity="0.5" stroke="#C9942A" stroke-width="0.5" stroke-dasharray="3 3"/>
+            <!-- Simple lotus sketch -->
+            <ellipse cx="100" cy="110" rx="30" ry="12" fill="#C9942A" opacity="0.12" stroke="#C9942A" stroke-width="1" opacity="0.4"/>
+            <path d="M100,98 Q85,80 100,70 Q115,80 100,98" fill="#C9942A" opacity="0.1" stroke="#C9942A" stroke-width="1" opacity="0.45"/>
+            <path d="M100,98 Q75,78 78,60 Q95,68 100,98" fill="#C9942A" opacity="0.07" stroke="#C9942A" stroke-width="0.8" opacity="0.35"/>
+            <path d="M100,98 Q125,78 122,60 Q105,68 100,98" fill="#C9942A" opacity="0.07" stroke="#C9942A" stroke-width="0.8" opacity="0.35"/>
+            <circle cx="100" cy="68" r="8" fill="#C9942A" opacity="0.15" stroke="#C9942A" stroke-width="1" opacity="0.5"/>
+            <!-- Pencil lines -->
+            <path d="M75,130 L125,130 M80,140 L120,140 M85,150 L115,150" stroke="#C9942A" stroke-width="0.5" opacity="0.25"/>
+            <!-- Gold pot -->
+            <ellipse cx="210" cy="160" rx="28" ry="10" fill="#C9942A" opacity="0.15" stroke="#C9942A" stroke-width="1"/>
+            <path d="M182,160 L186,120 Q210,110 234,120 L238,160 Z" fill="#C9942A" opacity="0.12" stroke="#C9942A" stroke-width="1"/>
+            <ellipse cx="210" cy="120" rx="24" ry="8" fill="#C9942A" opacity="0.18" stroke="#C9942A" stroke-width="1"/>
+            <text x="210" y="143" font-size="9" fill="#C9942A" text-anchor="middle" opacity="0.6" font-family="serif">Gold</text>
+            <!-- Brushes -->
+            <line x1="178" y1="50" x2="190" y2="130" stroke="#8B5E3C" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
+            <path d="M186,130 Q190,138 188,142 Q186,138 184,142 Q182,136 186,130" fill="#C9942A" opacity="0.7"/>
+            <line x1="196" y1="45" x2="205" y2="125" stroke="#8B5E3C" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+            <path d="M203,125 Q206,132 204,136 Q202,132 200,136 Q198,130 203,125" fill="#C9942A" opacity="0.6"/>
+            <!-- Color palette dots -->
+            <circle cx="218" cy="65" r="12" fill="#8B1A1A" opacity="0.5" stroke="#C9942A" stroke-width="0.8"/>
+            <circle cx="243" cy="58" r="10" fill="#1A4A8B" opacity="0.5" stroke="#C9942A" stroke-width="0.8"/>
+            <circle cx="262" cy="72" r="9" fill="#1A6B1A" opacity="0.5" stroke="#C9942A" stroke-width="0.8"/>
+            <circle cx="255" cy="93" r="8" fill="#8B6B1A" opacity="0.5" stroke="#C9942A" stroke-width="0.8"/>
+            <circle cx="230" cy="80" r="7" fill="#FAF3E0" opacity="0.4" stroke="#C9942A" stroke-width="0.8"/>
+            <text x="218" y="69" font-size="6" fill="white" text-anchor="middle" opacity="0.6" font-family="serif">R</text>
+            <text x="243" y="62" font-size="6" fill="white" text-anchor="middle" opacity="0.6" font-family="serif">B</text>
+            <text x="262" y="76" font-size="6" fill="white" text-anchor="middle" opacity="0.6" font-family="serif">G</text>
+          </svg>
+        </div>
+
+        <div class="kit-body">
+          <p class="kit-tag">Kit 01 · Foundation</p>
+          <h3 class="kit-title">Beginner Kit</h3>
+          <p class="kit-subtitle">Start Your Sacred Journey · Ages 14 & Above</p>
+          <p class="kit-desc">Everything a first-time artist needs to create their first Tanjore painting — with pre-traced deity outline on prepared wooden board, so you can focus entirely on the joy of painting and gilding.</p>
+
+          <div class="kit-contents">
+            <div class="kit-contents-label">What's Included</div>
+            <div class="kit-items-grid">
+              <div class="kit-item"><div class="kit-item-dot"></div><div class="kit-item-text">Pre-traced 8×10" wooden board</div></div>
+              <div class="kit-item"><div class="kit-item-dot"></div><div class="kit-item-text">6 mineral pigment colours</div></div>
+              <div class="kit-item"><div class="kit-item-dot"></div><div class="kit-item-text">24K gold foil (5 sheets)</div></div>
+              <div class="kit-item"><div class="kit-item-dot"></div><div class="kit-item-text">Chalk paste (prepared)</div></div>
+              <div class="kit-item"><div class="kit-item-dot"></div><div class="kit-item-text">4 traditional brushes</div></div>
+              <div class="kit-item"><div class="kit-item-dot"></div><div class="kit-item-text">Gold adhesive (gum)</div></div>
+              <div class="kit-item"><div class="kit-item-dot"></div><div class="kit-item-text">Step-by-step booklet</div></div>
+              <div class="kit-item"><div class="kit-item-dot"></div><div class="kit-item-text">5 semi-precious stones</div></div>
+              <div class="kit-item"><div class="kit-item-dot"></div><div class="kit-item-text">Teak frame (included)</div></div>
+              <div class="kit-item"><div class="kit-item-dot"></div><div class="kit-item-text">QR-linked video guide</div></div>
+            </div>
+          </div>
+
+          <div class="kit-pricing">
+            <span class="kit-price">&#8377;2,499</span>
+            <span class="kit-price-orig">&#8377;3,200</span>
+            <span class="kit-price-save">22% off</span>
+          </div>
+
+          <div class="kit-actions">
+            <button class="btn-kit-cart" id="kitCartBtn0" onclick="addKitToCart(0)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+              Add to Cart
+            </button>
+            <a href="#commission" class="btn-kit-enquire">Enquire</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── ADVANCED KIT ── -->
+      <div class="kit-card reveal">
+        <div class="kit-badge advanced">Master Level</div>
+
+        <div class="kit-illustration">
+          <svg viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg" fill="none" width="100%" style="max-width:280px">
+            <!-- Main ornate board -->
+            <rect x="20" y="15" width="150" height="180" rx="2" fill="#2A1505" opacity="0.7" stroke="#FFD700" stroke-width="2"/>
+            <rect x="25" y="20" width="140" height="170" fill="#1A0F05" opacity="0.5" stroke="#FFD700" stroke-width="0.5"/>
+            <!-- Gold border inner -->
+            <rect x="30" y="25" width="130" height="160" rx="1" fill="none" stroke="#C9942A" stroke-width="1" stroke-dasharray="2 3" opacity="0.4"/>
+            <!-- Corner jewels on board -->
+            <circle cx="26" cy="21" r="3.5" fill="#FFD700" opacity="0.8"/>
+            <circle cx="164" cy="21" r="3.5" fill="#FFD700" opacity="0.8"/>
+            <circle cx="26" cy="189" r="3.5" fill="#FFD700" opacity="0.8"/>
+            <circle cx="164" cy="189" r="3.5" fill="#FFD700" opacity="0.8"/>
+            <!-- Advanced deity sketch - 4 armed -->
+            <circle cx="95" cy="80" r="28" stroke="#FFD700" stroke-width="1" opacity="0.5"/>
+            <ellipse cx="95" cy="78" rx="14" ry="17" fill="#FFD700" opacity="0.12" stroke="#FFD700" stroke-width="0.8"/>
+            <path d="M81,93 Q68,80 58,87 Q60,100 74,98" stroke="#FFD700" stroke-width="1.2" opacity="0.45"/>
+            <path d="M109,93 Q122,80 132,87 Q130,100 116,98" stroke="#FFD700" stroke-width="1.2" opacity="0.45"/>
+            <path d="M81,98 Q66,105 60,115" stroke="#FFD700" stroke-width="1" opacity="0.35"/>
+            <path d="M109,98 Q124,105 130,115" stroke="#FFD700" stroke-width="1" opacity="0.35"/>
+            <path d="M81,95 Q73,125 72,165 L118,165 Q117,125 109,95 Z" fill="#FFD700" opacity="0.06" stroke="#FFD700" stroke-width="0.8" opacity="0.35"/>
+            <path d="M73,168 Q95,162 117,168 Q107,182 95,185 Q83,182 73,168 Z" fill="#FFD700" opacity="0.07" stroke="#FFD700" stroke-width="0.7" opacity="0.3"/>
+            <path d="M82,65 L95,58 L108,65" fill="#FFD700" opacity="0.4" stroke="#FFD700" stroke-width="0.8"/>
+            <g fill="#FFD700" opacity="0.7"><circle cx="56" cy="85" r="3.5"/><circle cx="134" cy="85" r="3.5"/><circle cx="58" cy="115" r="3"/><circle cx="132" cy="115" r="3"/></g>
+            <!-- Gold foil sheets fan -->
+            <rect x="175" y="25" width="55" height="75" rx="1" fill="#FFD700" opacity="0.18" stroke="#FFD700" stroke-width="1" transform="rotate(-8 202 62)"/>
+            <rect x="178" y="28" width="55" height="75" rx="1" fill="#FFD700" opacity="0.12" stroke="#FFD700" stroke-width="0.8" transform="rotate(-2 205 65)"/>
+            <rect x="180" y="30" width="55" height="75" rx="1" fill="#FFD700" opacity="0.08" stroke="#FFD700" stroke-width="0.6" transform="rotate(4 207 67)"/>
+            <text x="205" y="68" font-size="7" fill="#FFD700" text-anchor="middle" opacity="0.7" font-family="serif" transform="rotate(-2 205 68)">24K Gold</text>
+            <text x="205" y="78" font-size="6" fill="#FFD700" text-anchor="middle" opacity="0.5" font-family="serif" transform="rotate(-2 205 78)">Foil Sheets</text>
+            <!-- Gemstone box -->
+            <rect x="178" y="118" width="80" height="50" rx="2" fill="#0A0804" stroke="#C9942A" stroke-width="1.2"/>
+            <rect x="182" y="122" width="72" height="42" rx="1" fill="none" stroke="#C9942A" stroke-width="0.4" stroke-dasharray="2 2" opacity="0.4"/>
+            <!-- Gems in box -->
+            <circle cx="196" cy="136" r="6" fill="#8B1A1A" opacity="0.8" stroke="#FFD700" stroke-width="0.8"/>
+            <circle cx="214" cy="132" r="5" fill="#1A2A8B" opacity="0.8" stroke="#FFD700" stroke-width="0.8"/>
+            <circle cx="230" cy="136" r="5.5" fill="#1A6B1A" opacity="0.8" stroke="#FFD700" stroke-width="0.8"/>
+            <circle cx="244" cy="131" r="4.5" fill="#8B6B1A" opacity="0.8" stroke="#FFD700" stroke-width="0.8"/>
+            <circle cx="196" cy="152" r="5" fill="#FAF3E0" opacity="0.6" stroke="#FFD700" stroke-width="0.8"/>
+            <circle cx="212" cy="155" r="4" fill="#8B1A1A" opacity="0.7" stroke="#FFD700" stroke-width="0.8"/>
+            <circle cx="228" cy="152" r="5" fill="#1A2A8B" opacity="0.7" stroke="#FFD700" stroke-width="0.8"/>
+            <circle cx="244" cy="150" r="4.5" fill="#1A6B1A" opacity="0.7" stroke="#FFD700" stroke-width="0.8"/>
+            <!-- Fine brushes -->
+            <line x1="170" y1="100" x2="178" y2="170" stroke="#5C3A1E" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+            <path d="M176,170 Q179,177 177,181 Q175,177 173,181 Q171,175 176,170" fill="#C9942A" opacity="0.8"/>
+            <line x1="162" y1="98" x2="168" y2="168" stroke="#5C3A1E" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+            <path d="M166,168 Q169,174 167,178 Q165,174 163,178 Q161,172 166,168" fill="#C9942A" opacity="0.7"/>
+          </svg>
+        </div>
+
+        <div class="kit-body">
+          <p class="kit-tag">Kit 02 · Mastery</p>
+          <h3 class="kit-title">Advanced Kit</h3>
+          <p class="kit-subtitle">Master Artisan Level · Serious Practitioners</p>
+          <p class="kit-desc">A complete professional-grade kit for those ready to create full-scale Tanjore masterpieces — with a large untraced board, complete gemstone set, and premium gold foil used in museum-quality works.</p>
+
+          <div class="kit-contents">
+            <div class="kit-contents-label">What's Included</div>
+            <div class="kit-items-grid">
+              <div class="kit-item"><div class="kit-item-dot"></div><div class="kit-item-text">Blank 18×24" wooden board</div></div>
+              <div class="kit-item"><div class="kit-item-dot"></div><div class="kit-item-text">16 mineral pigment colours</div></div>
+              <div class="kit-item"><div class="kit-item-dot"></div><div class="kit-item-text">24K gold foil (20 sheets)</div></div>
+              <div class="kit-item"><div class="kit-item-dot"></div><div class="kit-item-text">Chalk & limestone paste kit</div></div>
+              <div class="kit-item"><div class="kit-item-dot"></div><div class="kit-item-text">8 professional brushes</div></div>
+              <div class="kit-item"><div class="kit-item-dot"></div><div class="kit-item-text">Premium gold adhesive</div></div>
+              <div class="kit-item"><div class="kit-item-dot"></div><div class="kit-item-text">Advanced technique manual</div></div>
+              <div class="kit-item"><div class="kit-item-dot"></div><div class="kit-item-text">25 semi-precious gemstones</div></div>
+              <div class="kit-item"><div class="kit-item-dot"></div><div class="kit-item-text">Jewel setting tools (2)</div></div>
+              <div class="kit-item"><div class="kit-item-dot"></div><div class="kit-item-text">Live masterclass access (1hr)</div></div>
+              <div class="kit-item"><div class="kit-item-dot"></div><div class="kit-item-text">Gold-gilded frame</div></div>
+              <div class="kit-item"><div class="kit-item-dot"></div><div class="kit-item-text">Artisan certificate template</div></div>
+            </div>
+          </div>
+
+          <div class="kit-pricing">
+            <span class="kit-price">&#8377;6,999</span>
+            <span class="kit-price-orig">&#8377;9,500</span>
+            <span class="kit-price-save">26% off</span>
+          </div>
+
+          <div class="kit-actions">
+            <button class="btn-kit-cart" id="kitCartBtn1" onclick="addKitToCart(1)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+              Add to Cart
+            </button>
+            <a href="#commission" class="btn-kit-enquire">Enquire</a>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end kits-grid -->
+
+    <!-- Compare table -->
+    <div class="kit-compare reveal" style="margin-top:4rem">
+      <div class="kit-compare-header">
+        <div>Feature</div>
+        <div>Beginner Kit</div>
+        <div>Advanced Kit</div>
+      </div>
+      <div class="kit-compare-row"><div>Board size</div><div>8 × 10 inches</div><div>18 × 24 inches</div></div>
+      <div class="kit-compare-row"><div>Board preparation</div><div class="kit-check">✓ Pre-prepared</div><div class="kit-partial">⊕ You prepare</div></div>
+      <div class="kit-compare-row"><div>Deity outline</div><div class="kit-check">✓ Pre-traced</div><div class="kit-cross">✗ Blank canvas</div></div>
+      <div class="kit-compare-row"><div>Pigment colours</div><div>6 colours</div><div>16 colours</div></div>
+      <div class="kit-compare-row"><div>Gold foil sheets</div><div>5 sheets</div><div>20 sheets</div></div>
+      <div class="kit-compare-row"><div>Gemstones</div><div>5 stones</div><div>25 stones</div></div>
+      <div class="kit-compare-row"><div>Brushes</div><div>4 brushes</div><div>8 professional brushes</div></div>
+      <div class="kit-compare-row"><div>Frame included</div><div class="kit-check">✓ Teak frame</div><div class="kit-check">✓ Gold-gilded frame</div></div>
+      <div class="kit-compare-row"><div>Instruction format</div><div>Booklet + QR video</div><div>Manual + Live masterclass</div></div>
+      <div class="kit-compare-row"><div>Jewel setting tools</div><div class="kit-cross">✗ Not included</div><div class="kit-check">✓ 2 tools included</div></div>
+      <div class="kit-compare-row"><div>Artisan certificate</div><div class="kit-cross">✗ Not included</div><div class="kit-check">✓ Included</div></div>
+      <div class="kit-compare-row"><div>Kit price</div><div style="color:var(--gold);font-family:'Cinzel Decorative',serif">&#8377;2,499</div><div style="color:var(--gold);font-family:'Cinzel Decorative',serif">&#8377;6,999</div></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="container">
+    <p class="section-label reveal">Words of Our Patrons</p>
+    <h2 class="section-title reveal">Sacred Testimonies</h2>
+    <div class="ornament reveal">— ✦ —</div>
+
+    <div class="testimonials-grid">
+      <div class="testimonial reveal">
+        <p class="testimonial-text">When the painting arrived, my mother wept. She said it felt like God had entered our home. The gold catches the morning light in a way no photograph can capture. This is not decoration — it is a presence.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">R</div>
+          <div>
+            <div class="author-name">Rajashree Venkataraman</div>
+            <div class="author-place">Chennai, Tamil Nadu</div>
+            <div class="stars">★★★★★</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial reveal">
+        <p class="testimonial-text">I commissioned a Balaji painting for our new home's puja room. The artisan called three times — not to sell, but to understand. The final piece exceeded every expectation. The craftsmanship is otherworldly.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">A</div>
+          <div>
+            <div class="author-name">Aravind Subramaniam</div>
+            <div class="author-place">Bengaluru, Karnataka</div>
+            <div class="stars">★★★★★</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial reveal">
+        <p class="testimonial-text">We gifted a Lakshmi Tanjore painting at our daughter's wedding. Three months later, she tells us it is the centrepiece of their home and guests ask about it every single visit. Heirloom quality.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">S</div>
+          <div>
+            <div class="author-name">Shobha Krishnamurthy</div>
+            <div class="author-place">Hyderabad, Telangana</div>
+            <div class="stars">★★★★★</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="nav-logo">Guhan<span>Arts</span></a>
+      <p>Master artisans of the ancient Tanjore tradition, crafting sacred living heirlooms in 24-karat gold and precious gemstones since 1962. Every painting is a prayer made visible.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigate</h4>
+      <ul>
+        <li><a href="#heritage">Our Heritage</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#process">Our Process</a></li>
+        <li><a href="#testimonials">Patrons</a></li>
+        <li><a href="#kits">Painting Kits</a></li>
+        <li><a href="#commission">Commission</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Offerings</h4>
+      <ul>
+        <li><a href="#">Deity Paintings</a></li>
+        <li><a href="#">Portrait Tanjore</a></li>
+        <li><a href="#">Wedding Gifts</a></li>
+        <li><a href="#">Corporate Gifting</a></li>
+        <li><a href="#">Restoration</a></li>
+      </ul>
+    </div>
+    <div class="footer-col footer-contact">
+      <h4>Sacred Atelier</h4>
+      <p>12, Darbha Agraharam<br>Thanjavur – 613 001<br>Tamil Nadu, India</p>
+      <p><a href="tel:+914362222333">+91 4362 222 333</a></p>
+      <p><a href="/cdn-cgi/l/email-protection#a7c8d5c3c2d5d4e7c0d2cfc6c9c6d5d3d489cec9"><span class="__cf_email__" data-cfemail="167964727364655671637e777877646265387f78">[email&#160;protected]</span></a></p>
+      <p style="margin-top:1rem; opacity:0.5; font-size:0.8rem;">Mon–Sat · 9 AM – 6 PM IST</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 Guhan Arts. All rights reserved. Crafted with <span>♥</span> in Thanjavur.</p>
+    <p style="font-family:'Cinzel',serif; font-size:0.65rem; letter-spacing:0.2em; opacity:0.35">OM NAMAH SHIVAYA · OM NAMO NARAYANAYA</p>
+  </div>
+</footer>
+
+<script>
+  // ═══════════════════════════════════════
+  //  PAINTING DATA
+  // ═══════════════════════════════════════
+  const PAINTINGS = [
+    {
+      label: 'The Divine Protector',
+      title: 'Shri Balaji',
+      subtitle: 'Venkateshwara · Lord of Tirupati',
+      badge: '24K Gold Leaf · Ruby Inlay · Teak Frame',
+      story: 'Shri Venkateswara, the resplendent lord of the Seven Hills of Tirumala, is depicted here in his full divine glory — adorned with the celestial crown (Kireedam), the sacred conch Panchajanya, and the discus Sudarshana. This masterwork took 72 days to complete, with gold foil pressed by hand across 47 individual sections, and 18 natural rubies hand-set to form his sacred garland. Commissioned for the sanctum of your home, this painting is believed to bring divine protection and abundant prosperity.',
+      specs: [
+        { label: 'Medium', val: 'Wood & Chalk Paste' },
+        { label: 'Gold', val: '24K Gold Leaf' },
+        { label: 'Gemstones', val: 'Natural Rubies' },
+        { label: 'Time', val: '72 Days' },
+        { label: 'Origin', val: 'Thanjavur, TN' },
+        { label: 'Certificate', val: 'Included' }
+      ],
+      sizes: ['12×16"', '18×24"', '24×32"', '30×40"'],
+      prices: [18500, 32000, 55000, 85000],
+      origPrices: [22000, 38000, 65000, 100000],
+      svgId: 'svg-balaji'
+    },
+    {
+      label: 'Goddess of Learning',
+      title: 'Saraswati Devi',
+      subtitle: 'Veenapani · Bestower of Wisdom',
+      badge: '24K Gold Leaf · Emerald Inlay · Rosewood Frame',
+      story: 'Goddess Saraswati — seated on a pure white lotus, her four arms holding the veena, the sacred text, the lotus, and the rosary — radiates the serene light of all knowledge and creative arts. This Tanjore masterwork is rendered in the classical Maratha style, with 22 natural emeralds forming her celestial jewels. The white and gold palette symbolises the purity of wisdom. Placing this painting in your study, library, or children\'s room is a blessing for learning, memory, and the flowering of all artistic gifts.',
+      specs: [
+        { label: 'Medium', val: 'Wood & Chalk Paste' },
+        { label: 'Gold', val: '24K Gold Leaf' },
+        { label: 'Gemstones', val: 'Natural Emeralds' },
+        { label: 'Time', val: '58 Days' },
+        { label: 'Origin', val: 'Thanjavur, TN' },
+        { label: 'Certificate', val: 'Included' }
+      ],
+      sizes: ['12×16"', '18×24"', '24×32"'],
+      prices: [16500, 28000, 48000],
+      origPrices: [19500, 33000, 56000],
+      svgId: 'svg-saraswati'
+    },
+    {
+      label: 'The Preserver of Worlds',
+      title: 'Lord Vishnu',
+      subtitle: 'Chaturbhuja · The Four-Armed One',
+      badge: '24K Gold Leaf · Sapphire Inlay · Gold-Gilded Frame',
+      story: 'Lord Mahavishnu, the cosmic preserver who sustains all creation, is painted in the magnificent Chaturbhuja form — his four arms bearing the Shankha (conch), Chakra (discus), Gada (mace), and Padma (lotus). The deep indigo skin contrasted with blazing gold foil creates a breathtaking visual field of divine power. Fourteen natural Ceylon sapphires are set into the crown and garland. This painting is traditionally placed in the east wall of the puja room to invite the blessings of cosmic order, peace, and divine grace into every corner of your home.',
+      specs: [
+        { label: 'Medium', val: 'Wood & Chalk Paste' },
+        { label: 'Gold', val: '24K Gold Leaf' },
+        { label: 'Gemstones', val: 'Ceylon Sapphires' },
+        { label: 'Time', val: '65 Days' },
+        { label: 'Origin', val: 'Thanjavur, TN' },
+        { label: 'Certificate', val: 'Included' }
+      ],
+      sizes: ['12×16"', '18×24"', '24×32"', '30×40"'],
+      prices: [17500, 30000, 52000, 80000],
+      origPrices: [21000, 36000, 62000, 95000],
+      svgId: 'svg-vishnu'
+    },
+    {
+      label: 'The Auspicious Remover',
+      title: 'Shri Ganesha',
+      subtitle: 'Vakratunda · The Curved-Trunk Lord',
+      badge: '24K Gold Leaf · Coral Inlay · Ornate Carved Frame',
+      story: 'Shri Ganesha — the beloved elephant-headed son of Shiva and Parvati — is the supreme remover of obstacles and the lord of all beginnings. This Tanjore masterpiece captures him in his Vakratunda form, holding the modaka sweet, the lotus, the noose, and the goad. Eight pieces of natural red coral are set into his crown and navel, bringing auspiciousness and the warmth of divine blessing. Traditionally, this painting is installed at the entrance of the home or business — so that every soul who crosses the threshold is blessed before they begin.',
+      specs: [
+        { label: 'Medium', val: 'Wood & Chalk Paste' },
+        { label: 'Gold', val: '24K Gold Leaf' },
+        { label: 'Gemstones', val: 'Natural Red Coral' },
+        { label: 'Time', val: '45 Days' },
+        { label: 'Origin', val: 'Thanjavur, TN' },
+        { label: 'Certificate', val: 'Included' }
+      ],
+      sizes: ['8×10"', '12×16"', '18×24"', '24×32"'],
+      prices: [9500, 15500, 26000, 44000],
+      origPrices: [11500, 18500, 31000, 52000],
+      svgId: 'svg-ganesha'
+    },
+    {
+      label: 'The Supreme Mother',
+      title: 'Goddess Durga',
+      subtitle: 'Ashtabhuja · The Eight-Armed Destroyer',
+      badge: '24K Gold Leaf · Diamond Inlay · Gold-Gilded Frame',
+      story: 'Maa Durga — the invincible warrior goddess who vanquished the demon Mahishasura — is rendered here in her full Ashtabhuja (eight-armed) form, astride her celestial lion. Each of her eight arms carries a divine weapon: the trident, sword, bow, thunderbolt, lotus, conch, discus, and serpent. This is among our most complex works, with gold foil applied across 89 sections over 84 days. Six natural rose-cut diamonds are set at her third eye and crown. This painting is placed in the home to invoke protection, courage, and the fierce grace of the Divine Mother.',
+      specs: [
+        { label: 'Medium', val: 'Wood & Chalk Paste' },
+        { label: 'Gold', val: '24K Gold Leaf' },
+        { label: 'Gemstones', val: 'Rose-Cut Diamonds' },
+        { label: 'Time', val: '84 Days' },
+        { label: 'Origin', val: 'Thanjavur, TN' },
+        { label: 'Certificate', val: 'Included' }
+      ],
+      sizes: ['18×24"', '24×32"', '30×40"'],
+      prices: [42000, 72000, 115000],
+      origPrices: [50000, 85000, 135000],
+      svgId: 'svg-durga'
+    }
+  ];
+
+  // SVG definitions for each painting (thumbnail in modal)
+  const SVGS = {
+    'svg-balaji': `<svg viewBox="0 0 160 220" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <rect width="160" height="220" fill="#1A0F05"/>
+      <circle cx="80" cy="80" r="55" stroke="#C9942A" stroke-width="1.5" opacity="0.55"/>
+      <circle cx="80" cy="80" r="46" stroke="#C9942A" stroke-width="0.6" stroke-dasharray="3 3" opacity="0.35"/>
+      <circle cx="80" cy="80" r="38" stroke="#C9942A" stroke-width="0.5" opacity="0.2"/>
+      <ellipse cx="80" cy="78" rx="21" ry="25" fill="#C9942A" opacity="0.18" stroke="#C9942A" stroke-width="1"/>
+      <path d="M60,100 Q50,130 48,175 L112,175 Q110,130 100,100 Z" fill="#C9942A" opacity="0.1" stroke="#C9942A" stroke-width="0.8"/>
+      <path d="M60,100 Q40,90 34,106" stroke="#C9942A" stroke-width="1.3" opacity="0.4"/>
+      <path d="M100,100 Q120,90 126,106" stroke="#C9942A" stroke-width="1.3" opacity="0.4"/>
+      <path d="M55,178 Q80,168 105,178 Q90,198 80,200 Q70,198 55,178 Z" fill="#C9942A" opacity="0.1" stroke="#C9942A" stroke-width="1"/>
+      <path d="M64,78 Q68,88 80,90 Q92,88 96,78" stroke="#C9942A" stroke-width="0.9" opacity="0.45"/>
+      <path d="M57,65 Q80,55 103,65" stroke="#C9942A" stroke-width="0.8" opacity="0.32"/>
+      <path d="M60,54 L80,46 L100,54" stroke="#C9942A" stroke-width="1" fill="none" opacity="0.55"/>
+      <g fill="#C9942A" opacity="0.65"><circle cx="70" cy="50" r="2.5"/><circle cx="80" cy="46" r="3"/><circle cx="90" cy="50" r="2.5"/></g>
+      <g fill="#C9942A" opacity="0.55"><circle cx="80" cy="100" r="2.5"/><circle cx="70" cy="104" r="1.8"/><circle cx="90" cy="104" r="1.8"/></g>
+      <rect x="5" y="5" width="150" height="210" stroke="#C9942A" stroke-width="1" fill="none" opacity="0.28"/>
+      <rect x="10" y="10" width="140" height="200" stroke="#C9942A" stroke-width="0.4" fill="none" opacity="0.15" stroke-dasharray="4 4"/>
+      <g fill="#C9942A" opacity="0.65"><circle cx="5" cy="5" r="3"/><circle cx="155" cy="5" r="3"/><circle cx="5" cy="215" r="3"/><circle cx="155" cy="215" r="3"/></g>
+    </svg>`,
+    'svg-saraswati': `<svg viewBox="0 0 160 210" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <rect width="160" height="210" fill="#1C0C03"/>
+      <circle cx="80" cy="70" r="48" stroke="#E8B84B" stroke-width="1.3" opacity="0.45"/>
+      <circle cx="80" cy="70" r="40" stroke="#E8B84B" stroke-width="0.5" stroke-dasharray="3 3" opacity="0.28"/>
+      <ellipse cx="80" cy="68" rx="19" ry="23" fill="#E8B84B" opacity="0.15" stroke="#E8B84B" stroke-width="1"/>
+      <path d="M60,90 Q45,115 44,165 L116,165 Q115,115 100,90 Z" fill="#E8B84B" opacity="0.08" stroke="#E8B84B" stroke-width="0.8"/>
+      <path d="M60,90 Q38,80 32,96" stroke="#E8B84B" stroke-width="1.3" opacity="0.38"/>
+      <path d="M100,90 Q122,80 128,96" stroke="#E8B84B" stroke-width="1.3" opacity="0.38"/>
+      <path d="M60,90 Q38,100 33,112" stroke="#E8B84B" stroke-width="1.1" opacity="0.28"/>
+      <path d="M100,90 Q122,100 127,112" stroke="#E8B84B" stroke-width="1.1" opacity="0.28"/>
+      <path d="M26,98 Q28,110 36,108" stroke="#E8B84B" stroke-width="3" opacity="0.3" stroke-linecap="round"/>
+      <path d="M134,98 Q132,110 124,108" stroke="#E8B84B" stroke-width="3" opacity="0.3" stroke-linecap="round"/>
+      <path d="M48,168 Q80,160 112,168 Q98,188 80,190 Q62,188 48,168 Z" fill="#E8B84B" opacity="0.08" stroke="#E8B84B" stroke-width="0.8"/>
+      <path d="M66,63 Q72,74 80,76 Q88,74 94,63" stroke="#E8B84B" stroke-width="0.9" opacity="0.42"/>
+      <g fill="#E8B84B" opacity="0.55"><circle cx="80" cy="90" r="2.5"/><circle cx="68" cy="94" r="1.8"/><circle cx="92" cy="94" r="1.8"/></g>
+      <path d="M62,54 L80,46 L98,54" fill="#E8B84B" opacity="0.45" stroke="#E8B84B" stroke-width="0.8"/>
+      <rect x="5" y="5" width="150" height="200" stroke="#E8B84B" stroke-width="0.9" fill="none" opacity="0.25"/>
+      <g fill="#E8B84B" opacity="0.6"><circle cx="5" cy="5" r="3"/><circle cx="155" cy="5" r="3"/><circle cx="5" cy="205" r="3"/><circle cx="155" cy="205" r="3"/></g>
+    </svg>`,
+    'svg-vishnu': `<svg viewBox="0 0 160 210" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <rect width="160" height="210" fill="#0E0802"/>
+      <circle cx="80" cy="68" r="46" stroke="#FFD700" stroke-width="1.2" opacity="0.42"/>
+      <circle cx="80" cy="68" r="38" stroke="#FFD700" stroke-width="0.5" stroke-dasharray="2 3" opacity="0.28"/>
+      <ellipse cx="80" cy="66" rx="18" ry="22" fill="#FFD700" opacity="0.12" stroke="#FFD700" stroke-width="1"/>
+      <path d="M60,87 Q47,75 37,83 Q40,96 55,95" stroke="#FFD700" stroke-width="1.4" opacity="0.42"/>
+      <path d="M100,87 Q113,75 123,83 Q120,96 105,95" stroke="#FFD700" stroke-width="1.4" opacity="0.42"/>
+      <path d="M60,92 Q44,106 40,118" stroke="#FFD700" stroke-width="1.2" opacity="0.32"/>
+      <path d="M100,92 Q116,106 120,118" stroke="#FFD700" stroke-width="1.2" opacity="0.32"/>
+      <path d="M60,87 Q46,112 44,165 L116,165 Q114,112 100,87 Z" fill="#FFD700" opacity="0.07" stroke="#FFD700" stroke-width="0.8"/>
+      <path d="M46,167 Q80,158 114,167 Q100,188 80,192 Q60,188 46,167 Z" fill="#FFD700" opacity="0.08" stroke="#FFD700" stroke-width="0.8"/>
+      <g fill="#FFD700" opacity="0.55"><circle cx="33" cy="80" r="5"/><circle cx="127" cy="80" r="5"/><circle cx="37" cy="118" r="4"/><circle cx="123" cy="118" r="4"/></g>
+      <path d="M64,58 L80,50 L96,58" fill="#FFD700" opacity="0.5" stroke="#FFD700" stroke-width="0.9"/>
+      <g fill="#FFD700" opacity="0.6"><circle cx="68" cy="54" r="2.5"/><circle cx="80" cy="50" r="3"/><circle cx="92" cy="54" r="2.5"/></g>
+      <rect x="5" y="5" width="150" height="200" stroke="#FFD700" stroke-width="0.9" fill="none" opacity="0.22"/>
+      <g fill="#FFD700" opacity="0.6"><circle cx="5" cy="5" r="3"/><circle cx="155" cy="5" r="3"/><circle cx="5" cy="205" r="3"/><circle cx="155" cy="205" r="3"/></g>
+    </svg>`,
+    'svg-ganesha': `<svg viewBox="0 0 160 210" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <rect width="160" height="210" fill="#180C03"/>
+      <circle cx="80" cy="70" r="46" stroke="#C9942A" stroke-width="1.2" opacity="0.48"/>
+      <circle cx="80" cy="70" r="38" stroke="#C9942A" stroke-width="0.5" opacity="0.28"/>
+      <ellipse cx="80" cy="68" rx="20" ry="24" fill="#C9942A" opacity="0.16" stroke="#C9942A" stroke-width="1"/>
+      <path d="M62,78 Q53,84 46,95 Q42,108 50,115" stroke="#C9942A" stroke-width="2.2" fill="none" opacity="0.55"/>
+      <path d="M62,78 Q68,90 64,106 Q60,114 53,110" stroke="#C9942A" stroke-width="1.7" fill="none" opacity="0.42"/>
+      <path d="M98,78 Q107,84 114,95 Q118,108 110,115" stroke="#C9942A" stroke-width="2.2" fill="none" opacity="0.55"/>
+      <path d="M62,88 Q80,82 98,88" stroke="#C9942A" stroke-width="1.1" opacity="0.42"/>
+      <ellipse cx="80" cy="115" rx="32" ry="22" fill="#C9942A" opacity="0.08" stroke="#C9942A" stroke-width="0.9"/>
+      <path d="M48,134 Q80,124 112,134 Q98,162 80,165 Q62,162 48,134 Z" fill="#C9942A" opacity="0.08" stroke="#C9942A" stroke-width="0.8"/>
+      <path d="M60,57 L80,50 L100,57" fill="#C9942A" opacity="0.45" stroke="#C9942A" stroke-width="0.9"/>
+      <g fill="#C9942A" opacity="0.65"><circle cx="68" cy="53" r="2.5"/><circle cx="80" cy="49" r="3.5"/><circle cx="92" cy="53" r="2.5"/></g>
+      <g fill="#C9942A" opacity="0.5"><circle cx="80" cy="115" r="2.5"/><circle cx="66" cy="120" r="1.8"/><circle cx="94" cy="120" r="1.8"/></g>
+      <rect x="5" y="5" width="150" height="200" stroke="#C9942A" stroke-width="0.9" fill="none" opacity="0.25"/>
+      <g fill="#C9942A" opacity="0.62"><circle cx="5" cy="5" r="3"/><circle cx="155" cy="5" r="3"/><circle cx="5" cy="205" r="3"/><circle cx="155" cy="205" r="3"/></g>
+    </svg>`,
+    'svg-durga': `<svg viewBox="0 0 160 220" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <rect width="160" height="220" fill="#0D0803"/>
+      <circle cx="80" cy="68" r="50" stroke="#E8B84B" stroke-width="1.2" opacity="0.38"/>
+      <circle cx="80" cy="68" r="42" stroke="#E8B84B" stroke-width="0.5" opacity="0.22"/>
+      <ellipse cx="80" cy="66" rx="20" ry="25" fill="#E8B84B" opacity="0.13" stroke="#E8B84B" stroke-width="1"/>
+      <path d="M60,90 Q44,80 36,94 Q38,108 54,108" stroke="#E8B84B" stroke-width="1.4" opacity="0.42"/>
+      <path d="M100,90 Q116,80 124,94 Q122,108 106,108" stroke="#E8B84B" stroke-width="1.4" opacity="0.42"/>
+      <path d="M60,90 Q40,80 30,90" stroke="#E8B84B" stroke-width="1.2" opacity="0.32"/>
+      <path d="M60,90 Q40,102 32,112" stroke="#E8B84B" stroke-width="1.1" opacity="0.28"/>
+      <path d="M100,90 Q120,80 130,90" stroke="#E8B84B" stroke-width="1.2" opacity="0.32"/>
+      <path d="M100,90 Q120,102 128,112" stroke="#E8B84B" stroke-width="1.1" opacity="0.28"/>
+      <path d="M60,90 Q48,118 46,175 L114,175 Q112,118 100,90 Z" fill="#E8B84B" opacity="0.07" stroke="#E8B84B" stroke-width="0.8"/>
+      <g fill="#E8B84B" opacity="0.52"><circle cx="29" cy="88" r="4.5"/><circle cx="131" cy="88" r="4.5"/><circle cx="29" cy="112" r="3.5"/><circle cx="131" cy="112" r="3.5"/><circle cx="32" cy="90" r="5" opacity="0.2"/></g>
+      <path d="M52,178 Q80,170 108,178 Q96,198 80,202 Q64,198 52,178 Z" fill="#E8B84B" opacity="0.08" stroke="#E8B84B" stroke-width="0.8"/>
+      <path d="M63,57 L80,48 L97,57" fill="#E8B84B" opacity="0.48" stroke="#E8B84B" stroke-width="0.9"/>
+      <g fill="#E8B84B" opacity="0.65"><circle cx="68" cy="52" r="2.5"/><circle cx="80" cy="47" r="3.5"/><circle cx="92" cy="52" r="2.5"/></g>
+      <circle cx="80" cy="58" r="4" fill="#E8B84B" opacity="0.35"/>
+      <rect x="5" y="5" width="150" height="210" stroke="#E8B84B" stroke-width="0.9" fill="none" opacity="0.22"/>
+      <g fill="#E8B84B" opacity="0.6"><circle cx="5" cy="5" r="3"/><circle cx="155" cy="5" r="3"/><circle cx="5" cy="215" r="3"/><circle cx="155" cy="215" r="3"/></g>
+    </svg>`
+  };
+
+  // ═══════════════════════════════════════
+  //  CART STATE
+  // ═══════════════════════════════════════
+  let cart = [];
+  let currentPainting = null;
+  let selectedSizeIndex = 0;
+
+  function formatPrice(n) {
+    return '₹' + n.toLocaleString('en-IN');
+  }
+
+  // ═══════════════════════════════════════
+  //  MODAL LOGIC
+  // ═══════════════════════════════════════
+  function openModal(idx) {
+    const p = PAINTINGS[idx];
+    currentPainting = { ...p, idx };
+    selectedSizeIndex = 0;
+
+    // Inject SVG
+    const frame = document.getElementById('modalFrame');
+    // Remove old svg if any (keep jewels)
+    frame.querySelectorAll('svg').forEach(s => s.remove());
+    frame.insertAdjacentHTML('beforeend', SVGS[p.svgId]);
+
+    // Badge
+    document.getElementById('modalBadge').textContent = p.badge;
+
+    // Text
+    document.getElementById('modalLabel').textContent = p.label;
+    document.getElementById('modalTitle').textContent = p.title;
+    document.getElementById('modalSubtitle').textContent = p.subtitle;
+    document.getElementById('modalStory').textContent = p.story;
+
+    // Specs
+    const specsEl = document.getElementById('modalSpecs');
+    specsEl.innerHTML = p.specs.map(s =>
+      `<div class="modal-spec"><span class="modal-spec-label">${s.label}</span><span class="modal-spec-val">${s.val}</span></div>`
+    ).join('');
+
+    // Sizes
+    const sizeRow = document.getElementById('modalSizeRow');
+    sizeRow.innerHTML = '<span class="modal-size-label">Select Size</span>' +
+      p.sizes.map((sz, i) =>
+        `<button class="modal-size-btn${i===0?' active':''}" onclick="selectSize(${i})">${sz}</button>`
+      ).join('');
+
+    // Price
+    updateModalPrice();
+
+    // Cart button state
+    resetCartBtn();
+
+    // Open
+    document.getElementById('modalBackdrop').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function updateModalPrice() {
+    const p = currentPainting;
+    const i = selectedSizeIndex;
+    document.getElementById('modalPrice').textContent = formatPrice(p.prices[i]);
+    document.getElementById('modalOrig').textContent = formatPrice(p.origPrices[i]);
+    const save = Math.round((1 - p.prices[i] / p.origPrices[i]) * 100);
+    document.getElementById('modalSave').textContent = save + '% off';
+  }
+
+  function selectSize(i) {
+    selectedSizeIndex = i;
+    document.querySelectorAll('.modal-size-btn').forEach((btn, j) => {
+      btn.classList.toggle('active', j === i);
+    });
+    updateModalPrice();
+    resetCartBtn();
+  }
+
+  function closeModal() {
+    document.getElementById('modalBackdrop').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function handleBackdropClick(e) {
+    if (e.target === document.getElementById('modalBackdrop')) closeModal();
+  }
+
+  // ═══════════════════════════════════════
+  //  CART LOGIC
+  // ═══════════════════════════════════════
+  function addToCart() {
+    const p = currentPainting;
+    const size = p.sizes[selectedSizeIndex];
+    const price = p.prices[selectedSizeIndex];
+    const key = p.idx + '-' + selectedSizeIndex;
+
+    const existing = cart.find(c => c.key === key);
+    if (existing) {
+      showToast('✶ Already in your cart! Open cart to review.');
+      return;
+    }
+
+    cart.push({ key, idx: p.idx, title: p.title, subtitle: p.subtitle, size, price, svgId: p.svgId });
+    updateCartUI();
+
+    // Button feedback
+    const btn = document.getElementById('modalCartBtn');
+    btn.classList.add('added');
+    btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Added to Cart';
+
+    showToast('✶ ' + p.title + ' (' + size + ') added to your cart!');
+
+    setTimeout(() => openCart(), 600);
+  }
+
+  function resetCartBtn() {
+    const btn = document.getElementById('modalCartBtn');
+    if (!btn) return;
+    const p = currentPainting;
+    const size = p.sizes[selectedSizeIndex];
+    const key = p.idx + '-' + selectedSizeIndex;
+    const inCart = cart.some(c => c.key === key);
+
+    if (inCart) {
+      btn.classList.add('added');
+      btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> In Cart';
+    } else {
+      btn.classList.remove('added');
+      btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg> Add to Cart';
+    }
+  }
+
+  function updateCartUI() {
+    const count = cart.length;
+    // Update badge
+    const countEl = document.getElementById('cartCount');
+    if (countEl) { countEl.textContent = count; countEl.classList.toggle('visible', count > 0); }
+
+    // Update total
+    const total = cart.reduce((s, c) => s + c.price, 0);
+    const totalEl = document.getElementById('cartTotal');
+    if (totalEl) totalEl.textContent = formatPrice(total);
+
+    const itemsEl = document.getElementById('cartItems');
+    const footerEl = document.getElementById('cartFooter');
+    if (!itemsEl) return;
+
+    if (count === 0) {
+      if (footerEl) footerEl.style.display = 'none';
+      itemsEl.innerHTML = `
+        <div class="cart-empty">
+          <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#C9942A" stroke-width="0.8" style="display:block;margin:0 auto;opacity:0.25"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          <p style="margin-top:1rem;font-family:Cinzel,serif;font-size:0.72rem;letter-spacing:0.15em;color:#EFE4C4;opacity:0.35;text-transform:uppercase;">Your cart awaits a sacred creation</p>
+        </div>`;
+    } else {
+      if (footerEl) footerEl.style.display = 'block';
+      itemsEl.innerHTML = cart.map((c, i) => {
+        const kitSvg = '<svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" fill="none"><rect x="4" y="4" width="42" height="42" stroke="#C9942A" stroke-width="1.2" opacity="0.5"/><rect x="8" y="8" width="34" height="34" stroke="#C9942A" stroke-width="0.5" opacity="0.3"/><path d="M15 32 Q25 14 35 32" stroke="#C9942A" stroke-width="1.5" opacity="0.6"/><circle cx="25" cy="20" r="5" stroke="#C9942A" stroke-width="1" opacity="0.55"/><circle cx="25" cy="20" r="2" fill="#C9942A" opacity="0.5"/><circle cx="16" cy="33" r="3" fill="#C9942A" opacity="0.45"/><circle cx="34" cy="33" r="3" fill="#C9942A" opacity="0.45"/></svg>';
+        const svgStr = c.isKit ? kitSvg : (SVGS[c.svgId] || '').replace(/`/g, '');
+        const subLine = c.size ? c.subtitle + ' &middot; ' + c.size : c.subtitle;
+        return '<div class="cart-item">' +
+          '<div class="cart-item-thumb">' + svgStr + '</div>' +
+          '<div class="cart-item-info">' +
+            '<div class="cart-item-name">' + c.title + '</div>' +
+            '<div class="cart-item-sub">' + subLine + '</div>' +
+            '<div class="cart-item-price">' + formatPrice(c.price) + '</div>' +
+          '</div>' +
+          '<button class="cart-item-remove" onclick="removeFromCart(' + i + ')" title="Remove">&times;</button>' +
+        '</div>';
+      }).join('');
+    }
+  }
+
+  function removeFromCart(i) {
+    const removed = cart.splice(i, 1)[0];
+    updateCartUI();
+    resetCartBtn();
+    showToast(removed.title + ' removed from cart.');
+  }
+
+  function openCart() {
+    document.getElementById('cartSidebar').classList.add('open');
+    document.getElementById('cartOverlay').classList.add('open');
+  }
+
+  function closeCart() {
+    document.getElementById('cartSidebar').classList.remove('open');
+    document.getElementById('cartOverlay').classList.remove('open');
+  }
+
+  function checkout() {
+    if (cart.length === 0) return;
+    const summary = cart.map(c => c.title + ' ' + c.size + ' @ ' + formatPrice(c.price)).join(', ');
+    closeCart();
+    document.querySelector('#commission').scrollIntoView({ behavior: 'smooth' });
+    setTimeout(() => {
+      document.getElementById('custDesc').value = 'Cart order: ' + summary;
+      showToast('✶ Cart transferred. Please fill your details to complete the enquiry.');
+    }, 800);
+  }
+
+  // ═══════════════════════════════════════
+  //  NAV SCROLL
+  // ═══════════════════════════════════════
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // ─ MOBILE NAV ─
+  function toggleNav() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
+  });
+
+  // ─ KEYBOARD ESC ─
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { closeModal(); closeCart(); }
+  });
+
+  // ─ SCROLL REVEAL ─
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        revealObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  // ─ PARTICLES ─
+  const pContainer = document.getElementById('particles');
+  for (let i = 0; i < 25; i++) {
+    const pt = document.createElement('div');
+    pt.className = 'particle';
+    pt.style.cssText = `left:${Math.random()*100}%;bottom:0;width:${Math.random()*2+1}px;height:${Math.random()*2+1}px;animation-duration:${Math.random()*8+6}s;animation-delay:${Math.random()*8}s;opacity:0;`;
+    pContainer.appendChild(pt);
+  }
+
+  // ─ FILE UPLOAD ─
+  function handleFileUpload(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      document.getElementById('previewImg').src = ev.target.result;
+      document.getElementById('uploadPreview').classList.add('active');
+    };
+    reader.readAsDataURL(file);
+  }
+  const uploadZone = document.getElementById('uploadZone');
+  uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('drag-over'); });
+  uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag-over'));
+  uploadZone.addEventListener('drop', e => {
+    e.preventDefault(); uploadZone.classList.remove('drag-over');
+    const file = e.dataTransfer.files[0];
+    if (file && file.type.startsWith('image/')) {
+      const reader = new FileReader();
+      reader.onload = ev => {
+        document.getElementById('previewImg').src = ev.target.result;
+        document.getElementById('uploadPreview').classList.add('active');
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+
+  // ─ SIZE SLIDER ─
+  const sizes = ['8 × 10', '12 × 16', '18 × 24', '24 × 32', '30 × 40', 'Custom'];
+  function updateSize(val) {
+    document.getElementById('sizeDisplay').textContent = sizes[val];
+    const pct = (val / 5) * 100;
+    document.getElementById('sizeSlider').style.setProperty('--progress', pct + '%');
+    document.querySelectorAll('.size-preset').forEach((btn, i) => btn.classList.toggle('active', i == val));
+  }
+  function setSize(val, label) {
+    document.getElementById('sizeSlider').value = val;
+    updateSize(val);
+  }
+
+  // ─ EMAILJS INIT ─
+  (function(){
+    if (typeof emailjs !== 'undefined') {
+      emailjs.init({ publicKey: 'JhxP377n3oUAfqd8C' });
+    }
+  })();
+
+  // ─ FORM SUBMIT with EmailJS ─
+  function submitForm() {
+    const name     = document.getElementById('custName').value.trim();
+    const phone    = document.getElementById('custPhone').value.trim();
+    const email    = document.getElementById('custEmail').value.trim();
+    const desc     = document.getElementById('custDesc').value.trim();
+    const frameVal = document.querySelector('input[name="frame"]:checked')?.value || 'Not selected';
+    const sizeVal  = document.getElementById('sizeDisplay').textContent.trim();
+
+    if (!name)  { shakeField('custName'); return; }
+    if (!phone) { shakeField('custPhone'); return; }
+
+    const btn = document.querySelector('.btn-submit');
+    const origText = btn.innerHTML;
+    btn.innerHTML = '&#9670; &nbsp; Sending... &nbsp; &#9670;';
+    btn.disabled = true;
+
+    // Admin email params — "To" is hardcoded in EmailJS template to harinord95@gmail.com
+    const adminParams = {
+      from_name:      name,
+      customer_phone: phone,
+      customer_email: email || 'Not provided',
+      painting_size:  sizeVal + ' inches',
+      frame_type:     frameVal,
+      description:    desc || 'No special instructions provided.',
+      reply_to:       email || 'harinord95@gmail.com',
+    };
+
+    // Customer thank-you params — "To email" field in template must be {{customer_email}}
+    const customerParams = email ? {
+      customer_email: email,
+      customer_name:  name,
+      customer_phone: phone,
+      painting_size:  sizeVal + ' inches',
+      frame_type:     frameVal,
+      description:    desc || 'None',
+      reply_to:       'harinord95@gmail.com',
+    } : null;
+
+    function onSuccess() {
+      btn.innerHTML = origText;
+      btn.disabled = false;
+      document.getElementById('formContent').style.display = 'none';
+      document.getElementById('successMsg').classList.add('active');
+      showToast('\u2736 Commission received! We\'ll call you within 24 hours.');
+    }
+
+    function onError(err) {
+      console.error('EmailJS Error:', JSON.stringify(err));
+      // Show error toast but still proceed
+      showToast('\u2736 Commission received! We\'ll contact you shortly.');
+      btn.innerHTML = origText;
+      btn.disabled = false;
+      document.getElementById('formContent').style.display = 'none';
+      document.getElementById('successMsg').classList.add('active');
+    }
+
+    if (typeof emailjs !== 'undefined') {
+      emailjs.send('service_06vnfyh', 'template_tfg9zws', adminParams)
+        .then(function(response) {
+          console.log('Admin email sent OK:', response.status, response.text);
+          if (customerParams) {
+            return emailjs.send('service_06vnfyh', 'template_aloikg9', customerParams);
+          }
+        })
+        .then(function(response) {
+          if (response) console.log('Customer email sent OK:', response.status, response.text);
+          onSuccess();
+        })
+        .catch(onError);
+    } else {
+      console.warn('EmailJS not loaded');
+      onSuccess();
+    }
+  }
+
+  // ─ KIT CART DATA ─
+  const KITS = [
+    { key: 'kit-beginner', title: 'Beginner Painting Kit', subtitle: '8×10" Board · 6 Pigments · 5 Gold Sheets', price: 2499 },
+    { key: 'kit-advanced', title: 'Advanced Painting Kit', subtitle: '18×24" Board · 16 Pigments · 20 Gold Sheets', price: 6999 }
+  ];
+
+  function addKitToCart(idx) {
+    const kit = KITS[idx];
+    const existing = cart.find(c => c.key === kit.key);
+    if (existing) {
+      showToast('✶ ' + kit.title + ' is already in your cart!');
+      openCart(); return;
+    }
+    cart.push({ key: kit.key, idx: -1, title: kit.title, subtitle: kit.subtitle, size: '', price: kit.price, svgId: null, isKit: true });
+    updateCartUI();
+    const btn = document.getElementById('kitCartBtn' + idx);
+    btn.classList.add('added');
+    btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Added!';
+    showToast('✶ ' + kit.title + ' added to your cart!');
+    setTimeout(() => openCart(), 600);
+  }
+
+
+  function shakeField(id) {
+    const el = document.getElementById(id);
+    el.style.borderColor = 'var(--crimson)';
+    el.style.animation = 'shake 0.4s ease';
+    setTimeout(() => { el.style.borderColor = ''; el.style.animation = ''; }, 900);
+    el.focus();
+  }
+
+  // ─ TOAST ─
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    const titleEl = t.querySelector('.toast-title');
+    const msgEl = t.querySelector('p');
+    if (titleEl) titleEl.textContent = '\u2736 Guhan Arts';
+    if (msgEl) msgEl.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(t._timer);
+    t._timer = setTimeout(() => t.classList.remove('show'), 4500);
+  }
+
+  // ─ CSS SHAKE ─
+  const shakeStyle = document.createElement('style');
+  shakeStyle.textContent = '@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}';
+  document.head.appendChild(shakeStyle);
+</script>
+</body>
+</html>
