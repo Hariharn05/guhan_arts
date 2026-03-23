@@ -3000,16 +3000,43 @@
   }
 
   // ─ FILE UPLOAD ─
+  let uploadedImageBase64 = ''; // global — stores resized image for email
+
+  function resizeAndStore(dataUrl) {
+    return new Promise(function(resolve) {
+      const img = new Image();
+      img.onload = function() {
+        const MAX = 600; // max width/height in pixels for email
+        let w = img.width, h = img.height;
+        if (w > MAX || h > MAX) {
+          if (w > h) { h = Math.round(h * MAX / w); w = MAX; }
+          else       { w = Math.round(w * MAX / h); h = MAX; }
+        }
+        const canvas = document.createElement('canvas');
+        canvas.width = w; canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        // Use JPEG at 80% quality — keeps email size small
+        const resized = canvas.toDataURL('image/jpeg', 0.80);
+        uploadedImageBase64 = resized;
+        resolve(resized);
+      };
+      img.src = dataUrl;
+    });
+  }
+
   function handleFileUpload(e) {
     const file = e.target.files[0];
     if (!file) return;
     const reader = new FileReader();
     reader.onload = (ev) => {
-      document.getElementById('previewImg').src = ev.target.result;
-      document.getElementById('uploadPreview').classList.add('active');
+      resizeAndStore(ev.target.result).then(function(resized) {
+        document.getElementById('previewImg').src = resized;
+        document.getElementById('uploadPreview').classList.add('active');
+      });
     };
     reader.readAsDataURL(file);
   }
+
   const uploadZone = document.getElementById('uploadZone');
   uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('drag-over'); });
   uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag-over'));
@@ -3019,8 +3046,10 @@
     if (file && file.type.startsWith('image/')) {
       const reader = new FileReader();
       reader.onload = ev => {
-        document.getElementById('previewImg').src = ev.target.result;
-        document.getElementById('uploadPreview').classList.add('active');
+        resizeAndStore(ev.target.result).then(function(resized) {
+          document.getElementById('previewImg').src = resized;
+          document.getElementById('uploadPreview').classList.add('active');
+        });
       };
       reader.readAsDataURL(file);
     }
@@ -3064,14 +3093,18 @@
     btn.disabled = true;
 
     // Admin email params — "To" is hardcoded in EmailJS template to harinord95@gmail.com
+    // reference_image is base64 JPEG — embed with <img src="{{reference_image}}"> in template
+    const hasImage = uploadedImageBase64.length > 0;
     const adminParams = {
-      from_name:      name,
-      customer_phone: phone,
-      customer_email: email || 'Not provided',
-      painting_size:  sizeVal + ' inches',
-      frame_type:     frameVal,
-      description:    desc || 'No special instructions provided.',
-      reply_to:       email || 'harinord95@gmail.com',
+      from_name:       name,
+      customer_phone:  phone,
+      customer_email:  email || 'Not provided',
+      painting_size:   sizeVal + ' inches',
+      frame_type:      frameVal,
+      description:     desc || 'No special instructions provided.',
+      reply_to:        email || 'harinord95@gmail.com',
+      reference_image: hasImage ? uploadedImageBase64 : '',
+      image_status:    hasImage ? 'Reference image attached below.' : 'No reference image provided.',
     };
 
     // Customer thank-you params — "To email" field in template must be {{customer_email}}
