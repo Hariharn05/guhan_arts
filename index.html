@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Guhan Arts — Sacred Tanjore Paintings</title>
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" onload="initEmailJS()"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
@@ -3000,41 +3000,129 @@
   }
 
   // ─ FILE UPLOAD ─
-  let uploadedImageBase64 = ''; // global — stores resized image for email
+  let uploadedImageBase64 = ''; // stores preview (full quality for display)
+  let emailImageBase64    = ''; // stores compressed version safe for EmailJS (<35KB base64)
 
-  function resizeAndStore(dataUrl) {
+  // Compress image iteratively until base64 length < 35KB
+  function compressForEmail(dataUrl) {
     return new Promise(function(resolve) {
-      const img = new Image();
+      var img = new Image();
       img.onload = function() {
-        const MAX = 600; // max width/height in pixels for email
-        let w = img.width, h = img.height;
+        // Start at 300px wide — safe starting point
+        var MAX = 300;
+        var w = img.width, h = img.height;
         if (w > MAX || h > MAX) {
-          if (w > h) { h = Math.round(h * MAX / w); w = MAX; }
-          else       { w = Math.round(w * MAX / h); h = MAX; }
+          if (w >= h) { h = Math.round(h * MAX / w); w = MAX; }
+          else        { w = Math.round(w * MAX / h); h = MAX; }
         }
-        const canvas = document.createElement('canvas');
+        var canvas = document.createElement('canvas');
         canvas.width = w; canvas.height = h;
         canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-        // Use JPEG at 80% quality — keeps email size small
-        const resized = canvas.toDataURL('image/jpeg', 0.80);
-        uploadedImageBase64 = resized;
-        resolve(resized);
+
+        // Try quality from 0.4 down to 0.1 until under 35KB
+        var TARGET_BYTES = 35 * 1024; // 35KB in base64 chars ≈ 35*1024
+        var qualities = [0.40, 0.30, 0.22, 0.15, 0.10];
+        var result = '';
+        for (var i = 0; i < qualities.length; i++) {
+          result = canvas.toDataURL('image/jpeg', qualities[i]);
+          // base64 string length ≈ actual bytes
+          if (result.length < TARGET_BYTES) {
+            console.log('✅ Email image compressed: ' + Math.round(result.length/1024) + 'KB at quality ' + qualities[i]);
+            break;
+          }
+        }
+        // Final fallback: shrink canvas to 200px and retry
+        if (result.length >= TARGET_BYTES) {
+          canvas.width = 200; canvas.height = Math.round(h * 200 / w);
+          canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+          result = canvas.toDataURL('image/jpeg', 0.10);
+          console.log('⚠ Fallback 200px image: ' + Math.round(result.length/1024) + 'KB');
+        }
+        emailImageBase64 = result;
+        resolve(result);
+      };
+      img.onerror = function() { resolve(''); };
+      img.src = dataUrl;
+    });
+  }
+
+  // Store display-quality preview (shown in the upload zone)
+  function storePreview(dataUrl) {
+    return new Promise(function(resolve) {
+      var img = new Image();
+      img.onload = function() {
+        var MAX = 600;
+        var w = img.width, h = img.height;
+        if (w > MAX || h > MAX) {
+          if (w >= h) { h = Math.round(h * MAX / w); w = MAX; }
+          else        { w = Math.round(w * MAX / h); h = MAX; }
+        }
+        var canvas = document.createElement('canvas');
+        canvas.width = w; canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        var preview = canvas.toDataURL('image/jpeg', 0.80);
+        uploadedImageBase64 = preview;
+        resolve(preview);
       };
       img.src = dataUrl;
     });
   }
 
-  function handleFileUpload(e) {
-    const file = e.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = (ev) => {
-      resizeAndStore(ev.target.result).then(function(resized) {
-        document.getElementById('previewImg').src = resized;
+  function processUploadedFile(file) {
+    // ── 5MB size check ──
+    var MAX_MB = 5;
+    if (file.size > MAX_MB * 1024 * 1024) {
+      showUploadError('File is too large (' + (file.size / (1024*1024)).toFixed(1) + 'MB). Maximum allowed size is 5MB. Please choose a smaller image.');
+      return;
+    }
+    // Clear old error
+    clearUploadError();
+    // Show loading state
+    var zone = document.getElementById('uploadZone');
+    zone.querySelector('p').textContent = 'Processing image...';
+
+    var reader = new FileReader();
+    reader.onload = function(ev) {
+      // Run both: preview + email-safe compression in parallel
+      Promise.all([
+        storePreview(ev.target.result),
+        compressForEmail(ev.target.result)
+      ]).then(function(results) {
+        var preview = results[0];
+        document.getElementById('previewImg').src = preview;
         document.getElementById('uploadPreview').classList.add('active');
+        zone.querySelector('p').textContent = 'Image ready ✦ Click to change';
+        zone.querySelector('span').textContent = 'File accepted · Compressed for email delivery';
       });
     };
     reader.readAsDataURL(file);
+  }
+
+  function showUploadError(msg) {
+    var zone = document.getElementById('uploadZone');
+    // Remove existing error if any
+    var old = document.getElementById('uploadErrorMsg');
+    if (old) old.remove();
+    var errDiv = document.createElement('div');
+    errDiv.id = 'uploadErrorMsg';
+    errDiv.style.cssText = 'margin-top:10px;padding:10px 14px;background:rgba(139,26,26,0.15);border:1px solid rgba(139,26,26,0.5);color:#FF8A8A;font-size:13px;font-family:Cinzel,serif;letter-spacing:0.05em;text-align:center;';
+    errDiv.innerHTML = '&#9888; &nbsp;' + msg;
+    zone.appendChild(errDiv);
+    // Reset file input so they can try again
+    document.getElementById('refImage').value = '';
+    uploadedImageBase64 = '';
+    emailImageBase64 = '';
+  }
+
+  function clearUploadError() {
+    var old = document.getElementById('uploadErrorMsg');
+    if (old) old.remove();
+  }
+
+  function handleFileUpload(e) {
+    var file = e.target.files[0];
+    if (!file) return;
+    processUploadedFile(file);
   }
 
   const uploadZone = document.getElementById('uploadZone');
@@ -3042,16 +3130,9 @@
   uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag-over'));
   uploadZone.addEventListener('drop', e => {
     e.preventDefault(); uploadZone.classList.remove('drag-over');
-    const file = e.dataTransfer.files[0];
+    var file = e.dataTransfer.files[0];
     if (file && file.type.startsWith('image/')) {
-      const reader = new FileReader();
-      reader.onload = ev => {
-        resizeAndStore(ev.target.result).then(function(resized) {
-          document.getElementById('previewImg').src = resized;
-          document.getElementById('uploadPreview').classList.add('active');
-        });
-      };
-      reader.readAsDataURL(file);
+      processUploadedFile(file);
     }
   });
 
@@ -3069,11 +3150,11 @@
   }
 
   // ─ EMAILJS INIT ─
-  (function(){
-    if (typeof emailjs !== 'undefined') {
-      emailjs.init({ publicKey: 'JhxP377n3oUAfqd8C' });
-    }
-  })();
+  // Called by onload on the SDK <script> tag — guarantees SDK is ready
+  function initEmailJS() {
+    emailjs.init({ publicKey: 'JhxP377n3oUAfqd8C' });
+    console.log('EmailJS initialised ✅');
+  }
 
   // ─ FORM SUBMIT with EmailJS ─
   function submitForm() {
@@ -3084,78 +3165,94 @@
     const frameVal = document.querySelector('input[name="frame"]:checked')?.value || 'Not selected';
     const sizeVal  = document.getElementById('sizeDisplay').textContent.trim();
 
-    if (!name)  { shakeField('custName'); return; }
+    // Validation
+    if (!name)  { shakeField('custName');  return; }
     if (!phone) { shakeField('custPhone'); return; }
 
+    // Check EmailJS loaded
+    if (typeof emailjs === 'undefined') {
+      alert('Email service not loaded. Please refresh the page and try again.');
+      return;
+    }
+
     const btn = document.querySelector('.btn-submit');
-    const origText = btn.innerHTML;
+    const origHTML = btn.innerHTML;
     btn.innerHTML = '&#9670; &nbsp; Sending... &nbsp; &#9670;';
     btn.disabled = true;
 
-    // Admin email params — "To" is hardcoded in EmailJS template to harinord95@gmail.com
-    // reference_image is base64 JPEG — embed with <img src="{{reference_image}}"> in template
-    const hasImage = uploadedImageBase64.length > 0;
-    const adminParams = {
-      from_name:       name,
-      customer_phone:  phone,
-      customer_email:  email || 'Not provided',
-      painting_size:   sizeVal + ' inches',
-      frame_type:      frameVal,
-      description:     desc || 'No special instructions provided.',
-      reply_to:        email || 'harinord95@gmail.com',
-      reference_image: hasImage ? uploadedImageBase64 : '',
-      image_status:    hasImage ? 'Reference image attached below.' : 'No reference image provided.',
-    };
+    // ── Use pre-compressed email image (already <35KB from upload step) ──
+    // emailImageBase64 was compressed iteratively during upload
+    var imgData = emailImageBase64 || '';
+    console.log('Email image size:', imgData ? Math.round(imgData.length/1024) + 'KB' : '0KB (no image)');
 
-    // Customer thank-you params — "To email" field in template must be {{customer_email}}
-    const customerParams = email ? {
-      customer_email: email,
-      customer_name:  name,
-      customer_phone: phone,
-      painting_size:  sizeVal + ' inches',
-      frame_type:     frameVal,
-      description:    desc || 'None',
-      reply_to:       'harinord95@gmail.com',
-    } : null;
+    (function(imgData) {
 
-    function onSuccess() {
-      btn.innerHTML = origText;
-      btn.disabled = false;
-      document.getElementById('formContent').style.display = 'none';
-      document.getElementById('successMsg').classList.add('active');
-      showToast('\u2736 Commission received! We\'ll call you within 24 hours.');
-    }
+      var hasImage = imgData.length > 0;
 
-    function onError(err) {
-      console.error('EmailJS Error:', JSON.stringify(err));
-      // Show error toast but still proceed
-      showToast('\u2736 Commission received! We\'ll contact you shortly.');
-      btn.innerHTML = origText;
-      btn.disabled = false;
-      document.getElementById('formContent').style.display = 'none';
-      document.getElementById('successMsg').classList.add('active');
-    }
+      // ── Admin email (to harinord95@gmail.com) ──
+      // IMPORTANT: In your EmailJS template, the "To" field must be hardcoded: harinord95@gmail.com
+      var adminParams = {
+        from_name:       name,
+        customer_phone:  phone,
+        customer_email:  email || 'Not provided',
+        painting_size:   sizeVal + ' inches',
+        frame_type:      frameVal,
+        description:     desc || 'No special instructions.',
+        reply_to:        email || 'harinord95@gmail.com',
+        reference_image: imgData,
+        image_status:    hasImage ? 'Reference image attached below.' : 'No reference image provided.',
+      };
 
-    if (typeof emailjs !== 'undefined') {
-      emailjs.send('service_06vnfyh', 'template_tfg9zws', adminParams)
-        .then(function(response) {
-          console.log('Admin email sent OK:', response.status, response.text);
+      // ── Customer thank-you (only if email given) ──
+      // IMPORTANT: In your EmailJS template, the "To" field must be: {{customer_email}}
+      var customerParams = email ? {
+        customer_name:  name,
+        customer_email: email,
+        customer_phone: phone,
+        painting_size:  sizeVal + ' inches',
+        frame_type:     frameVal,
+        description:    desc || 'None',
+        reply_to:       'harinord95@gmail.com',
+      } : null;
+
+      console.log('Sending admin email to harinord95@gmail.com...');
+      console.log('Admin params:', JSON.stringify({...adminParams, reference_image: hasImage ? '[BASE64 IMAGE]' : ''}));
+
+      // Send admin email first
+      return emailjs.send('service_06vnfyh', 'template_tfg9zws', adminParams)
+        .then(function(res) {
+          console.log('✅ Admin email sent! Status:', res.status, res.text);
+          // Then send customer thank-you if email provided
           if (customerParams) {
+            console.log('Sending customer thank-you to:', email);
             return emailjs.send('service_06vnfyh', 'template_aloikg9', customerParams);
           }
+          return Promise.resolve(null);
         })
-        .then(function(response) {
-          if (response) console.log('Customer email sent OK:', response.status, response.text);
-          onSuccess();
+        .then(function(res) {
+          if (res) console.log('✅ Customer email sent! Status:', res.status, res.text);
+          btn.innerHTML = origHTML;
+          btn.disabled = false;
+          document.getElementById('formContent').style.display = 'none';
+          document.getElementById('successMsg').classList.add('active');
+          showToast('\u2736 Commission received! We\'ll call you within 24 hours.');
         })
-        .catch(onError);
-    } else {
-      console.warn('EmailJS not loaded');
-      onSuccess();
-    }
+        .catch(function(err) {
+          console.error('❌ EmailJS FAILED:', JSON.stringify(err));
+          // Show specific error to help debug
+          var errMsg = err && err.text ? err.text : (err && err.status ? 'Error ' + err.status : JSON.stringify(err));
+          alert('Email error: ' + errMsg + '\n\nPlease contact us directly at: orders@guhanarts.in');
+          btn.innerHTML = origHTML;
+          btn.disabled = false;
+          // Still show success screen so customer is not confused
+          document.getElementById('formContent').style.display = 'none';
+          document.getElementById('successMsg').classList.add('active');
+        });
+
+    }(imgData)); // end image IIFE
   }
 
-  // ─ KIT CART DATA ─
+    // ─ KIT CART DATA ─
   const KITS = [
     { key: 'kit-beginner', title: 'Beginner Painting Kit', subtitle: '8×10" Board · 6 Pigments · 5 Gold Sheets', price: 2499 },
     { key: 'kit-advanced', title: 'Advanced Painting Kit', subtitle: '18×24" Board · 16 Pigments · 20 Gold Sheets', price: 6999 }
