@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Guhan Arts — Sacred Tanjore Paintings</title>
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" onload="initEmailJS()"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
@@ -3150,11 +3150,15 @@
   }
 
   // ─ EMAILJS INIT ─
-  // Called by onload on the SDK <script> tag — guarantees SDK is ready
-  function initEmailJS() {
-    emailjs.init({ publicKey: 'JhxP377n3oUAfqd8C' });
-    console.log('EmailJS initialised ✅');
-  }
+  // Use window.onload so both the SDK script AND our script are fully parsed first
+  window.addEventListener('load', function() {
+    if (typeof emailjs !== 'undefined') {
+      emailjs.init({ publicKey: 'JhxP377n3oUAfqd8C' });
+      console.log('EmailJS initialised ✅');
+    } else {
+      console.error('❌ EmailJS SDK not loaded — check your internet connection.');
+    }
+  });
 
   // ─ FORM SUBMIT with EmailJS ─
   function submitForm() {
