@@ -463,7 +463,7 @@
     aspect-ratio: 3/4;
     background: var(--brown-deep);
   }
-  .gallery-item:first-child { grid-row: span 2; aspect-ratio: unset; }
+  .gallery-item:first-child { grid-row: span 1 ; aspect-ratio: unset; }
   .gallery-item:hover {
     border-color: rgba(201,148,42,0.6);
     box-shadow: 0 0 40px rgba(201,148,42,0.2);
@@ -1105,7 +1105,7 @@
     border:3px solid var(--gold);
     box-shadow: 0 0 0 6px rgba(201,148,42,0.07), 0 0 0 7px var(--gold),
                 0 0 0 14px rgba(201,148,42,0.05), 0 0 50px rgba(201,148,42,0.25);
-    width:100%; max-width:280px; aspect-ratio:3/4;
+    width:100%; max-width:400px; aspect-ratio:3/4;
     display:flex; align-items:center; justify-content:center;
     background:linear-gradient(135deg,#2A1505,#1A0F05,#3D1F0A); overflow:hidden;
   }
@@ -1871,6 +1871,278 @@ section {
   .modal-details-panel { text-align: left; overflow-y: auto; -webkit-overflow-scrolling: touch; }
   .modal-story { display: block; }
   }
+
+  /* ══════════════════════════════
+     ENQUIRY POPUP
+  ══════════════════════════════ */
+  .enquiry-backdrop {
+    position: fixed; inset: 0; z-index: 7000;
+    background: rgba(5,3,1,0.92);
+    backdrop-filter: blur(10px);
+    display: flex; align-items: center; justify-content: center;
+    padding: 1.5rem;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.35s ease;
+    overflow-y: auto;
+  }
+  .enquiry-backdrop.open { opacity: 1; pointer-events: all; }
+
+  .enquiry-modal {
+    background: linear-gradient(145deg, #140C04, #0A0703);
+    border: 1px solid rgba(201,148,42,0.35);
+    box-shadow: 0 0 80px rgba(0,0,0,0.9), 0 0 40px rgba(201,148,42,0.08),
+                inset 0 0 60px rgba(201,148,42,0.02);
+    width: 100%; max-width: 540px;
+    position: relative;
+    transform: scale(0.93) translateY(20px);
+    transition: transform 0.4s cubic-bezier(0.34,1.3,0.64,1);
+    overflow: hidden;
+  }
+  .enquiry-backdrop.open .enquiry-modal { transform: scale(1) translateY(0); }
+
+  /* Corner accents */
+  .enquiry-modal::before, .enquiry-modal::after {
+    content: ''; position: absolute;
+    width: 50px; height: 50px;
+    border-color: rgba(201,148,42,0.5); border-style: solid; pointer-events: none; z-index: 1;
+  }
+  .enquiry-modal::before { top:0; left:0; border-width:2px 0 0 2px; }
+  .enquiry-modal::after  { bottom:0; right:0; border-width:0 2px 2px 0; }
+
+  /* Top stripe */
+  .enquiry-stripe {
+    height: 4px;
+    background: linear-gradient(to right, #5C0A0A, #C9942A, #FFD700, #C9942A, #5C0A0A);
+  }
+
+  .enquiry-header {
+    padding: 2rem 2rem 1.2rem;
+    text-align: center;
+    position: relative;
+  }
+  .enquiry-close {
+    position: absolute; top: 1rem; right: 1rem;
+    width: 2rem; height: 2rem;
+    border: 1px solid rgba(201,148,42,0.35);
+    background: transparent;
+    color: var(--gold); font-size: 1rem; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.3s; z-index: 2;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .enquiry-close:hover { background: var(--gold); color: var(--obsidian); }
+
+  .enquiry-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem; letter-spacing: 0.4em;
+    color: var(--gold); text-transform: uppercase;
+    opacity: 0.75; margin-bottom: 0.5rem;
+  }
+  .enquiry-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.4rem; color: var(--gold-light);
+    text-shadow: 0 0 30px rgba(201,148,42,0.3);
+    margin-bottom: 0.3rem;
+  }
+  .enquiry-subtitle {
+    font-size: 0.9rem; color: var(--ivory-dark);
+    opacity: 0.6; font-style: italic;
+  }
+
+  /* Cart summary inside popup */
+  .enquiry-cart-summary {
+    margin: 0 2rem;
+    padding: 0.9rem 1.1rem;
+    background: rgba(201,148,42,0.05);
+    border: 1px solid rgba(201,148,42,0.18);
+    margin-bottom: 1.2rem;
+  }
+  .enquiry-cart-summary-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.55rem; letter-spacing: 0.2em;
+    color: var(--gold); text-transform: uppercase;
+    opacity: 0.7; margin-bottom: 0.6rem; display: block;
+  }
+  .enquiry-cart-item {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 0.3rem 0;
+    border-bottom: 1px solid rgba(201,148,42,0.07);
+    font-size: 0.85rem; color: var(--ivory-dark); opacity: 0.82;
+  }
+  .enquiry-cart-item:last-child { border-bottom: none; }
+  .enquiry-cart-item span:last-child {
+    font-family: 'Cinzel', serif; font-size: 0.78rem; color: var(--gold);
+  }
+  .enquiry-total-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-top: 0.6rem; padding-top: 0.6rem;
+    border-top: 1px solid rgba(201,148,42,0.2);
+  }
+  .enquiry-total-label {
+    font-family: 'Cinzel', serif; font-size: 0.6rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--ivory-dark); opacity: 0.55;
+  }
+  .enquiry-total-amount {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.1rem; color: var(--gold);
+  }
+
+  /* Divider */
+  .enquiry-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(201,148,42,0.3), transparent);
+    margin: 0 2rem 1.4rem;
+  }
+
+  /* Form fields */
+  .enquiry-form { padding: 0 2rem 2rem; display: flex; flex-direction: column; gap: 1rem; }
+
+  .enq-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .enq-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem; letter-spacing: 0.2em;
+    color: var(--gold); text-transform: uppercase; opacity: 0.8;
+  }
+  .enq-label span { color: var(--crimson); }
+  .enq-input {
+    background: rgba(201,148,42,0.04);
+    border: 1px solid rgba(201,148,42,0.2);
+    color: var(--ivory);
+    padding: 0.85rem 1rem;
+    font-family: 'EB Garamond', serif;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s;
+    width: 100%;
+    -webkit-appearance: none;
+  }
+  .enq-input::placeholder { color: rgba(250,243,224,0.3); font-style: italic; }
+  .enq-input:focus {
+    border-color: var(--gold);
+    background: rgba(201,148,42,0.08);
+    box-shadow: 0 0 20px rgba(201,148,42,0.1);
+  }
+  .enq-input.error { border-color: var(--crimson); }
+  textarea.enq-input { resize: vertical; min-height: 90px; }
+
+  /* Submit button */
+  .btn-enq-submit {
+    background: linear-gradient(135deg, var(--gold), var(--gold-light), var(--gold));
+    background-size: 200%;
+    color: var(--obsidian);
+    border: none;
+    padding: 1rem;
+    font-family: 'Cinzel', serif;
+    font-size: 0.78rem; letter-spacing: 0.22em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.4s;
+    box-shadow: 0 0 30px rgba(201,148,42,0.2);
+    width: 100%;
+    margin-top: 0.5rem;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .btn-enq-submit:hover {
+    background-position: right;
+    box-shadow: 0 0 60px rgba(201,148,42,0.45);
+    transform: translateY(-2px);
+  }
+  .btn-enq-submit:disabled { opacity: 0.6; transform: none; cursor: not-allowed; }
+
+  /* Action icons row */
+  .enq-channel-row {
+    display: flex; gap: 0.5rem; align-items: center;
+    justify-content: center; margin-top: 0.8rem;
+  }
+  .enq-channel-badge {
+    display: flex; align-items: center; gap: 0.4rem;
+    font-family: 'Cinzel', serif; font-size: 0.55rem;
+    letter-spacing: 0.1em; color: var(--ivory-dark);
+    opacity: 0.45; text-transform: uppercase;
+  }
+  .enq-channel-dot { width: 5px; height: 5px; border-radius: 50%; }
+
+  /* Success state */
+  .enquiry-success {
+    display: none; text-align: center;
+    padding: 2.5rem 2rem;
+  }
+  .enquiry-success.active { display: block; }
+  .enquiry-success-icon {
+    font-size: 2.5rem; color: var(--gold);
+    margin-bottom: 1rem;
+  }
+  .enquiry-success h3 {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.2rem; color: var(--gold-light);
+    margin-bottom: 0.8rem;
+  }
+  .enquiry-success p {
+    font-size: 0.95rem; color: var(--ivory-dark);
+    opacity: 0.8; line-height: 1.8; font-style: italic;
+  }
+
+  /* Bottom stripe */
+  .enquiry-stripe-bottom {
+    height: 3px;
+    background: linear-gradient(to right, #5C0A0A, #C9942A, #FFD700, #C9942A, #5C0A0A);
+  }
+
+  button.cart-item-remove-custm {
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid rgba(201, 148, 42, 0.35);
+    background: transparent;
+    color: var(--gold);
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+  @media (max-width: 560px) {
+    .enquiry-modal { max-width: 100%; }
+    .enquiry-form { padding: 0 1.2rem 1.5rem; }
+    .enquiry-cart-summary { margin: 0 1.2rem; }
+    .enquiry-header { padding: 1.5rem 1.2rem 1rem; }
+    .enquiry-divider { margin: 0 1.2rem 1.2rem; }
+    .enquiry-title { font-size: 1.1rem; }
+  }
+
+  .bgimage{
+    /* background-image: url(Images/murugar.png); */
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  .bgimage0{
+    background-image: url(Images/1.png);
+  }
+  .bgimage1{
+    background-image: url(Images/murugar.png);
+  }
+  .bgimage2{
+    background-image: url(Images/amman.png);
+  }
+  .bgimage3{
+    background-image: url(Images/sivan.png);
+  }
+  .bgimage4{
+    background-image: url(Images/pilayar.png);
+  }
+  .bgimage5{
+    background-image: url(Images/durga.png);
+  }
+  .bgimage6{
+    background-image: url(Images/perumal.png);
+  }
+.gallery-item.reveal.bgimage.visible .gallery-item-inner {
+    background: none;
+}
 </style>
 </head>
 <body>
@@ -1942,6 +2214,83 @@ section {
     </div>
     <button class="btn-checkout" onclick="checkout()">Proceed to Enquiry &#10022;</button>
     <p class="cart-note">Our artisan will call to confirm your order details</p>
+  </div>
+</div>
+
+<!-- ══════════ ENQUIRY POPUP ══════════ -->
+<div class="enquiry-backdrop" id="enquiryBackdrop" onclick="handleEnquiryBackdrop(event)">
+  <div class="enquiry-modal" id="enquiryModal">
+
+    <div class="enquiry-stripe"></div>
+
+    <div class="enquiry-header">
+      <button class="enquiry-close" onclick="closeEnquiry()">&#10005;</button>
+      <p class="enquiry-label">&#10022; Sacred Order Enquiry &#10022;</p>
+      <h2 class="enquiry-title">Complete Your Order</h2>
+      <p class="enquiry-subtitle">Our artisan will contact you within 24 hours</p>
+    </div>
+
+    <!-- Cart summary -->
+    <div class="enquiry-cart-summary" id="enquiryCartSummary"></div>
+
+    <div class="enquiry-divider"></div>
+
+    <!-- Form -->
+    <div id="enquiryFormWrap">
+      <div class="enquiry-form">
+
+        <div class="enq-group">
+          <label class="enq-label">Your Name <span>*</span></label>
+          <input type="text" class="enq-input" id="enqName" placeholder="Full name…" autocomplete="name">
+        </div>
+
+        <div class="enq-group">
+          <label class="enq-label">Phone Number <span>*</span></label>
+          <input type="tel" class="enq-input" id="enqPhone" placeholder="+91 _____ _____" autocomplete="tel">
+        </div>
+
+        <div class="enq-group">
+          <label class="enq-label">Email Address <span style="color:var(--ivory-dark);opacity:0.45;font-size:0.7rem;letter-spacing:0;text-transform:none;">(optional)</span></label>
+          <input type="email" class="enq-input" id="enqEmail" placeholder="For order updates…" autocomplete="email">
+        </div>
+
+        <div class="enq-group">
+          <label class="enq-label">Special Instructions</label>
+          <textarea class="enq-input" id="enqDesc" rows="3" placeholder="Any special requests, colour preferences, gifting occasion…"></textarea>
+        </div>
+
+        <button class="btn-enq-submit" id="enqSubmitBtn" onclick="submitEnquiry()">
+          &#10022; &nbsp; Send Enquiry &nbsp; &#10022;
+        </button>
+
+        <div class="enq-channel-row">
+          <span class="enq-channel-badge">
+            <span class="enq-channel-dot" style="background:#25D366;"></span>
+            WhatsApp
+          </span>
+          <span class="enq-channel-badge" style="margin:0 0.4rem;opacity:0.25;">+</span>
+          <span class="enq-channel-badge">
+            <span class="enq-channel-dot" style="background:#C9942A;"></span>
+            Email
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Success state -->
+    <div class="enquiry-success" id="enquirySuccess">
+      <div class="enquiry-success-icon">&#10022;</div>
+      <h3>Enquiry Sent!</h3>
+      <p>
+        <em>Om Shanti.</em> Your order enquiry has been received.<br><br>
+        Our master artisan will call you within <strong style="color:var(--gold)">24 hours</strong> to confirm all details and begin your sacred painting journey.
+      </p>
+      <div style="margin-top:1.5rem;font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.25em;color:var(--gold);opacity:0.5;">
+        — GUHAN ARTS · THANJAVUR —
+      </div>
+    </div>
+
+    <div class="enquiry-stripe-bottom"></div>
   </div>
 </div>
 
@@ -2055,54 +2404,9 @@ section {
           <svg class="frame-corner-deco tr" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1,1 L29,1 M1,1 L1,29" stroke="#C9942A" stroke-width="2"/><circle cx="1" cy="1" r="3" fill="#C9942A"/></svg>
           <svg class="frame-corner-deco bl" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1,1 L29,1 M1,1 L1,29" stroke="#C9942A" stroke-width="2"/><circle cx="1" cy="1" r="3" fill="#C9942A"/></svg>
           <svg class="frame-corner-deco br" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1,1 L29,1 M1,1 L1,29" stroke="#C9942A" stroke-width="2"/><circle cx="1" cy="1" r="3" fill="#C9942A"/></svg>
-          <div class="painting-inner">
+          <div class="painting-inner bgimage bgimage0 ">
             <!-- Decorative Deity Silhouette -->
-            <svg viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg" fill="none">
-              <!-- Halo -->
-              <circle cx="100" cy="70" r="55" stroke="#C9942A" stroke-width="1.5" opacity="0.6"/>
-              <circle cx="100" cy="70" r="48" stroke="#C9942A" stroke-width="0.5" stroke-dasharray="3 3" opacity="0.4"/>
-              <circle cx="100" cy="70" r="42" stroke="#C9942A" stroke-width="0.8" opacity="0.3"/>
-              <!-- Crown rays -->
-              <g stroke="#C9942A" stroke-width="1" opacity="0.5">
-                <line x1="100" y1="15" x2="100" y2="5"/>
-                <line x1="75" y1="22" x2="70" y2="13"/>
-                <line x1="125" y1="22" x2="130" y2="13"/>
-                <line x1="55" y1="45" x2="48" y2="38"/>
-                <line x1="145" y1="45" x2="152" y2="38"/>
-              </g>
-              <!-- Crown -->
-              <path d="M78,28 L82,18 L86,26 L90,14 L94,24 L100,12 L106,24 L110,14 L114,26 L118,18 L122,28 Z" fill="#C9942A" opacity="0.7"/>
-              <!-- Head -->
-              <ellipse cx="100" cy="68" rx="22" ry="26" fill="#C9942A" opacity="0.25"/>
-              <ellipse cx="100" cy="68" rx="22" ry="26" stroke="#C9942A" stroke-width="1" opacity="0.6"/>
-              <!-- Face features -->
-              <ellipse cx="93" cy="65" rx="3" ry="3.5" fill="#C9942A" opacity="0.5"/>
-              <ellipse cx="107" cy="65" rx="3" ry="3.5" fill="#C9942A" opacity="0.5"/>
-              <path d="M96,74 Q100,78 104,74" stroke="#C9942A" stroke-width="1" opacity="0.5"/>
-              <!-- Body -->
-              <path d="M78,90 Q70,120 65,160 L135,160 Q130,120 122,90 Z" fill="#C9942A" opacity="0.12" stroke="#C9942A" stroke-width="0.8"/>
-              <!-- Arms -->
-              <path d="M78,105 Q55,95 45,110 Q50,125 65,120" stroke="#C9942A" stroke-width="1.5" fill="none" opacity="0.5"/>
-              <path d="M122,105 Q145,95 155,110 Q150,125 135,120" stroke="#C9942A" stroke-width="1.5" fill="none" opacity="0.5"/>
-              <!-- Lower hands items -->
-              <circle cx="42" cy="112" r="6" stroke="#C9942A" stroke-width="1" opacity="0.5"/>
-              <path d="M155,108 L162,112 L155,116 Z" fill="#C9942A" opacity="0.4"/>
-              <!-- Lotus seat -->
-              <path d="M65,165 Q100,155 135,165 Q120,200 100,200 Q80,200 65,165 Z" fill="#C9942A" opacity="0.1" stroke="#C9942A" stroke-width="1"/>
-              <path d="M70,165 Q100,158 130,165 Q115,185 100,185 Q85,185 70,165 Z" stroke="#C9942A" stroke-width="0.5" opacity="0.3" fill="none"/>
-              <!-- Petal details -->
-              <g stroke="#C9942A" stroke-width="0.5" opacity="0.3">
-                <path d="M75,170 Q80,160 85,170"/><path d="M90,167 Q95,157 100,167"/>
-                <path d="M105,167 Q110,157 115,167"/><path d="M120,170 Q125,160 130,170"/>
-              </g>
-              <!-- Jewelry dots -->
-              <circle cx="100" cy="90" r="2.5" fill="#C9942A" opacity="0.7"/>
-              <circle cx="88" cy="93" r="1.5" fill="#C9942A" opacity="0.5"/>
-              <circle cx="112" cy="93" r="1.5" fill="#C9942A" opacity="0.5"/>
-              <!-- Border decorations -->
-              <rect x="10" y="10" width="180" height="260" stroke="#C9942A" stroke-width="0.5" fill="none" opacity="0.2"/>
-              <rect x="15" y="15" width="170" height="250" stroke="#C9942A" stroke-width="0.3" fill="none" opacity="0.15" stroke-dasharray="4 4"/>
-            </svg>
+            
           </div>
           <div class="painting-caption">
             <p>Shri Lakshmi Devi · 24K Gold Leaf · Kundan Work</p>
@@ -2145,10 +2449,10 @@ section {
     <p class="section-desc reveal">Each piece is a universe unto itself — a devotional masterwork wrought in gold, gemstone, and prayer.</p>
 
     <div class="gallery-grid">
-      <!-- Item 1 - Large -->
-      <div class="gallery-item reveal" onclick="openModal(0)">
+      <!-- Item 1  -->
+      <div class="gallery-item reveal bgimage bgimage1" onclick="openModal(0)">
         <div class="gallery-item-inner">
-          <svg viewBox="0 0 160 220" xmlns="http://www.w3.org/2000/svg" fill="none">
+          <!-- <svg viewBox="0 0 160 220" xmlns="http://www.w3.org/2000/svg" fill="none">
             <rect width="160" height="220" fill="#1A0F05"/>
             <circle cx="80" cy="80" r="50" stroke="#C9942A" stroke-width="1.5" opacity="0.5"/>
             <circle cx="80" cy="80" r="42" stroke="#C9942A" stroke-width="0.5" opacity="0.3"/>
@@ -2166,18 +2470,18 @@ section {
               <circle cx="5" cy="5" r="3"/><circle cx="155" cy="5" r="3"/>
               <circle cx="5" cy="215" r="3"/><circle cx="155" cy="215" r="3"/>
             </g>
-          </svg>
+          </svg> -->
         </div>
         <div class="gallery-overlay">
-          <h4>Shri Balaji · Tirupati</h4>
+          <h4>Traditional Thiruchendur Murugan</h4>
           <p>Gold Leaf · Rubies · 24"×32"</p>
         </div>
       </div>
 
       <!-- Item 2 -->
-      <div class="gallery-item reveal" onclick="openModal(1)">
+      <div class="gallery-item reveal bgimage bgimage2" onclick="openModal(1)">
         <div class="gallery-item-inner">
-          <svg viewBox="0 0 140 180" xmlns="http://www.w3.org/2000/svg" fill="none">
+          <!-- <svg viewBox="0 0 140 180" xmlns="http://www.w3.org/2000/svg" fill="none">
             <rect width="140" height="180" fill="#200C03"/>
             <circle cx="70" cy="65" r="40" stroke="#E8B84B" stroke-width="1.2" opacity="0.4"/>
             <ellipse cx="70" cy="63" rx="17" ry="20" fill="#E8B84B" opacity="0.15" stroke="#E8B84B" stroke-width="1"/>
@@ -2190,23 +2494,23 @@ section {
               <circle cx="70" cy="82" r="2.5"/><circle cx="60" cy="86" r="1.5"/><circle cx="80" cy="86" r="1.5"/>
             </g>
             <rect x="4" y="4" width="132" height="172" stroke="#E8B84B" stroke-width="0.8" fill="none" opacity="0.2"/>
-          </svg>
+          </svg> -->
         </div>
         <div class="gallery-overlay">
-          <h4>Goddess Saraswati</h4>
+          <h4>Angala Amman</h4>
           <p>Gold Leaf · Emeralds · 18"×24"</p>
         </div>
       </div>
 
       <!-- Item 3 -->
-      <div class="gallery-item reveal" onclick="openModal(2)">
+      <div class="gallery-item reveal bgimage bgimage3" onclick="openModal(2)">
         <div class="gallery-item-inner">
-          <svg viewBox="0 0 140 180" xmlns="http://www.w3.org/2000/svg" fill="none">
+          <!-- <svg viewBox="0 0 140 180" xmlns="http://www.w3.org/2000/svg" fill="none">
             <rect width="140" height="180" fill="#160A02"/>
             <circle cx="70" cy="60" r="38" stroke="#FFD700" stroke-width="1" opacity="0.4"/>
             <circle cx="70" cy="60" r="32" stroke="#FFD700" stroke-width="0.5" stroke-dasharray="2 3" opacity="0.3"/>
             <ellipse cx="70" cy="58" rx="16" ry="19" fill="#FFD700" opacity="0.12" stroke="#FFD700" stroke-width="1"/>
-            <!-- 4 arms deity -->
+            
             <path d="M54,75 Q44,65 36,72 Q38,82 50,82" stroke="#FFD700" stroke-width="1.3" opacity="0.4"/>
             <path d="M86,75 Q96,65 104,72 Q102,82 90,82" stroke="#FFD700" stroke-width="1.3" opacity="0.4"/>
             <path d="M54,80 Q42,92 38,100" stroke="#FFD700" stroke-width="1.2" opacity="0.35"/>
@@ -2217,22 +2521,22 @@ section {
               <circle cx="34" cy="70" r="4"/><circle cx="106" cy="70" r="4"/><circle cx="36" cy="102" r="3"/><circle cx="104" cy="102" r="3"/>
             </g>
             <rect x="4" y="4" width="132" height="172" stroke="#FFD700" stroke-width="0.8" fill="none" opacity="0.2"/>
-          </svg>
+          </svg> -->
         </div>
         <div class="gallery-overlay">
-          <h4>Lord Vishnu · Chaturbhuja</h4>
+          <h4>Shiva Parvati In Rishaba Vahanam</h4>
           <p>Gold Leaf · Sapphires · 20"×28"</p>
         </div>
       </div>
 
       <!-- Item 4 -->
-      <div class="gallery-item reveal" onclick="openModal(3)">
+      <div class="gallery-item reveal bgimage bgimage4" onclick="openModal(3)">
         <div class="gallery-item-inner">
-          <svg viewBox="0 0 140 180" xmlns="http://www.w3.org/2000/svg" fill="none">
+          <!-- <svg viewBox="0 0 140 180" xmlns="http://www.w3.org/2000/svg" fill="none">
             <rect width="140" height="180" fill="#1E0E04"/>
             <circle cx="70" cy="62" r="38" stroke="#C9942A" stroke-width="1" opacity="0.45"/>
             <ellipse cx="70" cy="60" rx="17" ry="21" fill="#C9942A" opacity="0.15" stroke="#C9942A" stroke-width="1"/>
-            <!-- Elephant head hints for Ganesha -->
+            
             <path d="M55,68 Q48,72 42,80 Q38,90 44,95" stroke="#C9942A" stroke-width="2" fill="none" opacity="0.5"/>
             <path d="M55,68 Q62,78 58,90 Q55,95 50,92" stroke="#C9942A" stroke-width="1.5" fill="none" opacity="0.4"/>
             <path d="M85,68 Q92,72 98,80 Q102,90 96,95" stroke="#C9942A" stroke-width="2" fill="none" opacity="0.5"/>
@@ -2244,7 +2548,7 @@ section {
               <circle cx="60" cy="55" r="2.5"/><circle cx="80" cy="55" r="2.5"/>
             </g>
             <rect x="4" y="4" width="132" height="172" stroke="#C9942A" stroke-width="0.8" fill="none" opacity="0.2"/>
-          </svg>
+          </svg> -->
         </div>
         <div class="gallery-overlay">
           <h4>Shri Ganesha · Vakratunda</h4>
@@ -2253,9 +2557,9 @@ section {
       </div>
 
       <!-- Item 5 -->
-      <div class="gallery-item reveal" onclick="openModal(4)">
+      <div class="gallery-item reveal bgimage bgimage5" onclick="openModal(4)">
         <div class="gallery-item-inner">
-          <svg viewBox="0 0 140 180" xmlns="http://www.w3.org/2000/svg" fill="none">
+          <!-- <svg viewBox="0 0 140 180" xmlns="http://www.w3.org/2000/svg" fill="none">
             <rect width="140" height="180" fill="#0F0804"/>
             <circle cx="70" cy="60" r="42" stroke="#E8B84B" stroke-width="1" opacity="0.3"/>
             <circle cx="70" cy="60" r="35" stroke="#E8B84B" stroke-width="0.5" opacity="0.25"/>
@@ -2269,10 +2573,35 @@ section {
             <circle cx="114" cy="87" r="5" stroke="#E8B84B" stroke-width="1" opacity="0.45"/>
             <path d="M44,150 Q70,142 96,150 Q84,165 70,168 Q56,165 44,150 Z" fill="#E8B84B" opacity="0.08" stroke="#E8B84B" stroke-width="0.8"/>
             <rect x="4" y="4" width="132" height="172" stroke="#E8B84B" stroke-width="0.8" fill="none" opacity="0.2"/>
-          </svg>
+          </svg> -->
         </div>
         <div class="gallery-overlay">
           <h4>Goddess Durga · Ashtabhuja</h4>
+          <p>Gold Leaf · Diamonds · 24"×36"</p>
+        </div>
+      </div>
+
+      <!-- Item 6 -->
+      <div class="gallery-item reveal bgimage bgimage6" onclick="openModal(5)">
+        <div class="gallery-item-inner">
+          <!-- <svg viewBox="0 0 140 180" xmlns="http://www.w3.org/2000/svg" fill="none">
+            <rect width="140" height="180" fill="#0F0804"/>
+            <circle cx="70" cy="60" r="42" stroke="#E8B84B" stroke-width="1" opacity="0.3"/>
+            <circle cx="70" cy="60" r="35" stroke="#E8B84B" stroke-width="0.5" opacity="0.25"/>
+            <ellipse cx="70" cy="58" rx="18" ry="22" fill="#E8B84B" opacity="0.12" stroke="#E8B84B" stroke-width="1"/>
+            <path d="M52,80 Q44,100 42,148 L98,148 Q96,100 88,80 Z" fill="#E8B84B" opacity="0.07" stroke="#E8B84B" stroke-width="0.8"/>
+            <path d="M52,80 Q34,72 28,85 Q30,100 44,100" stroke="#E8B84B" stroke-width="1.5" opacity="0.4"/>
+            <path d="M52,80 Q34,88 28,100" stroke="#E8B84B" stroke-width="1.2" opacity="0.3"/>
+            <path d="M88,80 Q106,72 112,85 Q110,100 96,100" stroke="#E8B84B" stroke-width="1.5" opacity="0.4"/>
+            <path d="M88,80 Q106,88 112,100" stroke="#E8B84B" stroke-width="1.2" opacity="0.3"/>
+            <circle cx="26" cy="87" r="5" stroke="#E8B84B" stroke-width="1" opacity="0.45"/>
+            <circle cx="114" cy="87" r="5" stroke="#E8B84B" stroke-width="1" opacity="0.45"/>
+            <path d="M44,150 Q70,142 96,150 Q84,165 70,168 Q56,165 44,150 Z" fill="#E8B84B" opacity="0.08" stroke="#E8B84B" stroke-width="0.8"/>
+            <rect x="4" y="4" width="132" height="172" stroke="#E8B84B" stroke-width="0.8" fill="none" opacity="0.2"/>
+          </svg> -->
+        </div>
+        <div class="gallery-overlay">
+          <h4>Tirupathi Perumal</h4>
           <p>Gold Leaf · Diamonds · 24"×36"</p>
         </div>
       </div>
@@ -2849,9 +3178,9 @@ section {
     </div>
     <div class="footer-col footer-contact">
       <h4>Sacred Atelier</h4>
-      <p>12, Darbha Agraharam<br>Thanjavur – 613 001<br>Tamil Nadu, India</p>
-      <p><a href="tel:+914362222333">+91 4362 222 333</a></p>
-      <p><a href="/cdn-cgi/l/email-protection#a7c8d5c3c2d5d4e7c0d2cfc6c9c6d5d3d489cec9"><span class="__cf_email__" data-cfemail="167964727364655671637e777877646265387f78">[email&#160;protected]</span></a></p>
+      <p>No:87, 5th cross st<br>Audco nagar kattupakkam ch – 613 001<br>Tamil Nadu, India</p>
+      <p><a href="tel:+917904743502">+91 790 4743 502</a></p>
+      <p><a href="/cdn-cgi/l/email-protection#a7c8d5c3c2d5d4e7c0d2cfc6c9c6d5d3d489cec9"><span class="__cf_email__" data-cfemail="167964727364655671637e777877646265387f78">harinord95@gmail.com</span></a></p>
       <p style="margin-top:1rem; opacity:0.5; font-size:0.8rem;">Mon–Sat · 9 AM – 6 PM IST</p>
     </div>
   </div>
@@ -2868,10 +3197,10 @@ section {
   const PAINTINGS = [
     {
       label: 'The Divine Protector',
-      title: 'Shri Balaji',
-      subtitle: 'Venkateshwara · Lord of Tirupati',
+      title: 'Traditional Thiruchendur Murugan',
+      subtitle: 'Murugan · Lord of Thiruchendur',
       badge: '24K Gold Leaf · Ruby Inlay · Teak Frame',
-      story: 'Shri Venkateswara, the resplendent lord of the Seven Hills of Tirumala, is depicted here in his full divine glory — adorned with the celestial crown (Kireedam), the sacred conch Panchajanya, and the discus Sudarshana. This masterwork took 72 days to complete, with gold foil pressed by hand across 47 individual sections, and 18 natural rubies hand-set to form his sacred garland. Commissioned for the sanctum of your home, this painting is believed to bring divine protection and abundant prosperity.',
+      story: 'Shri Murugan, the resplendent lord of the Seven Hills of Tirumala, is depicted here in his full divine glory — adorned with the celestial crown (Kireedam), the sacred conch Panchajanya, and the discus Sudarshana. This masterwork took 72 days to complete, with gold foil pressed by hand across 47 individual sections, and 18 natural rubies hand-set to form his sacred garland. Commissioned for the sanctum of your home, this painting is believed to bring divine protection and abundant prosperity.',
       specs: [
         { label: 'Medium', val: 'Wood & Chalk Paste' },
         { label: 'Gold', val: '24K Gold Leaf' },
@@ -2882,7 +3211,7 @@ section {
       sizes: ['12×16"', '18×24"', '24×32"', '30×40"'],
       prices: [18500, 32000, 55000, 85000],
       origPrices: [22000, 38000, 65000, 100000],
-      svgId: 'svg-balaji'
+      svgId: 'svg-murugar'
     },
     {
       label: 'Goddess of Learning',
@@ -2900,7 +3229,7 @@ section {
       sizes: ['12×16"', '18×24"', '24×32"'],
       prices: [16500, 28000, 48000],
       origPrices: [19500, 33000, 56000],
-      svgId: 'svg-saraswati'
+      svgId: 'svg-amman'
     },
     {
       label: 'The Preserver of Worlds',
@@ -2918,7 +3247,7 @@ section {
       sizes: ['12×16"', '18×24"', '24×32"', '30×40"'],
       prices: [17500, 30000, 52000, 80000],
       origPrices: [21000, 36000, 62000, 95000],
-      svgId: 'svg-vishnu'
+      svgId: 'svg-sivan'
     },
     {
       label: 'The Auspicious Remover',
@@ -2956,102 +3285,35 @@ section {
       prices: [42000, 72000, 115000],
       origPrices: [50000, 85000, 135000],
       svgId: 'svg-durga'
+    },
+    {
+      label: 'The Supreme Mother',
+      title: 'Goddess Durga',
+      subtitle: 'Ashtabhuja · The Eight-Armed Destroyer',
+      badge: '24K Gold Leaf · Diamond Inlay · Gold-Gilded Frame',
+      story: 'Maa Durga — the invincible warrior goddess who vanquished the demon Mahishasura — is rendered here in her full Ashtabhuja (eight-armed) form, astride her celestial lion. Each of her eight arms carries a divine weapon: the trident, sword, bow, thunderbolt, lotus, conch, discus, and serpent. This is among our most complex works, with gold foil applied across 89 sections over 84 days. Six natural rose-cut diamonds are set at her third eye and crown. This painting is placed in the home to invoke protection, courage, and the fierce grace of the Divine Mother.',
+      specs: [
+        { label: 'Medium', val: 'Wood & Chalk Paste' },
+        { label: 'Gold', val: '24K Gold Leaf' },
+        { label: 'Gemstones', val: 'Rose-Cut Diamonds' },
+        { label: 'Time', val: '84 Days' },
+        // { label: 'Origin', val: 'Thanjavur, TN' },
+        // { label: 'Certificate', val: 'Included' }
+      ],
+      sizes: ['18×24"', '24×32"', '30×40"'],
+      prices: [42000, 72000, 115000],
+      origPrices: [50000, 85000, 135000],
+      svgId: 'svg-perumal'
     }
   ];
   // SVG definitions for each painting (thumbnail in modal)
   const SVGS = {
-    'svg-balaji': `<svg viewBox="0 0 160 220" xmlns="http://www.w3.org/2000/svg" fill="none">
-      <rect width="160" height="220" fill="#1A0F05"/>
-      <circle cx="80" cy="80" r="55" stroke="#C9942A" stroke-width="1.5" opacity="0.55"/>
-      <circle cx="80" cy="80" r="46" stroke="#C9942A" stroke-width="0.6" stroke-dasharray="3 3" opacity="0.35"/>
-      <circle cx="80" cy="80" r="38" stroke="#C9942A" stroke-width="0.5" opacity="0.2"/>
-      <ellipse cx="80" cy="78" rx="21" ry="25" fill="#C9942A" opacity="0.18" stroke="#C9942A" stroke-width="1"/>
-      <path d="M60,100 Q50,130 48,175 L112,175 Q110,130 100,100 Z" fill="#C9942A" opacity="0.1" stroke="#C9942A" stroke-width="0.8"/>
-      <path d="M60,100 Q40,90 34,106" stroke="#C9942A" stroke-width="1.3" opacity="0.4"/>
-      <path d="M100,100 Q120,90 126,106" stroke="#C9942A" stroke-width="1.3" opacity="0.4"/>
-      <path d="M55,178 Q80,168 105,178 Q90,198 80,200 Q70,198 55,178 Z" fill="#C9942A" opacity="0.1" stroke="#C9942A" stroke-width="1"/>
-      <path d="M64,78 Q68,88 80,90 Q92,88 96,78" stroke="#C9942A" stroke-width="0.9" opacity="0.45"/>
-      <path d="M57,65 Q80,55 103,65" stroke="#C9942A" stroke-width="0.8" opacity="0.32"/>
-      <path d="M60,54 L80,46 L100,54" stroke="#C9942A" stroke-width="1" fill="none" opacity="0.55"/>
-      <g fill="#C9942A" opacity="0.65"><circle cx="70" cy="50" r="2.5"/><circle cx="80" cy="46" r="3"/><circle cx="90" cy="50" r="2.5"/></g>
-      <g fill="#C9942A" opacity="0.55"><circle cx="80" cy="100" r="2.5"/><circle cx="70" cy="104" r="1.8"/><circle cx="90" cy="104" r="1.8"/></g>
-      <rect x="5" y="5" width="150" height="210" stroke="#C9942A" stroke-width="1" fill="none" opacity="0.28"/>
-      <rect x="10" y="10" width="140" height="200" stroke="#C9942A" stroke-width="0.4" fill="none" opacity="0.15" stroke-dasharray="4 4"/>
-      <g fill="#C9942A" opacity="0.65"><circle cx="5" cy="5" r="3"/><circle cx="155" cy="5" r="3"/><circle cx="5" cy="215" r="3"/><circle cx="155" cy="215" r="3"/></g>
-    </svg>`,
-    'svg-saraswati': `<svg viewBox="0 0 160 210" xmlns="http://www.w3.org/2000/svg" fill="none">
-      <rect width="160" height="210" fill="#1C0C03"/>
-      <circle cx="80" cy="70" r="48" stroke="#E8B84B" stroke-width="1.3" opacity="0.45"/>
-      <circle cx="80" cy="70" r="40" stroke="#E8B84B" stroke-width="0.5" stroke-dasharray="3 3" opacity="0.28"/>
-      <ellipse cx="80" cy="68" rx="19" ry="23" fill="#E8B84B" opacity="0.15" stroke="#E8B84B" stroke-width="1"/>
-      <path d="M60,90 Q45,115 44,165 L116,165 Q115,115 100,90 Z" fill="#E8B84B" opacity="0.08" stroke="#E8B84B" stroke-width="0.8"/>
-      <path d="M60,90 Q38,80 32,96" stroke="#E8B84B" stroke-width="1.3" opacity="0.38"/>
-      <path d="M100,90 Q122,80 128,96" stroke="#E8B84B" stroke-width="1.3" opacity="0.38"/>
-      <path d="M60,90 Q38,100 33,112" stroke="#E8B84B" stroke-width="1.1" opacity="0.28"/>
-      <path d="M100,90 Q122,100 127,112" stroke="#E8B84B" stroke-width="1.1" opacity="0.28"/>
-      <path d="M26,98 Q28,110 36,108" stroke="#E8B84B" stroke-width="3" opacity="0.3" stroke-linecap="round"/>
-      <path d="M134,98 Q132,110 124,108" stroke="#E8B84B" stroke-width="3" opacity="0.3" stroke-linecap="round"/>
-      <path d="M48,168 Q80,160 112,168 Q98,188 80,190 Q62,188 48,168 Z" fill="#E8B84B" opacity="0.08" stroke="#E8B84B" stroke-width="0.8"/>
-      <path d="M66,63 Q72,74 80,76 Q88,74 94,63" stroke="#E8B84B" stroke-width="0.9" opacity="0.42"/>
-      <g fill="#E8B84B" opacity="0.55"><circle cx="80" cy="90" r="2.5"/><circle cx="68" cy="94" r="1.8"/><circle cx="92" cy="94" r="1.8"/></g>
-      <path d="M62,54 L80,46 L98,54" fill="#E8B84B" opacity="0.45" stroke="#E8B84B" stroke-width="0.8"/>
-      <rect x="5" y="5" width="150" height="200" stroke="#E8B84B" stroke-width="0.9" fill="none" opacity="0.25"/>
-      <g fill="#E8B84B" opacity="0.6"><circle cx="5" cy="5" r="3"/><circle cx="155" cy="5" r="3"/><circle cx="5" cy="205" r="3"/><circle cx="155" cy="205" r="3"/></g>
-    </svg>`,
-    'svg-vishnu': `<svg viewBox="0 0 160 210" xmlns="http://www.w3.org/2000/svg" fill="none">
-      <rect width="160" height="210" fill="#0E0802"/>
-      <circle cx="80" cy="68" r="46" stroke="#FFD700" stroke-width="1.2" opacity="0.42"/>
-      <circle cx="80" cy="68" r="38" stroke="#FFD700" stroke-width="0.5" stroke-dasharray="2 3" opacity="0.28"/>
-      <ellipse cx="80" cy="66" rx="18" ry="22" fill="#FFD700" opacity="0.12" stroke="#FFD700" stroke-width="1"/>
-      <path d="M60,87 Q47,75 37,83 Q40,96 55,95" stroke="#FFD700" stroke-width="1.4" opacity="0.42"/>
-      <path d="M100,87 Q113,75 123,83 Q120,96 105,95" stroke="#FFD700" stroke-width="1.4" opacity="0.42"/>
-      <path d="M60,92 Q44,106 40,118" stroke="#FFD700" stroke-width="1.2" opacity="0.32"/>
-      <path d="M100,92 Q116,106 120,118" stroke="#FFD700" stroke-width="1.2" opacity="0.32"/>
-      <path d="M60,87 Q46,112 44,165 L116,165 Q114,112 100,87 Z" fill="#FFD700" opacity="0.07" stroke="#FFD700" stroke-width="0.8"/>
-      <path d="M46,167 Q80,158 114,167 Q100,188 80,192 Q60,188 46,167 Z" fill="#FFD700" opacity="0.08" stroke="#FFD700" stroke-width="0.8"/>
-      <g fill="#FFD700" opacity="0.55"><circle cx="33" cy="80" r="5"/><circle cx="127" cy="80" r="5"/><circle cx="37" cy="118" r="4"/><circle cx="123" cy="118" r="4"/></g>
-      <path d="M64,58 L80,50 L96,58" fill="#FFD700" opacity="0.5" stroke="#FFD700" stroke-width="0.9"/>
-      <g fill="#FFD700" opacity="0.6"><circle cx="68" cy="54" r="2.5"/><circle cx="80" cy="50" r="3"/><circle cx="92" cy="54" r="2.5"/></g>
-      <rect x="5" y="5" width="150" height="200" stroke="#FFD700" stroke-width="0.9" fill="none" opacity="0.22"/>
-      <g fill="#FFD700" opacity="0.6"><circle cx="5" cy="5" r="3"/><circle cx="155" cy="5" r="3"/><circle cx="5" cy="205" r="3"/><circle cx="155" cy="205" r="3"/></g>
-    </svg>`,
-    'svg-ganesha': `<svg viewBox="0 0 160 210" xmlns="http://www.w3.org/2000/svg" fill="none">
-      <rect width="160" height="210" fill="#180C03"/>
-      <circle cx="80" cy="70" r="46" stroke="#C9942A" stroke-width="1.2" opacity="0.48"/>
-      <circle cx="80" cy="70" r="38" stroke="#C9942A" stroke-width="0.5" opacity="0.28"/>
-      <ellipse cx="80" cy="68" rx="20" ry="24" fill="#C9942A" opacity="0.16" stroke="#C9942A" stroke-width="1"/>
-      <path d="M62,78 Q53,84 46,95 Q42,108 50,115" stroke="#C9942A" stroke-width="2.2" fill="none" opacity="0.55"/>
-      <path d="M62,78 Q68,90 64,106 Q60,114 53,110" stroke="#C9942A" stroke-width="1.7" fill="none" opacity="0.42"/>
-      <path d="M98,78 Q107,84 114,95 Q118,108 110,115" stroke="#C9942A" stroke-width="2.2" fill="none" opacity="0.55"/>
-      <path d="M62,88 Q80,82 98,88" stroke="#C9942A" stroke-width="1.1" opacity="0.42"/>
-      <ellipse cx="80" cy="115" rx="32" ry="22" fill="#C9942A" opacity="0.08" stroke="#C9942A" stroke-width="0.9"/>
-      <path d="M48,134 Q80,124 112,134 Q98,162 80,165 Q62,162 48,134 Z" fill="#C9942A" opacity="0.08" stroke="#C9942A" stroke-width="0.8"/>
-      <path d="M60,57 L80,50 L100,57" fill="#C9942A" opacity="0.45" stroke="#C9942A" stroke-width="0.9"/>
-      <g fill="#C9942A" opacity="0.65"><circle cx="68" cy="53" r="2.5"/><circle cx="80" cy="49" r="3.5"/><circle cx="92" cy="53" r="2.5"/></g>
-      <g fill="#C9942A" opacity="0.5"><circle cx="80" cy="115" r="2.5"/><circle cx="66" cy="120" r="1.8"/><circle cx="94" cy="120" r="1.8"/></g>
-      <rect x="5" y="5" width="150" height="200" stroke="#C9942A" stroke-width="0.9" fill="none" opacity="0.25"/>
-      <g fill="#C9942A" opacity="0.62"><circle cx="5" cy="5" r="3"/><circle cx="155" cy="5" r="3"/><circle cx="5" cy="205" r="3"/><circle cx="155" cy="205" r="3"/></g>
-    </svg>`,
-    'svg-durga': `<svg viewBox="0 0 160 220" xmlns="http://www.w3.org/2000/svg" fill="none">
-      <rect width="160" height="220" fill="#0D0803"/>
-      <circle cx="80" cy="68" r="50" stroke="#E8B84B" stroke-width="1.2" opacity="0.38"/>
-      <circle cx="80" cy="68" r="42" stroke="#E8B84B" stroke-width="0.5" opacity="0.22"/>
-      <ellipse cx="80" cy="66" rx="20" ry="25" fill="#E8B84B" opacity="0.13" stroke="#E8B84B" stroke-width="1"/>
-      <path d="M60,90 Q44,80 36,94 Q38,108 54,108" stroke="#E8B84B" stroke-width="1.4" opacity="0.42"/>
-      <path d="M100,90 Q116,80 124,94 Q122,108 106,108" stroke="#E8B84B" stroke-width="1.4" opacity="0.42"/>
-      <path d="M60,90 Q40,80 30,90" stroke="#E8B84B" stroke-width="1.2" opacity="0.32"/>
-      <path d="M60,90 Q40,102 32,112" stroke="#E8B84B" stroke-width="1.1" opacity="0.28"/>
-      <path d="M100,90 Q120,80 130,90" stroke="#E8B84B" stroke-width="1.2" opacity="0.32"/>
-      <path d="M100,90 Q120,102 128,112" stroke="#E8B84B" stroke-width="1.1" opacity="0.28"/>
-      <path d="M60,90 Q48,118 46,175 L114,175 Q112,118 100,90 Z" fill="#E8B84B" opacity="0.07" stroke="#E8B84B" stroke-width="0.8"/>
-      <g fill="#E8B84B" opacity="0.52"><circle cx="29" cy="88" r="4.5"/><circle cx="131" cy="88" r="4.5"/><circle cx="29" cy="112" r="3.5"/><circle cx="131" cy="112" r="3.5"/><circle cx="32" cy="90" r="5" opacity="0.2"/></g>
-      <path d="M52,178 Q80,170 108,178 Q96,198 80,202 Q64,198 52,178 Z" fill="#E8B84B" opacity="0.08" stroke="#E8B84B" stroke-width="0.8"/>
-      <path d="M63,57 L80,48 L97,57" fill="#E8B84B" opacity="0.48" stroke="#E8B84B" stroke-width="0.9"/>
-      <g fill="#E8B84B" opacity="0.65"><circle cx="68" cy="52" r="2.5"/><circle cx="80" cy="47" r="3.5"/><circle cx="92" cy="52" r="2.5"/></g>
-      <circle cx="80" cy="58" r="4" fill="#E8B84B" opacity="0.35"/>
-      <rect x="5" y="5" width="150" height="210" stroke="#E8B84B" stroke-width="0.9" fill="none" opacity="0.22"/>
-      <g fill="#E8B84B" opacity="0.6"><circle cx="5" cy="5" r="3"/><circle cx="155" cy="5" r="3"/><circle cx="5" cy="215" r="3"/><circle cx="155" cy="215" r="3"/></g>
-    </svg>`
+    'svg-murugar': `<img class="bgimage" src="Images/murugar.png" alt="murugar">`,
+    'svg-amman': `<img class="bgimage" src="Images/amman.png" alt="amman">`,
+    'svg-sivan': `<img class="bgimage" src="Images/sivan.png" alt="sivan">`,
+    'svg-durga': `<img class="bgimage" src="Images/durga.png" alt="durga">`,
+    'svg-ganesha': `<img class="bgimage" src="Images/pilayar.png" alt="pilaiyar">`,
+    'svg-perumal': `<img class="bgimage" src="Images/perumal.png" alt="perumal">`,
   };
 
   // ═══════════════════════════════════════
@@ -3076,8 +3338,15 @@ section {
     // Inject SVG
     const frame = document.getElementById('modalFrame');
     // Remove old svg if any (keep jewels)
-    frame.querySelectorAll('svg').forEach(s => s.remove());
-    frame.insertAdjacentHTML('beforeend', SVGS[p.svgId]);
+    // frame.querySelectorAll('svg').forEach(s => s.remove());
+    // frame.insertAdjacentHTML('beforeend', SVGS[p.svgId]);
+
+    frame.innerHTML =
+  '<div class="jewel tl"></div>' +
+  '<div class="jewel tr"></div>' +
+  '<div class="jewel bl"></div>' +
+  '<div class="jewel br"></div>' +
+  SVGS[p.svgId];  // complete replace — only ever 1 SVG
 
     // Badge
     document.getElementById('modalBadge').textContent = p.badge;
@@ -3222,7 +3491,7 @@ section {
             '<div class="cart-item-sub">' + subLine + '</div>' +
             '<div class="cart-item-price">' + formatPrice(c.price) + '</div>' +
           '</div>' +
-          '<button class="cart-item-remove" onclick="removeFromCart(' + i + ')" title="Remove">&times;</button>' +
+          '<button class="cart-item-remove-custm" onclick="removeFromCart(' + i + ')" title="Remove">&times;</button>' +
         '</div>';
       }).join('');
     }
@@ -3245,15 +3514,158 @@ section {
     document.getElementById('cartOverlay').classList.remove('open');
   }
 
+  // ══════════════════════════════════════════
+  //  ENQUIRY POPUP
+  // ══════════════════════════════════════════
+  var WHATSAPP_NUMBER = '917904743502'; // country code + number, no +
+
   function checkout() {
     if (cart.length === 0) return;
-    const summary = cart.map(c => c.title + ' ' + c.size + ' @ ' + formatPrice(c.price)).join(', ');
     closeCart();
-    document.querySelector('#commission').scrollIntoView({ behavior: 'smooth' });
-    setTimeout(() => {
-      document.getElementById('custDesc').value = 'Cart order: ' + summary;
-      showToast('✶ Cart transferred. Please fill your details to complete the enquiry.');
-    }, 800);
+    setTimeout(openEnquiry, 300);
+  }
+
+  function openEnquiry() {
+    // Populate cart summary inside popup
+    var summaryEl = document.getElementById('enquiryCartSummary');
+    var itemsHtml = '<span class="enquiry-cart-summary-label">&#10022; Your Order</span>';
+    cart.forEach(function(c) {
+      var label = c.isKit ? c.title : (c.title + (c.size ? ' · ' + c.size : ''));
+      itemsHtml += '<div class="enquiry-cart-item"><span>' + label + '</span><span>' + formatPrice(c.price) + '</span></div>';
+    });
+    var total = cart.reduce(function(s, c) { return s + c.price; }, 0);
+    itemsHtml += '<div class="enquiry-total-row"><span class="enquiry-total-label">Total</span><span class="enquiry-total-amount">' + formatPrice(total) + '</span></div>';
+    summaryEl.innerHTML = itemsHtml;
+
+    // Reset form
+    document.getElementById('enqName').value = '';
+    document.getElementById('enqPhone').value = '';
+    document.getElementById('enqEmail').value = '';
+    document.getElementById('enqDesc').value = '';
+    document.getElementById('enqName').classList.remove('error');
+    document.getElementById('enqPhone').classList.remove('error');
+    document.getElementById('enquiryFormWrap').style.display = 'block';
+    document.getElementById('enquirySuccess').classList.remove('active');
+    var btn = document.getElementById('enqSubmitBtn');
+    btn.innerHTML = '&#10022; &nbsp; Send Enquiry &nbsp; &#10022;';
+    btn.disabled = false;
+
+    // Open
+    document.getElementById('enquiryBackdrop').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeEnquiry() {
+    document.getElementById('enquiryBackdrop').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function handleEnquiryBackdrop(e) {
+    if (e.target === document.getElementById('enquiryBackdrop')) closeEnquiry();
+  }
+
+  function submitEnquiry() {
+    var name  = document.getElementById('enqName').value.trim();
+    var phone = document.getElementById('enqPhone').value.trim();
+    var email = document.getElementById('enqEmail').value.trim();
+    var desc  = document.getElementById('enqDesc').value.trim();
+
+    // Validate
+    var valid = true;
+    if (!name) {
+      document.getElementById('enqName').classList.add('error');
+      document.getElementById('enqName').focus();
+      valid = false;
+    } else { document.getElementById('enqName').classList.remove('error'); }
+    if (!phone) {
+      document.getElementById('enqPhone').classList.add('error');
+      if (valid) document.getElementById('enqPhone').focus();
+      valid = false;
+    } else { document.getElementById('enqPhone').classList.remove('error'); }
+    if (!valid) { shakeEnqField(); return; }
+
+    var btn = document.getElementById('enqSubmitBtn');
+    btn.innerHTML = '&#9670; &nbsp; Sending... &nbsp; &#9670;';
+    btn.disabled = true;
+
+    // Build order summary text
+    var orderLines = cart.map(function(c) {
+      return (c.isKit ? c.title : c.title + (c.size ? ' (' + c.size + ')' : '')) + ' - ' + formatPrice(c.price);
+    });
+    var total = cart.reduce(function(s, c) { return s + c.price; }, 0);
+    var orderText = orderLines.join('\n') + '\nTotal: ' + formatPrice(total);
+
+    // ── 1. WhatsApp ──
+    var waMsg = encodeURIComponent(
+      '\u2736 New Order Enquiry - Guhan Arts \u2736\n\n' +
+      'Name: ' + name + '\n' +
+      'Phone: ' + phone + '\n' +
+      'Email: ' + (email || 'Not provided') + '\n\n' +
+      '--- ORDER ---\n' + orderText + '\n\n' +
+      (desc ? 'Notes: ' + desc : '')
+    );
+    window.open('https://wa.me/' + WHATSAPP_NUMBER + '?text=' + waMsg, '_blank');
+
+    // ── 2. Email via EmailJS ──
+    var emailParams = {
+      from_name:      name,
+      customer_phone: phone,
+      customer_email: email || 'Not provided',
+      order_summary:  orderLines.join(' | '),
+      order_total:    formatPrice(total),
+      description:    desc || 'No special instructions.',
+      reply_to:       email || 'harinord95@gmail.com',
+    };
+
+    var sendEmail;
+    if (typeof emailjs !== 'undefined') {
+      sendEmail = emailjs.send('service_06vnfyh', 'template_tfg9zws', emailParams);
+    } else {
+      sendEmail = Promise.resolve();
+    }
+
+    sendEmail
+      .then(function() {
+        // Also send customer thank-you if email provided
+        if (email && typeof emailjs !== 'undefined') {
+          return emailjs.send('service_06vnfyh', 'template_aloikg9', {
+            customer_name:  name,
+            customer_email: email,
+            customer_phone: phone,
+            painting_size:  orderLines.join(', '),
+            frame_type:     'See order details',
+            description:    desc || 'None',
+            reply_to:       'harinord95@gmail.com',
+          });
+        }
+      })
+      .then(function() {
+        console.log('\u2705 Enquiry emails sent');
+        showSuccess();
+      })
+      .catch(function(err) {
+        console.error('EmailJS enquiry error:', err);
+        // Still show success — WhatsApp already opened
+        showSuccess();
+      });
+  }
+
+  function showSuccess() {
+    document.getElementById('enquiryFormWrap').style.display = 'none';
+    document.getElementById('enquirySuccess').classList.add('active');
+    showToast('\u2736 Enquiry sent via WhatsApp & Email!');
+    // Auto-close after 4s
+    setTimeout(function() {
+      closeEnquiry();
+      // Optionally clear cart after successful enquiry
+      // cart = []; updateCartUI();
+    }, 4500);
+  }
+
+  function shakeEnqField() {
+    var modal = document.getElementById('enquiryModal');
+    modal.style.animation = 'shake 0.4s ease';
+    setTimeout(function() { modal.style.animation = ''; }, 500);
   }
 
   // ═══════════════════════════════════════
@@ -3284,7 +3696,7 @@ section {
 
   // ─ KEYBOARD ESC ─
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') { closeDrawer(); closeCart(); closeModal(); }
+    if (e.key === 'Escape') { closeDrawer(); closeCart(); closeModal(); closeEnquiry(); }
   });
 
   // ─ SCROLL REVEAL ─
