@@ -463,7 +463,12 @@
     aspect-ratio: 3/4;
     background: var(--brown-deep);
   }
-  .gallery-item:first-child { grid-row: span 1 ; aspect-ratio: unset; }
+  .gallery-item:first-child { 
+    grid-row: span 1 ; 
+    /* aspect-ratio: unset;  */
+  }
+
+
   .gallery-item:hover {
     border-color: rgba(201,148,42,0.6);
     box-shadow: 0 0 40px rgba(201,148,42,0.2);
@@ -2451,27 +2456,7 @@ section {
     <div class="gallery-grid">
       <!-- Item 1  -->
       <div class="gallery-item reveal bgimage bgimage1" onclick="openModal(0)">
-        <div class="gallery-item-inner">
-          <!-- <svg viewBox="0 0 160 220" xmlns="http://www.w3.org/2000/svg" fill="none">
-            <rect width="160" height="220" fill="#1A0F05"/>
-            <circle cx="80" cy="80" r="50" stroke="#C9942A" stroke-width="1.5" opacity="0.5"/>
-            <circle cx="80" cy="80" r="42" stroke="#C9942A" stroke-width="0.5" opacity="0.3"/>
-            <ellipse cx="80" cy="78" rx="20" ry="24" fill="#C9942A" opacity="0.2" stroke="#C9942A" stroke-width="1"/>
-            <path d="M60,100 Q50,130 48,170 L112,170 Q110,130 100,100 Z" fill="#C9942A" opacity="0.1" stroke="#C9942A" stroke-width="0.8"/>
-            <path d="M60,100 Q40,90 35,105" stroke="#C9942A" stroke-width="1.2" opacity="0.4"/>
-            <path d="M100,100 Q120,90 125,105" stroke="#C9942A" stroke-width="1.2" opacity="0.4"/>
-            <path d="M55,175 Q80,165 105,175 Q90,195 80,195 Q70,195 55,175 Z" fill="#C9942A" opacity="0.1" stroke="#C9942A" stroke-width="1"/>
-            <path d="M65,78 Q68,86 80,88 Q92,86 95,78" stroke="#C9942A" stroke-width="0.8" opacity="0.4"/>
-            <path d="M58,66 Q80,56 102,66" stroke="#C9942A" stroke-width="0.8" opacity="0.3"/>
-            <path d="M60,56 L80,48 L100,56" stroke="#C9942A" stroke-width="0.8" fill="none" opacity="0.5"/>
-            <rect x="5" y="5" width="150" height="210" stroke="#C9942A" stroke-width="0.8" fill="none" opacity="0.25"/>
-            <rect x="10" y="10" width="140" height="200" stroke="#C9942A" stroke-width="0.3" fill="none" opacity="0.15"/>
-            <g fill="#C9942A" opacity="0.6">
-              <circle cx="5" cy="5" r="3"/><circle cx="155" cy="5" r="3"/>
-              <circle cx="5" cy="215" r="3"/><circle cx="155" cy="215" r="3"/>
-            </g>
-          </svg> -->
-        </div>
+        <div class="gallery-item-inner"></div>
         <div class="gallery-overlay">
           <h4>Traditional Thiruchendur Murugan</h4>
           <p>Gold Leaf · Rubies · 24"×32"</p>
